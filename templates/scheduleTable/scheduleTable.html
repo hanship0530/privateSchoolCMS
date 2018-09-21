@@ -1,0 +1,71 @@
+{% extends "dashboard/base.html" %}
+{% load staticfiles %}
+
+{% block extrahead %}
+<link href="{% static 'bower_components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet" media="screen">
+{% endblock extrahead %}
+
+{% block content %}
+<div class='notifications top-right'></div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">수업시간표</h1>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+
+<div class="col-lg-12" id="date-search-div">
+	<div class="form-group row">
+		<div class="input-group date form_date col-xs-4 col-lg-3" data-date="" data-date-format="dd mm yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+			<input class="form-control" id="search-date" size="16" type="text" value="" readonly name="daymonthyear" required="required">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+			<span class="input-group-addon"><span url="{% url 'dashboard:scheduleDisplay' %}" id="schedule-search" class="glyphicon glyphicon-search"></span></span>
+		</div>
+	</div>
+</div>
+
+<div class="row schedule-div">
+	<div class="col-lg-12">
+        <div class="box">
+            <div class="box-body table-responsive no-padding">				
+				<table class="table table-striped table-bordered table-hover sttable schedule-table" style="width:100%">
+					<thead>
+						<tr>
+							<th width="2%">번호</th>
+							<th width="5%">이름</th>
+							<th width="3%">학년</th>
+							<th width="30%">비고</th>
+							<th width="10%">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% include 'scheduleTable/scheduleTableList.html' %}
+					</tbody>						
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
+
+{% block extrajs %}
+<!-- Custom Java Script -->a
+<script src="{% static 'js/schedule.js' %}"></script>
+<!-- Datetime picker Java Script -->
+<script type="text/javascript" src="{% static 'bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js' %}" charset="UTF-8"></script>
+<script type="text/javascript" src="{% static 'bower_components/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ko.js' %}" charset="UTF-8"></script>
+
+<script type="text/javascript">
+	$('.form_date').datetimepicker({
+		language:  'ko',
+		weekStart: 1,
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 0,
+		startView: 2,
+		minView: 2,
+		forceParse: 1
+	});
+</script>
+{% endblock extrajs %}

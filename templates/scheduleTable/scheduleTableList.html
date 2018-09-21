@@ -1,0 +1,36 @@
+{% for row in scheduleTable %}
+<tr>
+  <td colspan="5"><h3>{{row.time}}</h3></td>
+  {% for student in row.lessons %}
+  <tr>
+    <td>
+      <input class="form-control" name="number" value="{{student.number}}">
+    </td>
+    <td>
+      <input class="form-control" name="name" value="{{student.name}}">
+    </td>
+    <td>  
+      <input class="form-control grade" name="grade" value="{{student.grade}}">
+    </td>
+    <td>  
+      <input class="form-control" name="memo" value="{{student.memo}}">
+      <input class="form-control hidden" name="cellInfo" value="{{student.cellInfo}}">
+      <input class="form-control hidden" name="sheet" value="{{student.sheet}}">
+      <input class="form-control hidden" name="day" value="{{student.day}}">
+    </td>
+    <td>
+      <button type="button" class="btn btn-warning btn-sm update-schedule-btn" url="{% url 'dashboard:scheduleUpdate' %}">
+        <span class="glyphicon glyphicon-pencil"></span>편집
+      </button>
+      <button type="button" class="btn btn-primary btn-sm attend-lesson-btn" url="{% url 'dashboard:attendLesson' %}">
+        <span class="glyphicon glyphicon-ok"></span>출석
+      </button>
+    </td>
+  </tr> 
+  {% endfor %}
+</tr>
+{% empty %}
+<tr>
+  <td colspan="8" class="text-center bg-warning">No data</td>
+</tr>
+{% endfor %}
