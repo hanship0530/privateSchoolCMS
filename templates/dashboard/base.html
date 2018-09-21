@@ -105,9 +105,6 @@
                         <a href="{% url 'dashboard:scheduleDisplay' %}"><i class="fa fa-table fa-fw"></i> 수업 시간표</a>
                         <!-- dashboard 디렉터리에서 urls.py에 해당 html명 연결시켜줘야 함
                              그리고 views.py에서 해당 뷰 클래스 만들어야 함 -->
-                    </li>
-                    <li>
-                        <a href="{% url 'dashboard:manageLessonShow' %}"><i class="fa fa-table fa-fw"></i> 수업등록</a>
                     </li>                     
                     <li>
                         <a href="{% url 'dashboard:managePaymentShow' %}"><i class="fa fa-table fa-fw"></i> 결제관리</a>
@@ -116,10 +113,10 @@
                         <a href="#"><i class="fa fa-sitemap fa-fw"></i> 상품관리<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">수업등록</a>
+                                <a href="{% url 'dashboard:manageLessonCreate' %}">수업등록</a>
                             </li>
                             <li>
-                                <a href="#">수업조회</a>
+                                <a href="{% url 'dashboard:manageLessonShow' %}">수업조회</a>
                             </li>
                             <li>
                                 <a href="#">상품등록</a>
