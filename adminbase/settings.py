@@ -26,9 +26,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dashboard',
-    'students.apps.StudentsConfig',
-    'attendance.apps.AttendanceConfig',
-    'payments.apps.PaymentsConfig',
+    'students',
+    'attendance',
+    'payments',
+    # 'students.apps.StudentsConfig',
+    # 'attendance.apps.AttendanceConfig',
+    # 'payments.apps.PaymentsConfig',
+    # 'dashboard.apps.NoteConfig',
     'widget_tweaks',
 )
 
