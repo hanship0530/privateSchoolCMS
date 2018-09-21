@@ -1,0 +1,24 @@
+{% for student in students %}
+<tr>
+  <td>{{student.number}}</td>
+  <td>{{student.stname}}</td>
+  <td>{{student.contact}}</td>
+  <td>{{student.school}}</td>
+  <td>{{student.years}}</td>
+  <td>
+    <button type="button" class="btn btn-info btn-xs" id="display-table-btn" url="{% url 'dashboard:lessonTableDisplay' %}"  data-id="{{student.number}}">
+      <span class="glyphicon glyphicon-pencil"></span> 작성
+    </button>
+    <button type="button" class="btn btn-success btn-xs" id="create-table-btn" url="{% url 'dashboard:lessonTableCreate' %}"  data-id="{{student.number}}">
+      <span class="glyphicon glyphicon-plus"></span> 생성
+    </button>   
+    <button type="button" class="btn btn-primary btn-xs" id="fillout-table-btn" url="{% url 'dashboard:lessonTableFillout' %}"  data-id="{{student.number}}">
+      <span class="glyphicon glyphicon-ok"></span> 완료
+    </button>         
+  </td>
+</tr>
+{% empty %}
+<tr>
+  <td colspan="8" class="text-center bg-warning">출석회원 없음(출석회원을 확인해주세요)</td>
+</tr>
+{% endfor %}
