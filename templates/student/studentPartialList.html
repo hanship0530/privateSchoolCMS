@@ -1,0 +1,25 @@
+{% for student in students %}
+<tr>
+  <td>{{student.number}}</td>
+  <td>{{student.stname}}</td>
+  <td>{{student.contact}}</td>
+  <td>{{student.address}}</td>
+  <td></td>
+  <td>
+      <button type="button"
+              class="btn btn-warning btn-sm js-update-student"
+              data-url="{% url 'dashboard:studentUpdate' student.number %}">
+        <span class="glyphicon glyphicon-pencil"></span> 수정
+      </button>
+      <button type="button"
+              class="btn btn-danger btn-sm js-delete-student"
+              data-url="{% url 'dashboard:studentDelete' student.number %}">
+        <span class="glyphicon glyphicon-trash"></span> 삭제
+      </button>
+  </td>
+</tr>
+{% empty %}
+<tr>
+  <td colspan="8" class="text-center bg-warning">회원정보없음</td>
+</tr>
+{% endfor %}
