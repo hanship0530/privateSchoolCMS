@@ -30,11 +30,11 @@ $(function () {
                 if (data.form_is_valid) {
                     $("#lesson-table tbody").html(data.lesson_list);  // <-- Replace the table body
                     $("#modal-lesson").modal("hide");  // <-- Close the modal
-                    $('top-left').notify({message: { text: "Success!" }}).show();
+                    $('top-right').notify({message: { text: "Success!" }}).show();
                 }
                 else {
                     $("#modal-lesson .modal-content").html(data.html_form);
-                    $('top-left').notify({
+                    $('top-right').notify({
                       type: 'danger',
                       message: { text: "Fail!" }}).show();
                 }
@@ -46,15 +46,11 @@ $(function () {
 
   /* Binding */
 
-  // Create Student
-  $(".js-lesson-register").click(loadForm);
-  $("#modal-lesson").on("submit", ".js-lesson-register-form", saveForm);
-
-  // Update Student
+  // update lesson 
   $("#lesson-table").on("click", ".js-update-lesson", loadForm);
   $("#modal-lesson").on("submit", ".js-lesson-update-form", saveForm);
 
-  // Delete book
+  // delete lesson
   $("#lesson-table").on("click", ".js-delete-lesson", loadForm);
   $("#modal-lesson").on("submit", ".js-lesson-delete-form", saveForm);
 });
