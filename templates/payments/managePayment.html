@@ -1,6 +1,15 @@
 {% extends "dashboard/base.html" %}
 {% load staticfiles %}
 
+{% block extrahead %}
+<!-- This is about datatable showing table search, pagenator -->
+<!-- DataTables CSS -->
+<link href="{% static 'bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css' %}" rel="stylesheet">
+<!-- DataTables Responsive CSS -->
+<link href="{% static 'bower_components/datatables-responsive/css/dataTables.responsive.css' %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
 {% block content %}
 <div class="row">
     <div class="col-lg-12">
@@ -34,7 +43,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% include 'components/managePaymentStudentList.html' %}
+                            {% include 'payments/managePaymentStudentList.html' %}
                         </tbody>
                     </table>
                 </div>
@@ -69,7 +78,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% include 'components/managePaymentPartialList.html' %}
+                            {% include 'payments/managePaymentPartialList.html' %}
                         </tbody>
                     </table>
                 </div>
@@ -87,5 +96,17 @@
 
 {% block extrajs %}
 <script src="{% static 'js/managePayment.js' %}"></script>
+<!-- DataTables JavaScript -->
+<script src="{% static 'bower_components/datatables/media/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js' %}"></script>
 
+<!-- Page-Level Scripts - Tables - Use for reference -->
+<script>
+    $(document).ready(function() {
+        $('#table-payment').DataTable({
+            responsive: true
+        });
+
+    });
+</script>
 {% endblock extrajs %}
