@@ -1,15 +1,17 @@
 from django import forms
 from .models import Payment, Goods
-from .fields import SubjectModelChoiceField, PriceModelChoiceField
 
 
 class PaymentForm(forms.ModelForm):
-    item = forms.ModelChoiceField(queryset=Goods.objects.all(), empty_label="Please select.")
+    item = forms.ModelChoiceField(queryset=Goods.objects.all(), empty_label="Please select.", label="수업/상품")
     class Meta:
         model = Payment
         fields = ('number', 'paymentDate','paymentType', 'student', 'item', 'note')
 
-
+class PaymentUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Payment
+        fields = ('number', 'paymentDate', 'paymentType', 'student', 'item', 'price', 'note')
 
 class GoodsForm(forms.ModelForm):
  	class Meta:

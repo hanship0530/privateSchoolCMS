@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     # put your urls
     url(r'^manageLesson/$', views.LessonManageView.show, name="manageLessonShow"),
-    url(r'^manageLesson/create/$', views.LessonManageView.create, name="manageLessonCreate"),
+    url(r'^manageLesson/create/$', views.LessonCreateView.create, name="manageLessonCreate"),
     url(r'^manageLesson/(?P<pk>\d+)/update/$', views.LessonManageView.update, name='manageLessonUpdate'),
     url(r'^manageLesson/(?P<pk>\d+)/delete/$', views.LessonManageView.delete, name='manageLessonDelete'),
     url(r'^managePayment/$', views.PaymentManageView.show, name='managePaymentShow'),
