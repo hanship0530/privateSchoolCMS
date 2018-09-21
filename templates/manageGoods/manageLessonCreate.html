@@ -1,0 +1,32 @@
+{% extends "dashboard/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class='notifications top-right'></div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">수업등록</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box">
+            <div class="box-body table-responsive no-padding">
+                {% include 'components/manageLessonPartialCreate.html' %}
+
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.box-body -->
+</div>
+<!-- /.row -->
+
+{% endblock content %}
+
+{% block extrajs %}
+<script src="{% static 'js/manageLessonCreate.js' %}"></script>
+
+{% endblock extrajs %}

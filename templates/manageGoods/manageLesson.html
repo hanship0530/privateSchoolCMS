@@ -1,0 +1,56 @@
+{% extends "dashboard/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">수업관리</h1>
+    </div>
+</div>
+
+<div class='notifications top-left'></div>
+
+<div class="row">
+    <button type="button" class="btn btn-success js-lesson-register" data-toggle="modal" data-target="#modal-lesson-register" data-url="{% url 'dashboard:manageLessonCreate' %}"><span class="glyphicon glyphicon-plus">수업추가</span> 
+    </button>
+</div>
+
+<div class="row" id="create-lesson">
+    <div class="col-lg-12">
+        <div class="box">
+            <div class="box-body table-responsive no-padding">
+                <div class="dataTable_wrapper">
+                    <table class="table table-striped table-bordered table-hover" id="lesson-table" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th width="3%">No.</th>
+                                <th width="8%">수업명</th>
+                                <th width="11%">가격</th>
+                                <th width="15%">Act.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% include 'components/manageLessonPartialList.html' %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<!-- THE MODAL WE WILL BE USING -->
+<div class="modal fade" id="modal-lesson">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extrajs %}
+<script src="{% static 'js/manageLesson.js' %}"></script>
+
+{% endblock extrajs %}
