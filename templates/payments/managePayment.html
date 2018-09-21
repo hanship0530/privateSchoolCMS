@@ -1,0 +1,91 @@
+{% extends "dashboard/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">결제관리</h1>
+    </div>
+
+    
+</div>
+
+<div class="form-group input-group" id="div-student-search" style="width:30%">
+    <input type="text" class="form-control input-student-name" placeholder="회원이름을 입력하세요">
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default js-student-search" url="{% url 'dashboard:managePaymentSearch' %}"><i class="fa fa-search"></i></button>
+        </span>    
+</div>
+
+<div class="row" id="div-student">
+    <div class="col-lg-12">
+        <div class="box">
+            <div class="box-body table-responsive no-padding">       
+                <div class="dataTable_wrapper">
+                    <table class="table table-striped table-bordered table-hover" id="table-student" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th width="3%">No.</th>
+                                <th width="8%">이름</th>
+                                <th width="11%">보호자핸드폰</th>
+                                <th width="20%">학교</th>
+                                <th width="5%">학년</th>
+                                <th width="15%">Act.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% include 'components/managePaymentStudentList.html' %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class='notifications top-left'></div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">결제기록</h1>
+    </div>
+</div>
+
+<div class="row" id="div-payment">
+    <div class="col-lg-12">
+        <div class="box">
+            <div class="box-body table-responsive no-padding">       
+                <div class="dataTable_wrapper">                   
+                    <table class="table table-striped table-bordered table-hover" style="width:100%" id="table-payment">
+                        <thead>
+                            <tr>
+                                <th width="3%">No.</th>
+                                <th width="8%">일자</th>
+                                <th width="20%">종류</th>
+                                <th width="5%">가격</th>
+                                <th width="5%">방식</th>
+                                <th width="5%">비고</th>
+                                <th width="5%">/</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% include 'components/managePaymentPartialList.html' %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-payment">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extrajs %}
+<script src="{% static 'js/managePayment.js' %}"></script>
+
+{% endblock extrajs %}

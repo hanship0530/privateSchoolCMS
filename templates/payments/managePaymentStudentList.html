@@ -1,0 +1,25 @@
+{% for student in students %}
+<tr>
+  <td>{{student.number}}</td>
+  <td>{{student.stname}}</td>
+  <td>{{student.contact}}</td>
+  <td>{{student.school}}</td>
+  <td>{{student.years}}</td>
+  <td>
+      <button type="button"
+              class="btn btn-warning btn-sm js-inquire-payment"
+              data-url="{% url 'dashboard:managePaymentInquire' student.number %}">
+        <span class="glyphicon glyphicon-pencil"></span> 조회
+      </button>
+      <button type="button"
+              class="btn btn-danger btn-sm js-register-payment"
+              data-url="{% url 'dashboard:managePaymentCreate' student.number %}">
+        <span class="glyphicon glyphicon-trash"></span> 등록
+      </button>
+  </td>
+</tr>
+{% empty %}
+<tr>
+  <td colspan="8" class="text-center bg-warning">No Data</td>
+</tr>
+{% endfor %}
