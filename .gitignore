@@ -1,0 +1,22 @@
+# ignore
+adminbase/__pycache__/
+attendance/__pycache__/
+attendance/migrations/
+dashboard/__pycache__/
+dashboard/migrations/
+note/__pycache__/
+note/migrations/
+students/__pycache__/
+students/migrations/
+payments/__pycache__/
+payments/migrations/
+excelchart/
+migrations/
+adminbase/__init__.py
+attendance/__init__.py
+dashboard/__init__.py
+note/__init__.py
+students/__init__.py
+payments/__init__.py
+
+db.sqlite3
