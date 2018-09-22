@@ -106,8 +106,10 @@ class PaymentManageView(TemplateView):
 		if request.method == 'POST':
 			if form.is_valid():
 				payment = form.save(commit=False)
-				payment.item = form.cleaned_data['item'].item
-				payment.price = form.cleaned_data['item'].price
+				print(form.cleaned_data['item'])
+				goods = Goods.objects.get(item=form.cleaned_data['item'])
+				payment.item = goods.item
+				payment.price = goods.price
 				payment.student = form.cleaned_data['student']
 				payment.save()
 				student = payment.student

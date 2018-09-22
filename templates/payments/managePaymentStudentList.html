@@ -7,12 +7,12 @@
   <td>{{student.years}}</td>
   <td>
       <button type="button"
-              class="btn btn-warning btn-sm js-inquire-payment"
+              class="btn btn-warning btn-xs js-inquire-payment"
               data-url="{% url 'dashboard:managePaymentInquire' student.number %}">
         <span class="glyphicon glyphicon-pencil"></span> 조회
       </button>
       <button type="button"
-              class="btn btn-danger btn-sm js-register-payment"
+              class="btn btn-danger btn-xs js-register-payment"
               data-url="{% url 'dashboard:managePaymentCreate' student.number %}">
         <span class="glyphicon glyphicon-trash"></span> 등록
       </button>
