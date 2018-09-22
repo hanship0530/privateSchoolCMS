@@ -16,9 +16,11 @@ $('#student-search-div').on("click", "#student-search-btn", function(){
             if(data.is_valid){
                 $('#student-table tbody').html(data.studentList); 
             } else {
-                $('.top-right').notify({
-                    type: 'danger',
-                    message: { text: data.errorMsg }}).show();
+                  Lobibox.notify('warning', {
+                    sound: false,
+                    delay: 900,
+                    msg: data.errorMsg
+                  }); 
             }
         },
         error: function(error) { 
@@ -43,12 +45,18 @@ $('#student-div').on('click', '#display-table-btn', function(){
             if(data.is_valid) {
                 $('#student-table tbody').html(data.studentList); 
                 $('#attendance-table tbody').html(data.attendLists);
-                $('.top-right').notify({message: { text: 'Success!' }}).show();
+                  Lobibox.notify('success', {
+                    sound: false,
+                    delay: 900,
+                    msg: '정상적으로 등록되었습니다.'
+                  });    
             }
             else {
-                $('.top-right').notify({
-                    type: 'danger',
-                    message: { text: data.errorMsgs }}).show();
+                  Lobibox.notify('warning', {
+                    sound: false,
+                    delay: 900,
+                    msg: data.errorMsg
+                  }); 
             }            
         },
         error: function(error) { 

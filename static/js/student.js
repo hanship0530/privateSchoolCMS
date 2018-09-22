@@ -1,5 +1,6 @@
 /*
     Register Student Part
+    error: notify is not working
 */
 $(function () {
     var loadForm = function () {
@@ -28,9 +29,19 @@ $(function () {
                 if (data.form_is_valid) {
                     $("#student-table tbody").html(data.studentList);  
                     $("#modal-student").modal("hide");  
+                    Lobibox.notify('success', {
+                        sound: false,
+                        delay: 900,
+                        msg: '정상적으로 수정되었습니다.'
+                    });                    
                 }
                 else {
                     $("#modal-student .modal-content").html(data.html_form);
+                    Lobibox.notify('warning', {
+                        sound: false,
+                        delay: 900,
+                        msg: '형식에 오류가 있습니다.'
+                    });                    
                 }
             }
         });

@@ -11,7 +11,11 @@ $(function () {
             dataType: 'json',
             success: function (data) {
                 if (data.form_is_valid) {
-                  $('.top-right').notify({message: { text: "Registered Successfully!" }}).show();
+                  Lobibox.notify('success', {
+                    sound: false,
+                    delay: 900,
+                    msg: '정상적으로 등록되었습니다.'
+                  });
                   $('#register-page-div').html(data.form_html);
                 }
                 else {
@@ -21,9 +25,6 @@ $(function () {
                     delay: 900,
                     msg: '형식에 오류가 있습니다.'
                   });
-                  // $('.top-right').Lobibox.notify({
-                  //   type: 'danger',
-                  //   message: "Registering is fail!" }).show();
                 }
             }
         });

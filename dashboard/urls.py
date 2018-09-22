@@ -21,8 +21,7 @@ urlpatterns = [
     url(r'^tables/$', views.TablesView.as_view(), name="tables"),
     url(r'^typography/$', views.TypographyView.as_view(), name="typography"),
 
-    # 내가 커스텀마이징 한 부분
-    # 대시보드 뷰에서 만든 부분을 대시보드 url에서 연결
+    # Custom urls
     url(r'^students/', include('students.urls')),
     url(r'^attendance/', include('attendance.urls')),
     url(r'^payment/', include('payments.urls')),
