@@ -18,7 +18,7 @@ from .lesson_table_func import update_excelsheet, display_excelsheet
 import win32com.client, datetime, pythoncom, os, re
 
 # manage student 
-class StudentView(TemplateView):
+class StudentView(TemplateView): 
     def display(request):
         students = Student.objects.all()
         # paginator = Paginator(student_list, 5)
@@ -69,7 +69,7 @@ class StudentView(TemplateView):
         return JsonResponse(html)
 
 # create student
-class StudentCreateView(TemplateView):
+class StudentCreateView(TemplateView):      
     def create(request):
         if request.method == 'POST':
             form = StudentForm(request.POST)
@@ -378,7 +378,6 @@ class LessonTableView(TemplateView):
         html = {}
         if request.method == 'POST':
             try:
-                print(request.POST)
                 number = int(request.POST['number'].split('(')[1].split(')')[0])
                 sheetName = request.POST['sheet']
                 student = Student.objects.get(number=number)

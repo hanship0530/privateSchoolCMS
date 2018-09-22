@@ -1,9 +1,14 @@
 from django.conf.urls import url, include
 from . import views
+from django.contrib import admin
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-    url(r'^$', views.LoginView.as_view(), name="login"),
-    url(r'^index/$', views.IndexView.as_view(), name="index"),
+    url(r'^$', auth_views.login, {'template_name': 'components/login.html'}, name='login'),
+    url(r'^logout/$', auth_views.logout, {'template_name': 'components/logout.html'}, name='logout'),
+    url(r'^signup/$', views.signup, name='signup'),
+    url(r'^index/$', login_required(views.IndexView.as_view()), name="index"),
     url(r'^blank/$', views.BlankView.as_view(), name="blank"),
     url(r'^buttons/$', views.ButtonsView.as_view(), name="buttons"),
     url(r'^flot/$', views.FlotView.as_view(), name="flot"),

@@ -1,8 +1,26 @@
 from django.views.generic import TemplateView
+from django.contrib.auth.models import User
 from students.models import Student
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+from .forms import SignUpForm
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('dashboard:index')
+    else:
+        form = SignUpForm()
+    return render(request, 'components/signup.html', {'form': form})   
+
 class IndexView(TemplateView):
     template_name = "components/index.html"
-
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         try:
@@ -12,14 +30,14 @@ class IndexView(TemplateView):
             # send number of human students by dic data with get_context_data and context
             context.update({'title': "Dashboard",
                            'human_student': human_student.count(),
-                          'payment_student': payment_student.count()
+                          'payment_student': payment_student.count(),
+                          'user':request.user
             })
             return context
         except:
             context.update({'title': "Dashboard"})
             return context
-
-
+ 
 class BlankView(TemplateView):
     template_name = "components/blank.html"
 
