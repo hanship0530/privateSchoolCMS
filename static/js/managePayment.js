@@ -22,14 +22,15 @@ $(function () {
             success: function(data) { // 서버에 전송한 request가 수행되고 서버로 부터 결과를 받은 경우
                 if(data.form_is_valid){
                     $('#table-student tbody').html(data.student_list); // 서버에서 html형식에 데이터를 넣어주면 그것을 html에 출력함
-                    $("#table-payment tbody").html(data.payment_list);
-                    $('.top-left').notify({message: { text: 'Success!' }}).show();
+                    $("#table-payment tbody").html();
                 } else {
                     $('#table-student tbody').html(data.student_list);
-                    $("#table-payment tbody").html(data.payment_list);
-                    $('.top-left').notify({
-                        type: 'danger',
-                        message: { text: "Fail!" }}).show();
+                    $("#table-payment tbody").html();
+                    Lobibox.notify('warning', {
+                        sound: false,
+                        delay: 900,
+                        msg: '오류 발생'
+                    });
                 }
             },
             error: function(error) { // 오류가 난 경우
@@ -42,20 +43,21 @@ $(function () {
         var btn = $(this);
         $.ajax({
             // Ajax 정보입력
-            url: btn.attr("data-url"), // request를 보낼 url urls.py에 등록된 주소로 하여야함 name 파라미터 값 사용 불가능
-            type: 'get', // request 방식
-            datatype: 'json', // 전달할 데이터 방식
-            success: function(data) { // 서버에 전송한 request가 수행되고 서버로 부터 결과를 받은 경우
+            url: btn.attr("data-url"), 
+            type: 'get', 
+            datatype: 'json', 
+            success: function(data) { 
                 if(data.form_is_valid){
-                    $('#table-student tbody').html(data.student_list); // 서버에서 html형식에 데이터를 넣어주면 그것을 html에 출력함
+                    $('#table-student tbody').html(data.student_list); 
                     $("#table-payment tbody").html(data.payment_list);
-                    $('.top-left').notify({message: { text: 'Success!' }}).show();
                 } else {
                     $('#table-student tbody').html(data.student_list);
                     $("#table-payment tbody").html(data.payment_list);
-                    $('.top-left').notify({
-                        type: 'danger',
-                        message: { text: "Fail!" }}).show();
+                    Lobibox.notify('warning', {
+                        sound: false,
+                        delay: 900,
+                        msg: '오류 발생'
+                    });
                 }
             },
             error: function(error) { // 오류가 난 경우
@@ -91,10 +93,19 @@ $(function () {
                     $("#table-student tbody").html(data.student_list);
                     $("#table-payment tbody").html(data.payment_list);
                     $("#modal-payment").modal("hide");  // <-- Close the modal
-                    $('.top-left').notify({message: { text: 'Success!' }}).show();
+                    Lobibox.notify('success', {
+                        sound: false,
+                        delay: 900,
+                        msg: '정상적으로 등록되었습니다.'
+                    });
                 }
                 else {
                     $("#modal-payment .modal-content").html(data.html_form);
+                    Lobibox.notify('warning', {
+                        sound: false,
+                        delay: 900,
+                        msg: '오류 발생'
+                    });
                 }
             }
         });

@@ -18,13 +18,19 @@ $('#student-search-div').on("click", "#student-search-btn", function(){
             if(data.is_valid){
                 $('#student-table tbody').html(data.studentList); 
                 $('#lesson-table tbody').html(data.lessonList);
-                $('.top-right').notify({ message: { text: "Success!" } }).show();
+                  Lobibox.notify('success', {
+                    sound: false,
+                    delay: 900,
+                    msg: '정상적으로 등록되었습니다.'
+                  });
             } else {
                 $('#student-table tbody').html('');
                 $('#lesson-table tbody').html('');;
-                $('.top-right').notify({
-                    type: 'danger',
-                    message: { text: data.errorMsg }}).show();
+                  Lobibox.notify('warning', {
+                    sound: false,
+                    delay: 900,
+                    msg: data.errorMsg
+                  });
             }
         },
         error: function(error) {
@@ -50,12 +56,18 @@ $('#student-div').on('click', '#create-table-btn', function(){
             if(data.isSuccess) {
                 $('#student-table tbody').html(data.studentList); 
                 $('#lesson-table tbody').html(' ');                
-                $('.top-right').notify({ message: { text: "Success!" }}).show();
+                  Lobibox.notify('success', {
+                    sound: false,
+                    delay: 900,
+                    msg: '정상적으로 등록되었습니다.'
+                  });
             }
             else {
-                $('.top-right').notify({
-                    type: 'danger',
-                    message: { text: data.errorMsg }}).show();                
+                  Lobibox.notify('warning', {
+                    sound: false,
+                    delay: 900,
+                    msg: data.errorMsg
+                  });            
             }
         },
         error: function(error) { 
@@ -78,18 +90,24 @@ $('#student-div').on('click', '#display-table-btn', function(){
         },  
         success: function(data) { 
             if(data.is_valid) {
-                $('.top-right').notify({message: { text: "Success!" }}).show();
                 $('#sheet-select').html(data.worksheets);
                 $('#lesson-table tbody').html(data.lessonTable);
                 $('#lesson-table-header').html(data.student.name+'('+data.student.number+')의 레슨테이블');
+                  Lobibox.notify('success', {
+                    sound: false,
+                    delay: 900,
+                    msg: '정상적으로 등록되었습니다.'
+                  });                
             }
             else {
                 $('#student-table').html(' ');
                 $('#lesson-table tbody').html(' ');
                 $('#lesson-table-header').val('레슨테이블');
-                $('.top-right').notify({
-                    type: 'danger',
-                    message: { text: data.errorMsg }}).show();
+                  Lobibox.notify('warning', {
+                    sound: false,
+                    delay: 900,
+                    msg: data.errorMsg
+                  }); 
             }            
         },
         error: function(error) { 
@@ -114,12 +132,18 @@ $('#student-div').on('click', '#fillout-table-btn', function(){
             if(data.is_valid) {
                 $('#student-table tbody').html(data.studentList); 
                 $('#lesson-table tbody').html(' ');                 
-                $('.top-right').notify({message: { text: "Success!" }}).show();
+                  Lobibox.notify('success', {
+                    sound: false,
+                    delay: 900,
+                    msg: '정상적으로 등록되었습니다.'
+                  });    
             }
             else {
-                $('.top-right').notify({
-                    type: 'danger',
-                    message: { text: data.errorMsg }}).show();
+                  Lobibox.notify('warning', {
+                    sound: false,
+                    delay: 900,
+                    msg: data.errorMsg
+                  }); 
             }            
         },
         error: function(error) { 

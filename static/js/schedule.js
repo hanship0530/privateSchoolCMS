@@ -47,12 +47,18 @@ $('.schedule-table').on('click', '.update-schedule-btn', function(){
         success: function(data) {
             if(data.is_valid == true){
                 $('.schedule-table tbody').html(data.scheduleTable);
-                $('.top-right').notify({message: { text: "Success!" }}).show();
+                  Lobibox.notify('success', {
+                    sound: false,
+                    delay: 900,
+                    msg: '정상적으로 수정되었습니다.'
+                  });
             }
             else {
-                $('.top-right').notify({
-                    type: 'danger',
-                    message: { text: data.errorMsg }}).show();
+                  Lobibox.notify('warning', {
+                    sound: false,
+                    delay: 900,
+                    msg: data.errorMsg
+                  });
             }
         },
         error: function(e) {
@@ -76,12 +82,18 @@ $('.schedule-table').on('click', '.attend-lesson-btn', function(){
         },
         success: function(data) {
             if(data.is_valid == true){
-                $('.top-right').notify({message: { text: "Success!" }}).show();
+                  Lobibox.notify('success', {
+                    sound: false,
+                    delay: 900,
+                    msg: '출결처리 되었습니다.'
+                  });
             }
             else {
-                $('.top-right').notify({
-                    type: 'danger',
-                    message: { text: data.errorMsg }}).show();
+                  Lobibox.notify('warning', {
+                    sound: false,
+                    delay: 900,
+                    msg: data.errorMsg
+                  });
             }
         },
         error: function(e) {

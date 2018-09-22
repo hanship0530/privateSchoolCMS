@@ -30,13 +30,19 @@ $(function () {
                 if (data.form_is_valid) {
                     $("#lesson-table tbody").html(data.lesson_list);  // <-- Replace the table body
                     $("#modal-lesson").modal("hide");  // <-- Close the modal
-                    $('top-right').notify({message: { text: "Success!" }}).show();
+                    Lobibox.notify('success', {
+                        sound: false,
+                        delay: 900,
+                        msg: '정상적으로 등록되었습니다.'
+                    });
                 }
                 else {
                     $("#modal-lesson .modal-content").html(data.html_form);
-                    $('top-right').notify({
-                      type: 'danger',
-                      message: { text: "Fail!" }}).show();
+                    Lobibox.notify('warning', {
+                        sound: false,
+                        delay: 900,
+                        msg: '형식에 오류가 있습니다.'
+                    });
                 }
             }
         });

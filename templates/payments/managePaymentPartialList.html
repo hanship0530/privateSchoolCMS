@@ -8,12 +8,12 @@
   <td>{{payment.note}}</td>
   <td>
       <button type="button"
-              class="btn btn-warning btn-sm js-update-payment"
+              class="btn btn-warning btn-xs js-update-payment"
               data-url="{% url 'dashboard:managePaymentUpdate' payment.number %}">
         <span class="glyphicon glyphicon-pencil"></span> 수정
       </button>
       <button type="button"
-              class="btn btn-danger btn-sm js-delete-payment"
+              class="btn btn-danger btn-xs js-delete-payment"
               data-url="{% url 'dashboard:managePaymentDelete' payment.number %}">
         <span class="glyphicon glyphicon-trash"></span> 삭제
       </button>      

@@ -289,8 +289,8 @@ class LessonTableView(TemplateView):
                 return JsonResponse(html) 
         except Exception as e:
             print("Error: "+str(e))
-            ht_data['is_valid'] = False
-            ht_data['errorMsg'] = "Error: "+str(e)
+            html['is_valid'] = False
+            html['errorMsg'] = "Error: "+str(e)
             return JsonResponse(html) 
     
     def display(request):
