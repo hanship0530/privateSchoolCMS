@@ -16,9 +16,14 @@ $(function () {
                 }
                 else {
                   $('#register-page-div').html(data.form_html);
-                  $('.top-right').notify({
-                    type: 'danger',
-                    message: "Registering is fail!" }).show();
+                  Lobibox.notify('warning', {
+                    sound: false,
+                    delay: 900,
+                    msg: '형식에 오류가 있습니다.'
+                  });
+                  // $('.top-right').Lobibox.notify({
+                  //   type: 'danger',
+                  //   message: "Registering is fail!" }).show();
                 }
             }
         });

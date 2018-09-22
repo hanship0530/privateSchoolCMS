@@ -628,8 +628,8 @@ table.dataTable thead .sorting:after {
  */
 .notifications {
   position: fixed;
-  z-index: 9999;
-  border-radius: 3px;
+  z-index: 5000;
+  border-radius: 1px;
 }
 
 /* Positioning */ 
