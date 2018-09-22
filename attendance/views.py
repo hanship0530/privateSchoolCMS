@@ -40,7 +40,6 @@ class AttendanceView(TemplateView):
 					temp['date'] = str(row.attendanceDate)
 					temp['check'] = str(row.fillOut)
 					attendList.append(temp)
-				print(attendList)
 				html['is_valid'] = True
 				html['studentList'] = render_to_string('attendance/attendanceStudentList.html', {'students':students}, request=request)
 				html['attendLists'] = render_to_string('attendance/attendanceTableList.html'
