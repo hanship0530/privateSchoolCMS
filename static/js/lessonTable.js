@@ -94,16 +94,26 @@ $('#student-div').on('click', '#display-table-btn', function(){
             'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val() // 크로스오버 공격방지    
         },  
         success: function(data) { 
-            if(data.is_valid) {
+            if(data.is_valid && !data.is_main) {
                 $('#sheet-select').html(data.worksheets);
                 $('#lesson-table tbody').html(data.lessonTable);
                 $('#lesson-table-header').html(data.student.name+'('+data.student.number+')의 레슨테이블');
                   Lobibox.notify('success', {
                     sound: false,
                     delay: 900,
-                    msg: 'Successfully completed'
+                    msg: data.message
                   });                
             }
+            else if(data.is_valid && data.is_main) {
+                $('#sheet-select').html(data.worksheets);
+                $('#lesson-table tbody').html(data.lessonTable);
+                $('#lesson-table-header').html(data.student.name+'('+data.student.number+')의 레슨테이블');
+                  Lobibox.notify('warning', {
+                    sound: false,
+                    delay: 900,
+                    msg: data.message
+                  });                
+            }            
             else {
                 $('#student-table').html(' ');
                 $('#lesson-table tbody').html(' ');

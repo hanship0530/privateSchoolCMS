@@ -1,0 +1,2 @@
+@echo off
+cmd /k "cd /d C:\Users\%USERNAME%\Desktop\privateSchoolCMS-master & python manage.py runserver"

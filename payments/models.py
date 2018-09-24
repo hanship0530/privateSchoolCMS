@@ -19,7 +19,7 @@ class Payment(models.Model):
 	paymentState = models.CharField(max_length=6, choices=PAYMENT_STATE, default='결제', verbose_name="결제상태")
 	item = models.CharField(max_length=30, null=True, verbose_name="수업/상품")
 	price = models.IntegerField(default=0, verbose_name="가격")
-	note = models.CharField(max_length=100, default='', verbose_name="Memo")
+	note = models.CharField(max_length=100, blank=True, default='', null=True, verbose_name="Memo")
 	def __str__(self):
 		return str(self.paymentDate)+"_"+str(self.student)
 

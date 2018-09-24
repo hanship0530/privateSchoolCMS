@@ -75,7 +75,8 @@ class StudentCreateView(TemplateView):
             form = StudentForm(request.POST)
             return StudentCreateView.saveStudentForm(request, form, 'student/studentPartialCreate.html')  
         else:
-            form = StudentForm() 
+            number = Student.objects.all().count() + 1
+            form = StudentForm(initial={'number':number}) 
             return render(request, 'student/studentCreate.html', {'form':form})
     def saveStudentForm(request, form, template_name):
         html = {}
@@ -203,7 +204,7 @@ class LessonTableView(TemplateView):
         today = datetime.datetime.now().date()
         # 오늘 출석한 회원 리스트 얻기
         if Attendance.objects.filter(attendanceDate=today).exists():
-            student_list = Attendance.objects.filter(attendanceDate=today, fillOut=False)
+            student_list = Attendance.objects.filter(attendanceDate=today, fillOut='미작성')
             students = []
             # html출력 형식으로 인한 데이터 전처리
             for student in student_list:
@@ -298,15 +299,20 @@ class LessonTableView(TemplateView):
                 if student.sheet != "main": 
                     tableData = display_excelsheet(student.filepath, student.sheet)
                     html['is_valid'] = True
+                    html['is_main'] = False
                     html['lessonTable'] = render_to_string("lessonTable/lessonTableList.html", {'table':tableData[0:-2]},
                         request=request)
                     html['student'] = {'name':student.stname, 'number':student.number}
                     html['worksheets'] = render_to_string("lessonTable/lessonTableSelect.html", {'worksheets':tableData[-1]})
+                    html['message'] = "Successfully completed."
                 else:
                     html['is_valid'] = True
+                    html['is_main'] = True
                     html['lessonTable'] = render_to_string("lessonTable/lessonTableList.html", {},
                         request=request)
-                    html['student'] = student
+                    html['student'] = {'name':student.stname, 'number':student.number}
+                    html['worksheets'] = None
+                    html['message'] = "차트불러오기 실패 생성버튼을 눌러 엑셀 시트를 생성해주세요."
                 return JsonResponse(html)
             except Exception as e:
                 print("Error: "+str(e))
@@ -321,7 +327,7 @@ class LessonTableView(TemplateView):
         if request.method == 'POST':
             try:
                 student = Student.objects.get(number=request.POST['number'])
-                attend = Attendance.objects.get(attendanceDate=today, student=student, fillOut=False)
+                attend = Attendance.objects.get(attendanceDate=today, student=student, fillOut='미작성')
                 attend.fillOut = True
                 attend.save()
                 html['is_valid'] = True

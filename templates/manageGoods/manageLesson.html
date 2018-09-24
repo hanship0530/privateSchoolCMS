@@ -63,7 +63,11 @@
 <script>
     $(document).ready(function() {
         $('#lesson-table').DataTable({
-            responsive: true
+            responsive: true,
+            "columnDefs": [{
+            "defaultContent": "-",
+            "targets": "_all"
+            }]                
         });
 
     });
