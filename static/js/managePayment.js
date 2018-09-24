@@ -29,7 +29,7 @@ $(function () {
                     Lobibox.notify('warning', {
                         sound: false,
                         delay: 900,
-                        msg: '오류 발생'
+                        msg: 'Errors are captured.'
                     });
                 }
             },
@@ -56,7 +56,7 @@ $(function () {
                     Lobibox.notify('warning', {
                         sound: false,
                         delay: 900,
-                        msg: '오류 발생'
+                        msg: 'Errors are captured.'
                     });
                 }
             },
@@ -96,7 +96,7 @@ $(function () {
                     Lobibox.notify('success', {
                         sound: false,
                         delay: 900,
-                        msg: '정상적으로 등록되었습니다.'
+                        msg: 'Successfully completed.'
                     });
                 }
                 else {
@@ -104,7 +104,7 @@ $(function () {
                     Lobibox.notify('warning', {
                         sound: false,
                         delay: 900,
-                        msg: '오류 발생'
+                        msg: 'Errors are captured.'
                     });
                 }
             }

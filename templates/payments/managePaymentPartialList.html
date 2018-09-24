@@ -1,11 +1,11 @@
 {% for payment in payments %}
 <tr>
-  <td>{{payment.number}}</td>
-  <td>{{payment.paymentDate}}</td>
-  <td>{{payment.paymentType}}</td>
-  <td>{{payment.item}}</td>
-  <td>{{payment.price}}</td>
-  <td>{{payment.note}}</td>
+  <td class="text-center">{{payment.number}}</td>
+  <td class="text-center">{{payment.paymentDate}}</td>
+  <td class="text-center">{{payment.paymentType}}</td>
+  <td class="text-center">{{payment.item}}</td>
+  <td class="text-center">{{payment.price}}</td>
+  <td class="text-center">{{payment.note}}</td>
   <td>
       <button type="button"
               class="btn btn-warning btn-xs js-update-payment"
