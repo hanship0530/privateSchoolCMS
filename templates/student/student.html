@@ -73,7 +73,11 @@
 <script>
     $(document).ready(function() {
         $('#student-table').DataTable({
-            responsive: true
+            responsive: true,
+            "columnDefs": [{
+            "defaultContent": "-",
+            "targets": "_all"
+            }]                
         });
 
     });

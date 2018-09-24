@@ -48,7 +48,7 @@ $('#student-div').on('click', '#display-table-btn', function(){
                   Lobibox.notify('success', {
                     sound: false,
                     delay: 900,
-                    msg: '정상적으로 등록되었습니다.'
+                    msg: 'Successfully completed.'
                   });    
             }
             else {
@@ -65,46 +65,53 @@ $('#student-div').on('click', '#display-table-btn', function(){
     })
 });
 
-// AttendanceTable Edting Part
-// $('#lesson-table-list-div').on('click', '#update-table-btn', function() {
-//     var btn = $(this);
-//     var tr = btn.parent().parent();
-//     var td = tr.children();
-//     var input = td.children();
-//     var number = input.eq(0).val();
-//     var date = input.eq(1).val();
-//     var content = input.eq(2).val();
-//     var completed = input.eq(3).val();
-//     var memo = input.eq(4).val();
-//     var cells = input.eq(5).val();
-//     var sheetName = input.eq(6).val();
-//     var studentNumber = input.eq(7).val();      
-//     $.ajax({
-//         url: btn.attr("url"),
-//         type: 'post',
-//         datatype: 'json',
-//         data: {
-//             'number': studentNumber,
-//             'date': date,
-//             'content': content,
-//             'completed': completed,
-//             'memo': memo,
-//             'cells': cells,
-//             'sheetName': sheetName,
-//             'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
-//         },
-//         success: function(data) {
-//             if(data.isSuccess) {
-//                 $('#lesson-table tbody').html(data.lessontable_html);
-//                 $('.top-left').notify({message: { text: data.message }}).show(); 
-//             } else{
-//                 $('.top-left').notify({
-//                     type: 'danger',
-//                     message: { text: data.message }}).show(); 
-//             }           
-//         },
-//         error: function(e) {
-//             alert(e);
-//         }
-//     })
-// })
+$('#attendance-div').on('click', '#update-attendance-btn', function() {
+    var btn = $(this);
+    $.ajax({
+        url: btn.attr("data-url"),
+        type: 'get',
+        dataType: 'json',
+        beforeSend: function () {
+            $("#modal-attendance").modal("show");
+        },
+        success: function (data) {
+            $("#modal-attendance .modal-content").html(data.html_form);
+        },
+        error: function(error) {
+            alert(error);
+        }        
+    });
+})
+
+$('#modal-attendance').on('submit', '.js-attendance-update-form', function() {
+    var form = $(this);
+    $.ajax({
+        url: form.attr("action"),
+        data: form.serialize(),
+        type: form.attr("method"),
+        dataType: 'json', 
+        success: function (data) {
+            if (data.form_is_valid) {
+                $("#student-table tbody").html(data.studentList);  
+                $("#attendance-table tbody").html(data.attendLists);  
+                $("#modal-attendance").modal("hide");  
+                Lobibox.notify('success', {
+                    sound: false,
+                    delay: 900,
+                    msg: 'Successfully completed.'
+                });                    
+            }
+            else {
+                $("#modal-attendance .modal-content").html(data.html_form);
+                Lobibox.notify('warning', {
+                    sound: false,
+                    delay: 900,
+                    msg: data.errorMsg
+                });                    
+            }
+        },
+        error: function(error) {
+            alert(error);
+        }
+    });
+})

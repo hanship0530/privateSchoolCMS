@@ -16,7 +16,22 @@ $(function () {
             }
         });
     };
-  
+
+    var loadForm2 = function () {
+        var btn = $(this);
+        $.ajax({
+            url: btn.attr("data-url"),
+            type: 'post',
+            dataType: 'json',
+            beforeSend: function () {
+                $("#modal-dashboard").modal("show");
+            },
+            success: function (data) {
+                $("#modal-dashboard .modal-content").html(data.html_form);
+            }
+        });
+    };
+
     var saveForm = function () {
         var form = $(this);
         $.ajax({
@@ -51,8 +66,8 @@ $(function () {
   /* Binding */ 
   // Create notice
   $("#notice-div").on('click', ".js-register-notice", loadForm);
-  $("#modal-notice").on("submit", ".js-notice-register-form", saveForm);
+  $("#modal-dashboard").on("submit", ".js-notice-register-form", saveForm);
   // Delete notice
   $("#notice-div").on("click", ".js-delete-notice", loadForm);
-  $("#modal-dashboard").on("submit", ".js-notice-notice-form", saveForm);
+  $("#modal-dashboard").on("submit", ".js-notice-delete-form", saveForm);
 });
