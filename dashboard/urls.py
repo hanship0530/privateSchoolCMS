@@ -23,7 +23,9 @@ urlpatterns = [
 
     # Custom urls
     url(r'^create/$', views.NoticeView.create, name='noticeCreate'),
-    url(r'^(?P<pk>\d+)/delete/$', views.NoticeView.delete, name='noticeDelete'),
+    url(r'^delete/$', views.NoticeView.deleteButton, name='noticeDelete'),
+    url(r'^delete2/$', views.NoticeView.deleteForm, name='noticeDelete2'),
+    url(r'^error/$', views.ErrorView.as_view(), name='error'),
 
     url(r'^students/', include('students.urls')),
     url(r'^attendance/', include('attendance.urls')),
