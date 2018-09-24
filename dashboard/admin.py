@@ -1,8 +1,7 @@
 from django.contrib import admin
-from .models import Note 
+from .models import Notice
 
 # Register your models here.
-class NoteAdmin(admin.ModelAdmin):
-	list_display = ('number', 'text')
-
-admin.site.register(Note, NoteAdmin)
+class NoticeAdmin(admin.ModelAdmin):
+	list_display = ('number', 'text', 'writer')
+admin.site.register(Notice, NoticeAdmin)

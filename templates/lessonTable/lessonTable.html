@@ -1,6 +1,10 @@
 {% extends "dashboard/base.html" %}
 {% load staticfiles %}
 
+{% block extrahead %}
+<link href="{% static 'custom/css/loading.min.css' %}" rel="stylesheet">
+{% endblock extrahead %}
+
 {% block content %}
 
 <div class="row">
@@ -88,4 +92,5 @@
 
 {% block extrajs %}
 <script src="{% static 'js/lessonTable.js' %}"></script>
+<script src="{% static 'custom/js/jquery.loading.min.js' %}"></script>
 {% endblock extrajs %}

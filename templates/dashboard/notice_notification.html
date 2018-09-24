@@ -1,0 +1,17 @@
+{% for notice in noticeList %}
+<tr>
+  <td>{{notice.number}}</td>
+  <td>{{notice.writer}}</td>
+  <td>{{notice.text}}</td>
+  <td>
+      <button type="button"
+              class="btn btn-danger btn-xs js-delete-notice" data-url="{% url 'dashboard:noticeDelete' notice.number %}">
+        <span class="glyphicon glyphicon-trash"></span> 삭제
+      </button>
+  </td>
+</tr>
+{% empty %}
+<tr>
+  <td colspan="8" class="text-center bg-warning">No Data</td>
+</tr>
+{% endfor %}

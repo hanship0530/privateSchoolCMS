@@ -11,7 +11,7 @@ class PaymentForm(forms.ModelForm):
 class PaymentUpdateForm(forms.ModelForm):
     class Meta:
         model = Payment
-        fields = ('number', 'paymentDate', 'paymentType', 'student', 'item', 'price', 'note')
+        fields = ('number', 'paymentDate', 'paymentType', 'paymentState', 'student', 'item', 'price', 'note')
 
 class GoodsForm(forms.ModelForm):
  	class Meta:

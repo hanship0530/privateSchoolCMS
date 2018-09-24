@@ -22,6 +22,9 @@ urlpatterns = [
     url(r'^typography/$', views.TypographyView.as_view(), name="typography"),
 
     # Custom urls
+    url(r'^create/$', views.NoticeView.create, name='noticeCreate'),
+    url(r'^(?P<pk>\d+)/delete/$', views.NoticeView.delete, name='noticeDelete'),
+
     url(r'^students/', include('students.urls')),
     url(r'^attendance/', include('attendance.urls')),
     url(r'^payment/', include('payments.urls')),

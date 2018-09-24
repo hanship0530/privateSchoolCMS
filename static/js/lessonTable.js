@@ -14,7 +14,7 @@ $('#student-search-div').on("click", "#student-search-btn", function(){
             'name' : $('#student-name-input').val(), 
             'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val() // 크로스오버 공격방지    
         }, 	
-        success: function(data) { 
+        success: function(data) {
             if(data.is_valid){
                 $('#student-table tbody').html(data.studentList); 
                 $('#lesson-table tbody').html(data.lessonList);
@@ -52,7 +52,11 @@ $('#student-div').on('click', '#create-table-btn', function(){
             'number' : btn.attr("data-id"), 
             'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val() // 크로스오버 공격방지
         },  
-        success: function(data) { 
+        beforeSend: function() {
+            $.showLoading({name: 'line-scale',allowHide: true});  
+        },
+        success: function(data) {
+            $.hideLoading({name: 'line-scale',allowHide: true});   
             if(data.isSuccess) {
                 $('#student-table tbody').html(data.studentList); 
                 $('#lesson-table tbody').html(' ');                
