@@ -44,13 +44,17 @@ $('.schedule-table').on('click', '.update-schedule-btn', function(){
             'day': day,
             'csrfmiddlewaretoken': $("input[name=csrfmiddlewaretoken]").val()
         },
+        beforeSend: function() {
+            $.showLoading({name: 'line-scale',allowHide: false});  
+        },        
         success: function(data) {
+            $.hideLoading(); 
             if(data.is_valid == true){
                 $('.schedule-table tbody').html(data.scheduleTable);
                   Lobibox.notify('success', {
                     sound: false,
                     delay: 900,
-                    msg: '정상적으로 수정되었습니다.'
+                    msg: 'Successfully completed'
                   });
             }
             else {
@@ -85,7 +89,7 @@ $('.schedule-table').on('click', '.attend-lesson-btn', function(){
                   Lobibox.notify('success', {
                     sound: false,
                     delay: 900,
-                    msg: '출결처리 되었습니다.'
+                    msg: 'Successfully completed'
                   });
             }
             else {

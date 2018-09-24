@@ -1,0 +1,12 @@
+{% for attendance in attendanceList %}
+<tr>
+  <td>{{attendance.student.number}}</td>
+  <td>{{attendance.student.stname}}</td>
+  <td>{{attendance.student.contact}}</td>
+  <td>{{attendance.fillOut}}</td>
+</tr>
+{% empty %}
+<tr>
+  <td colspan="8" class="text-center bg-warning">No Data</td>
+</tr>
+{% endfor %}

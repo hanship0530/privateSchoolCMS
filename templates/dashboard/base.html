@@ -24,12 +24,12 @@
                     <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> {{user}}</a>
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> {{loginUser}}</a>
                     </li>
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="{% url 'dashboard:logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="{% url 'dashboard:logout' %}"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -41,7 +41,7 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">                 
                     <li>
-                        <a href="{% url 'dashboard:index' %}"><i class="fa fa-dashboard fa-fw"></i> Home</a>
+                        <a href="{% url 'dashboard:index' %}"><i class="fa fa-dashboard fa-fw"></i>Home</a>
                     </li>                    
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -117,13 +117,7 @@
                             </li>
                             <li>
                                 <a href="{% url 'dashboard:manageLessonShow' %}">수업조회</a>
-                            </li>
-                            <li>
-                                <a href="#">상품등록</a>
-                            </li>
-                            <li>
-                                <a href="#">상품조회</a>
-                            </li>                                                        
+                            </li>                                                       
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>                      

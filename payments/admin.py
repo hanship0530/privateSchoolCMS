@@ -3,7 +3,7 @@ from payments.models import Payment, Goods
 # Register your models here.
 
 class PaymentAdmin(admin.ModelAdmin):
-	list_display = ('number','paymentDate', 'student', 'paymentType','item','price','note')
+	list_display = ('number','paymentDate', 'student', 'paymentType', 'paymentState','item','price','note')
 
 class GoodsAdmin(admin.ModelAdmin):
 	list_display = ('code', 'item', 'price')

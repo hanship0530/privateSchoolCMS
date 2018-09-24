@@ -1,0 +1,14 @@
+{% for payment in todaySales %}
+<tr>
+  <td>{{payment.number}}</td>
+  <td>{{payment.item}}</td>
+  <td>{{payment.price}}</td>
+  <td>{{payment.paymentType}}</td>
+  <td>{{payment.paymentState}}</td>
+  <td>{{payment.student.stname}}</td>
+</tr>
+{% empty %}
+<tr>
+  <td colspan="8" class="text-center bg-warning">No Data</td>
+</tr>
+{% endfor %}

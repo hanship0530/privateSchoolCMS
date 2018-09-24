@@ -13,8 +13,8 @@ from django.template.loader import render_to_string
 from .models import Student
 from attendance.models import Attendance
 from .forms import StudentForm
-from .schedule_func import sunday, monday, wendsday, thursday, friday, saturday
-from .lesson_table_func import update_excelsheet, display_excelsheet
+from .schedule_func import sunday, monday, tuseday, wendsday, thursday, friday, saturday
+from .lessonTable_func import update_excelsheet, display_excelsheet
 import win32com.client, datetime, pythoncom, os, re
 
 # manage student 
@@ -97,8 +97,8 @@ class ScheduleView(TemplateView):
         scheduleData = []
         if(day==1): # Monday
             scheduleData = monday(filepath, sheetName, day)                                       
-        elif(day==2): # Thusday
-            scheduleData = []              
+        elif(day==2): # Tuseday
+            scheduleData = tuseday(filepath, sheetName, day)            
         elif(day==3):  # Wendsday
             scheduleData = wendsday(filepath, sheetName, day) 
         elif(day==4):  # Thursday
@@ -106,7 +106,7 @@ class ScheduleView(TemplateView):
         elif(day==5):  # Friday
             scheduleData = friday(filepath, sheetName, day) 
         elif(day==6):  # Saturday
-            scheduleData = saturday(worksheet) 
+            scheduleData = saturday(filepath, sheetName, day) 
         elif(day==7):  # Sunday
             scheduleData = sunday(filepath, sheetName, day)
         return scheduleData
@@ -121,9 +121,8 @@ class ScheduleView(TemplateView):
             date = daymonthyear['daymonthyear'].split(' ')
             dayTuple = datetime.datetime(int(date[2]),int(date[1]),int(date[0])).isocalendar()
             day = dayTuple[2]
-            sheetName = str(dayTuple[0])+'_'+str(dayTuple[1])+'week'
+            sheetName = str(dayTuple[0])+'년_'+str(dayTuple[1])+'주차'
             filepath = "excelchart/timetable_master.xlsx"
-
             scheduleData = ScheduleView.getData(day, sheetName, filepath)
             html['scheduleTable'] = render_to_string('scheduleTable/scheduleTableList.html', {"scheduleTable":scheduleData}, 
                 request=request)
@@ -134,7 +133,6 @@ class ScheduleView(TemplateView):
             try:
                 html = dict()
                 cells = request.POST['cellInfo'].split("/")
-                
                 # Open Excel 
                 pythoncom.CoInitialize()
                 excel = win32com.client.DispatchEx('Excel.Application')
@@ -150,10 +148,9 @@ class ScheduleView(TemplateView):
                 workbook.Close(True)
                 excel.Application.Quit()
                 # Close Excel 
-
-                filepath = "excelchart/timetable_master.xlsx"
-                scheduleData = ScheduleView.getData(str(request.POST['day']), str(request.POST['sheet']), filepath)
                 
+                filepath = "excelchart/timetable_master.xlsx"
+                scheduleData = ScheduleView.getData(int(request.POST['day']), request.POST['sheet'], filepath)
                 html['is_valid'] = True
                 html['scheduleTable'] = render_to_string('scheduleTable/scheduleTableList.html', {"scheduleTable":scheduleData}, 
                 request=request)
@@ -284,8 +281,6 @@ class LessonTableView(TemplateView):
                 html['is_valid'] = True
                 html['studentList'] = render_to_string("lessonTable/lessonTableStudentList.html", {'students':students},
                     request=request)
-                html['lessonList'] = render_to_string("lessonTable/lessonTableList.html", {},
-                    request=request) 
                 return JsonResponse(html) 
         except Exception as e:
             print("Error: "+str(e))
@@ -329,7 +324,7 @@ class LessonTableView(TemplateView):
                 attend = Attendance.objects.get(attendanceDate=today, student=student, fillOut=False)
                 attend.fillOut = True
                 attend.save()
-                ht_data['is_valid'] = True
+                html['is_valid'] = True
                 students = Student.objects.filter(stname=student.stname)
                 html['studentList'] = render_to_string("lessonTable/lessonTableStudentList.html", {'students':students},
                     request=request)                
@@ -381,13 +376,14 @@ class LessonTableView(TemplateView):
                 number = int(request.POST['number'].split('(')[1].split(')')[0])
                 sheetName = request.POST['sheet']
                 student = Student.objects.get(number=number)
+                students = Student.objects.filter(stname=student.stname)
                 tables = display_excelsheet(student.filepath, sheetName)
                 html['is_valid'] = True
                 html['lessonTables'] = render_to_string("lessonTable/lessonTableList.html", {'table':tables[0:-2]}
                     , request=request)
                 html['worksheet'] = tables[-1]
                 html['studentNumber'] = number
-                html['students'] = render_to_string("lessonTable/lessonTableStudentList.html", {})
+                html['studentList'] = render_to_string("lessonTable/lessonTableStudentList.html", {'students':students})
             except Exception as e:
                 print("Error: ", str(e))
                 html['is_valid'] = False

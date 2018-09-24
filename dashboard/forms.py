@@ -1,4 +1,5 @@
 from django import forms
+from .models import Notice
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -11,3 +12,8 @@ class SignUpForm(UserCreationForm):
 	class Meta:
 		model = User
 		fields = ('username', 'password1', 'password2', )
+
+class NoticeForm(forms.ModelForm):
+	class Meta:
+		model = Notice
+		fields = ('number', 'text', 'writer')
