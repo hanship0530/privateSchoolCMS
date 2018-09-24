@@ -41,7 +41,7 @@ def display_excelsheet(filepath, sheetName):
 	wb = openpyxl.load_workbook(filepath)
 	ws = wb[sheetName]
 
-	for i in range(14,37,2):
+	for i in range(14,39,2):
 		data = dict()
 		cell_number = 'A'+str(i)
 		cell_date = 'B'+str(i)

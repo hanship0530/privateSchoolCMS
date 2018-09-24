@@ -21,7 +21,7 @@ $('#student-search-div').on("click", "#student-search-btn", function(){
                   Lobibox.notify('success', {
                     sound: false,
                     delay: 900,
-                    msg: '정상적으로 등록되었습니다.'
+                    msg: 'Successfully completed'
                   });
             } else {
                 $('#student-table tbody').html('');
@@ -53,17 +53,18 @@ $('#student-div').on('click', '#create-table-btn', function(){
             'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val() // 크로스오버 공격방지
         },  
         beforeSend: function() {
-            $.showLoading({name: 'line-scale',allowHide: true});  
+            $.showLoading({name: 'line-scale',allowHide: false});  
         },
         success: function(data) {
-            $.hideLoading({name: 'line-scale',allowHide: true});   
-            if(data.isSuccess) {
-                $('#student-table tbody').html(data.studentList); 
+            $.hideLoading();   
+            if(data.is_valid) {
+                $('#student-table tbody').html(data.studentList);
+                $('#lesson-table tbody').html(); 
                 $('#lesson-table tbody').html(' ');                
                   Lobibox.notify('success', {
                     sound: false,
                     delay: 900,
-                    msg: '정상적으로 등록되었습니다.'
+                    msg: 'Successfully completed'
                   });
             }
             else {
@@ -100,7 +101,7 @@ $('#student-div').on('click', '#display-table-btn', function(){
                   Lobibox.notify('success', {
                     sound: false,
                     delay: 900,
-                    msg: '정상적으로 등록되었습니다.'
+                    msg: 'Successfully completed'
                   });                
             }
             else {
@@ -135,11 +136,11 @@ $('#student-div').on('click', '#fillout-table-btn', function(){
         success: function(data) { 
             if(data.is_valid) {
                 $('#student-table tbody').html(data.studentList); 
-                $('#lesson-table tbody').html(' ');                 
+                $('#lesson-table tbody').html();                 
                   Lobibox.notify('success', {
                     sound: false,
                     delay: 900,
-                    msg: '정상적으로 등록되었습니다.'
+                    msg: 'Successfully completed'
                   });    
             }
             else {
@@ -185,15 +186,25 @@ $('#lesson-table-div').on('click', '#update-table-btn', function() {
             'sheetName': sheetName,
             'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
         },
+        beforeSend: function() {
+            $.showLoading({name: 'line-scale',allowHide: false});  
+        },        
         success: function(data) {
             if(data.is_valid) {
+                $.hideLoading();
                 $('#student-table tbody').html(data.studentTable);
                 $('#lesson-table tbody').html(data.lessonTable);
-                $('.top-right').notify({message: { text: "Success" }}).show(); 
+                  Lobibox.notify('success', {
+                    sound: false,
+                    delay: 900,
+                    msg: 'Successfully completed'
+                  });  
             } else{
-                $('.top-right').notify({
-                    type: 'danger',
-                    message: { text: data.errorMsg }}).show(); 
+                  Lobibox.notify('warning', {
+                    sound: false,
+                    delay: 900,
+                    msg: data.errorMsg
+                  }); 
             }           
         },
         error: function(error) {
@@ -217,11 +228,13 @@ $('#lesson-table-div').on('click', '#sheet-select-btn', function() {
                 $('#lesson-table tbody').html(data.lessonTables);
                 $('#sheet-select').html(data.worksheets);
                 $('#lesson-table-header h1').html(data.studentNumber);
-                $('#student-table tbody').html(data.students);                
+                $('#student-table tbody').html(data.studentList);                
             } else {
-                $('.top-right').notify({
-                    type: 'danger',
-                    message: { text: data.errorMsg }}).show();             
+                Lobibox.notify('warning', {
+                    sound: false,
+                    delay: 900,
+                    msg: data.errorMsg
+                });            
             } 
         },
         error: function(e) {
