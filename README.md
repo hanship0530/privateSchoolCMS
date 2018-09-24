@@ -6,26 +6,25 @@ These instructions will get you a copy of the project up and running on your loc
 ###   Environment
 Windows, Django 1.9
 ### Before Installing 
-```
-please download over python 3.0 [python](https://www.python.org/downloads/)     
-```
+please download over python 3.0     
+[python](https://www.python.org/downloads/)     
 ### Installing
 
 What things you need to install the software and how to install them
 
 - python package
-    ```
-  open windowns cmd
-  pip install requirment.txt
-  ```       
+```
+open windowns cmd
+pip install requirment.txt
+```       
 ### Caution
 This program only works on Windows, Django 1.9
 Please check your django version with "pip list"
 ## Running
 
-    ```
-    python manage.py runserver 0.0.0.0:8000 
-    ```       
+```
+python manage.py runserver 0.0.0.0:8000 
+```       
 ## Detail
 ### django.models
 After modify django models
