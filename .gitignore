@@ -18,5 +18,6 @@ dashboard/__init__.py
 note/__init__.py
 students/__init__.py
 payments/__init__.py
-
+student_excel/
+tutor_excel/
 db.sqlite3
