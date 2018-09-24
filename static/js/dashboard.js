@@ -17,17 +17,28 @@ $(function () {
         });
     };
 
-    var loadForm2 = function () {
+    var loadDelteForm = function () {
         var btn = $(this);
+        var tr = btn.parent().parent();
+        var td = tr.children();
+        var number = td.eq(0).text();
         $.ajax({
-            url: btn.attr("data-url"),
+            url: btn.attr("url"),
             type: 'post',
             dataType: 'json',
+            data: {
+                'number': number,
+                'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+            },
             beforeSend: function () {
                 $("#modal-dashboard").modal("show");
             },
             success: function (data) {
                 $("#modal-dashboard .modal-content").html(data.html_form);
+            },
+            error: function(error) {
+                alert(error);
+                console.log(error);
             }
         });
     };
@@ -62,12 +73,10 @@ $(function () {
         return false;
     };
 
-
   /* Binding */ 
   // Create notice
   $("#notice-div").on('click', ".js-register-notice", loadForm);
   $("#modal-dashboard").on("submit", ".js-notice-register-form", saveForm);
   // Delete notice
-  $("#notice-div").on("click", ".js-delete-notice", loadForm);
-  $("#modal-dashboard").on("submit", ".js-notice-delete-form", saveForm);
+  $("#notice-div").on("click", ".js-delete-notice", loadDelteForm);
 });

@@ -44,27 +44,36 @@ class NoticeView(TemplateView):
                 html['form_is_valid'] = True
                 notices = Notice.objects.all()
                 html['noticeList'] = render_to_string('dashboard/notice_notification.html', {
-                'notices': notices })
-                return redirect('dashboard:index')           
+                'noticeList': notices })
             else:
                 html['form_is_valid'] = False
         context = {'form':form}
         html['html_form'] = render_to_string(template_name, context, request=request)           
         return JsonResponse(html)
-    def delete(request, pk):
+
+    def deleteForm(request):
+        try:
+            if request.method == 'POST':
+                notice = Notice.objects.get(number=request.POST['number'])
+                notice.delete()
+                return redirect('dashboard:index')
+            else:
+                return redirect('dashboard:index')
+        except Exception as e:
+            print("Error: "+str(e))
+            return redirect('dashboard:index')
+    def deleteButton(request):
         html = {}
-        notice = get_object_or_404(Notice, pk=pk)
-        if request.method == 'POST':
-            notice.delete()
-            html['form_is_valid'] = True
-            notices = Notice.objects.all()
-            html['noticeList'] = render_to_string('dashboard/notice_notification.html', 
-                {'notices': notices }, request=request)  
-        else:
-            context = {'notice':notice}
-            html['html_form'] = render_to_string('dashboard/noticePartialDelete.html', context,
-                request=request)
-        return JsonResponse(html)        
+        try:
+            if request.method == 'POST':
+                notice = Notice.objects.get(number=request.POST['number'])
+                context = {'notice':notice.number}
+                html['html_form'] = render_to_string('dashboard/noticePartialDelete.html', context,
+                    request=request)            
+            return JsonResponse(html)
+        except Exception as e:
+            print("Error: "+str(e))
+            return redirect('dashboard:index')
 
 class IndexView(TemplateView):
     template_name = "components/index.html"
@@ -78,7 +87,7 @@ class IndexView(TemplateView):
             total_todaySales = 0
             for sale in today_sales:
                 total_todaySales = total_todaySales + sale.price
-
+            total_todaySales = format(total_todaySales, ',')
             attendanceList = Attendance.objects.filter(attendanceDate=timezone.localtime(timezone.now()).date())
             noticeList = Notice.objects.all()
             # render to string
@@ -107,7 +116,14 @@ class IndexView(TemplateView):
                 'is_valid': False,
                 'errorMsg': "Error: "+str(e) })
             return context
- 
+
+class ErrorView(TemplateView):
+    template_name = "components/error.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(BlankView, self).get_context_data(**kwargs)
+        return context
+
 class BlankView(TemplateView):
     template_name = "components/blank.html"
 

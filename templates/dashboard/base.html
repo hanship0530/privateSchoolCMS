@@ -97,33 +97,36 @@
                         <!-- /.nav-second-level -->
                     </li>                    
                     <li>
-                        <a href="{% url 'dashboard:lessonTable' %}"><i class="fa fa-table fa-fw"></i> 회원차트</a>
+                        <a href="{% url 'dashboard:lessonTable' %}"><i class="fa fa-calendar-o fa-fw"></i> 회원차트</a>
                         <!-- dashboard 디렉터리에서 urls.py에 해당 html명 연결시켜줘야 함
                              그리고 views.py에서 해당 뷰 클래스 만들어야 함 -->
                     </li>
                     <li>
-                        <a href="{% url 'dashboard:scheduleDisplay' %}"><i class="fa fa-table fa-fw"></i> 수업 시간표</a>
+                        <a href="{% url 'dashboard:scheduleDisplay' %}"><i class="fa fa-list fa-fw"></i> 수업 시간표</a>
                         <!-- dashboard 디렉터리에서 urls.py에 해당 html명 연결시켜줘야 함
                              그리고 views.py에서 해당 뷰 클래스 만들어야 함 -->
                     </li>                     
                     <li>
-                        <a href="{% url 'dashboard:managePaymentShow' %}"><i class="fa fa-table fa-fw"></i> 결제관리</a>
+                        <a href="{% url 'dashboard:managePaymentShow' %}"><i class="fa fa-shopping-cart fa-fw"></i> 결제관리</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> 상품관리<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-anchor fa-fw"></i> 수업/상품 관리<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{% url 'dashboard:manageLessonCreate' %}">수업등록</a>
+                                <a href="{% url 'dashboard:manageLessonCreate' %}">수업/상품 등록</a>
                             </li>
                             <li>
-                                <a href="{% url 'dashboard:manageLessonShow' %}">수업조회</a>
+                                <a href="{% url 'dashboard:manageLessonShow' %}">수업/상품 조회</a>
                             </li>                                                       
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>                      
                     <li>
-                        <a href="{% url 'dashboard:attendanceSearch' %}"><i class="fa fa-table fa-fw"></i> 출석관리</a>
-                    </li>                                                                               
+                        <a href="{% url 'dashboard:attendanceSearch' %}"><i class="fa fa-bell fa-fw"></i> 출석관리</a>
+                    </li> 
+                    <li>
+                        <a href="#"><i class="fa fa-usd fa-fw"></i> 매출현황</a>
+                    </li>                                                                                                                      
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

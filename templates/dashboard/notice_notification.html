@@ -5,7 +5,7 @@
   <td>{{notice.text}}</td>
   <td>
       <button type="button"
-              class="btn btn-danger btn-xs js-delete-notice" data-url="{% url 'dashboard:noticeDelete' notice.number %}">
+              class="btn btn-danger btn-xs js-delete-notice" url="{% url 'dashboard:noticeDelete' %}">
         <span class="glyphicon glyphicon-trash"></span> 삭제
       </button>
   </td>

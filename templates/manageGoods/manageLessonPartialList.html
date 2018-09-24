@@ -1,9 +1,9 @@
 {% for lesson in lessons %}
 <tr>
-  <td>{{lesson.code}}</td>
-  <td>{{lesson.item}}</td>
-  <td>{{lesson.price}}</td>
-  <td>
+  <td class="text-center">{{lesson.code}}</td>
+  <td class="text-center">{{lesson.item}}</td>
+  <td class="text-center">{{lesson.price}}</td>
+  <td class="text-center">
       <button type="button"
               class="btn btn-warning btn-sm js-update-lesson"
               data-url="{% url 'dashboard:manageLessonUpdate' lesson.code %}">

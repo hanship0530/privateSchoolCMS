@@ -62,25 +62,23 @@ class AttendanceView(TemplateView):
 
 	def saveAttendanceForm(request, form, template_name, attendance):
 		html = {}
-		try:
-			if request.method == 'POST':
-				if form.is_valid():
-					form.save()
-					html['form_is_valid'] = True
-					students = Student.objects.filter(stname=attendance.student.stname)
-					attendList = Attendance.objects.filter(student=attendance.student)
-					html['studentList'] = render_to_string('attendance/attendanceStudentList.html', {'students':students})
-					html['attendLists'] = render_to_string('attendance/attendanceTableList.html'
-						,{'attendList':attendList})
-				else:
-					html['form_is_valid'] = False
-					html['errorMsg'] = "form is not valid"
-			context = {'form':form}
-			html['html_form'] = render_to_string(template_name, context, request=request)
-			return JsonResponse(html)
-		
-		except Exception as e:
-			print("Error: "+str(e))
-			html['form_is_valid'] = False
-			html['errorMsg'] = "Error: "+str(e)
-			return JsonResponse(html)
+		if request.method == 'POST':
+			if form.is_valid():
+				form.save()
+				html['form_is_valid'] = True
+				students = Student.objects.filter(stname=attendance.student.stname)
+				attendList = Attendance.objects.filter(student=attendance.student)
+				html['studentList'] = render_to_string('attendance/attendanceStudentList.html', {'students':students})
+				html['attendLists'] = render_to_string('attendance/attendanceTableList.html'
+					,{'attendList':attendList})
+			else:
+				html['form_is_valid'] = False
+				html['errorMsg'] = "form is not valid"
+		context = {'form':form}
+		html['html_form'] = render_to_string(template_name, context, request=request)
+		return JsonResponse(html)
+		# except Exception as e:
+		# 	print("Error: "+str(e))
+		# 	html['form_is_valid'] = False
+		# 	html['errorMsg'] = "Error: "+str(e)
+		# 	return JsonResponse(html)
