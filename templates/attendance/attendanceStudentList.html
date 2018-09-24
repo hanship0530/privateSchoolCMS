@@ -1,11 +1,11 @@
 {% for student in students %}
 <tr>
-  <td>{{student.number}}</td>
-  <td>{{student.stname}}</td>
-  <td>{{student.contact}}</td>
-  <td>{{student.school}}</td>
-  <td>{{student.years}}</td>
-  <td>
+  <td class="text-center">{{student.number}}</td>
+  <td class="text-center">{{student.stname}}</td>
+  <td class="text-center">{{student.contact}}</td>
+  <td class="text-center">{{student.school}}</td>
+  <td class="text-center">{{student.years}}</td>
+  <td class="text-center">
     <button type="button" class="btn btn-primary btn-sm" id="display-table-btn" url="{% url 'dashboard:getAttendList' %}"  data-id="{{student.number}}">
       <span class="glyphicon glyphicon-align-left"></span> 조회
     </button>        

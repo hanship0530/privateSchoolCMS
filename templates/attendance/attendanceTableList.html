@@ -1,9 +1,11 @@
 {% for row in attendList %}
 <tr>
-  <td>{{row.date}}</td>
-  <td>{{row.check}}</td>
-  <td>
-    <button type="button" class="btn btn-warning btn-sm" id="update-table-btn">
+  <td class="text-center">{{row.number}}</td>
+  <td class="text-center">{{row.name}}</td>
+  <td class="text-center">{{row.date}}</td>
+  <td class="text-center">{{row.check}}</td>
+  <td class="text-center">
+    <button type="button" class="btn btn-warning btn-sm" id="update-attendance-btn" data-url="{% url 'dashboard:attendanceUpdate' row.number %}">
       <span class="glyphicon glyphicon-pencil"></span> 편집
     </button>
   </td>
