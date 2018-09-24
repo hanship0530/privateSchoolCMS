@@ -87,7 +87,7 @@ class IndexView(TemplateView):
             total_todaySales = 0
             for sale in today_sales:
                 total_todaySales = total_todaySales + sale.price
-
+            total_todaySales = format(total_todaySales, ',')
             attendanceList = Attendance.objects.filter(attendanceDate=timezone.localtime(timezone.now()).date())
             noticeList = Notice.objects.all()
             # render to string

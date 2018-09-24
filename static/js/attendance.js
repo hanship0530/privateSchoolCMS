@@ -83,8 +83,9 @@ $('#attendance-div').on('click', '#update-attendance-btn', function() {
     });
 })
 
-$('#modal-attendance').on('submit', '.js-attendance-update-form', function() {
+$('#modal-attendance').on('submit', '#js-attendance-update-form', function() {
     var form = $(this);
+    console.log(form.serialize());
     $.ajax({
         url: form.attr("action"),
         data: form.serialize(),
