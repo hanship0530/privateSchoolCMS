@@ -15,7 +15,7 @@
                     <fieldset>
                         {% for field in form %}
                             <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                            {% render_field field class="form-control" %}<br>    
+                            {% render_field field class="form-control" placeholder=field.help_text %}<br>    
                         {% for error in field.errors %}
                         <p style="color: red">{{ error }}</p>
                         {% endfor %}
