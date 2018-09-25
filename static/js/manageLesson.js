@@ -29,11 +29,12 @@ $(function () {
             success: function (data) {
                 if (data.form_is_valid) {
                     $("#lesson-table tbody").html(data.lesson_list);  // <-- Replace the table body
+                    $("#student-lesson-table tbody").html('');
                     $("#modal-lesson").modal("hide");  // <-- Close the modal
                     Lobibox.notify('success', {
                         sound: false,
                         delay: 900,
-                        msg: '정상적으로 등록되었습니다.'
+                        msg: 'Successfully completed.'
                     });
                 }
                 else {
@@ -41,7 +42,7 @@ $(function () {
                     Lobibox.notify('warning', {
                         sound: false,
                         delay: 900,
-                        msg: '형식에 오류가 있습니다.'
+                        msg: 'Erros are captured.'
                     });
                 }
             }
@@ -49,9 +50,41 @@ $(function () {
         return false;
     };
 
-
+    var inquireBtn = function () {
+        var btn = $(this);
+        $.ajax({
+            url: btn.attr("data-url"),
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                $("#lesson-table tbody").html(data.lessonList);
+                $("#student-lesson-table tbody").html(data.studentList);
+                Lobibox.notify('success', {
+                    sound: false,
+                    delay: 900,
+                    msg: 'Successfully completed.'
+                });
+            }
+        });
+    };
+    var deleteBtn = function () {
+        var btn = $(this);
+        $.ajax({
+            url: btn.attr("data-url"),
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                $("#lesson-table tbody").html(data.lessonList);
+                $("#student-lesson-table tbody").html(data.studentList);
+                Lobibox.notify('success', {
+                    sound: false,
+                    delay: 900,
+                    msg: 'Successfully completed.'
+                });            
+            }
+        });
+    };    
   /* Binding */
-
   // update lesson 
   $("#lesson-table").on("click", ".js-update-lesson", loadForm);
   $("#modal-lesson").on("submit", ".js-lesson-update-form", saveForm);
@@ -59,4 +92,10 @@ $(function () {
   // delete lesson
   $("#lesson-table").on("click", ".js-delete-lesson", loadForm);
   $("#modal-lesson").on("submit", ".js-lesson-delete-form", saveForm);
+
+  // inquire student
+  $("#lesson-table").on("click", ".js-inquire-lesson", inquireBtn);
+  
+  // delete student's lesson
+  $("#student-lesson-table").on("click", ".js-delete-lesson-student", deleteBtn);
 });
