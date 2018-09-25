@@ -25,7 +25,7 @@ class Payment(models.Model):
 
 class Goods(models.Model):
 	code = models.AutoField(primary_key=True, verbose_name="Merchant Code")
-	item = models.CharField(max_length=10, unique=True, default='', verbose_name="수업/상품")
-	price = models.IntegerField(default=0, verbose_name="가격")
+	item = models.CharField(max_length=10, unique=True, default='', verbose_name="수업/상품", help_text="최대 20자까지 입력가능")
+	price = models.IntegerField(default=0, verbose_name="가격", help_text="숫자만 입력하세요.")
 	def __str__(self):
 		return str(self.item)+'['+str(self.price)+']원'

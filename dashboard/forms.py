@@ -5,8 +5,11 @@ from django.contrib.auth.models import User
 
 
 class SignUpForm(UserCreationForm):
-	first_name = forms.CharField(max_length=30, required=True, help_text='Optional.', label='이름')
-	last_name = forms.CharField(max_length=30, required=True, help_text='Optional.', label='성')
+	username = forms.CharField(max_length=10, required=True, help_text='영문 10자로 입력하세요.', label='아이디')
+	password1 = forms.CharField(max_length=12, widget=forms.PasswordInput, label='비밀번호', help_text='최대 12자로 입력하세요.')
+	password2 = forms.CharField(max_length=12, widget=forms.PasswordInput, label='비밀번호 확인', help_text='비밀번호 확인')
+	first_name = forms.CharField(max_length=8, required=True, help_text='길동', label='이름')
+	last_name = forms.CharField(max_length=4, required=True, help_text='홍', label='성')
 	fileName = forms.FilePathField(path='tutor_excel/', label="강사시간표 파일명")
 	class Meta:
 		model = User

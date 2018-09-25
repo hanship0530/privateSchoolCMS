@@ -13,22 +13,40 @@ from payments.models import Payment
 from attendance.models import Attendance
 from django.http import JsonResponse
 
+def setting(request):
+    if request.method == 'POST':
+        if form.is_valid():
+            form = SignUpForm(request.POST)
+            user = form.save()
+            user.profile.fileName = form.cleaned_data.get('fileName')
+            return redirect('dashboard:index')
+    else:
+        print(request)
+        user = User.objects.get(username=self.request.uesr)
+        form = SignUpForm(user) 
+    return render(request, 'components/setting.html', {'form': form})
+     
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            user.refresh_from_db()
-            user.profile.fileName = form.cleaned_data.get('fileName')
-            user.save()
+            # user = form.save()
+            # user.refresh_from_db()
+            new_user = User.objects.create_user(username=form.cleaned_data.get('username')
+                ,password=form.cleaned_data.get('password1'), first_name= form.cleaned_data.get('first_name'),
+                last_name=form.cleaned_data.get('last_name'))
+            new_user.profile.fileName = form.cleaned_data.get('fileName')
+            # user.save()
+            new_user.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=user.username, password=raw_password)
-            login(request, user)
+            new_user = authenticate(username=username, password=raw_password)
+            login(request, new_user)
             return redirect('dashboard:index')
     else:
         form = SignUpForm()
     return render(request, 'components/signup.html', {'form': form})   
+
 
 class NoticeView(TemplateView):
     def create(request):
@@ -129,7 +147,7 @@ class ErrorView(TemplateView):
     template_name = "components/error.html"
 
     def get_context_data(self, **kwargs):
-        context = super(BlankView, self).get_context_data(**kwargs)
+        context = super(ErrorView, self).get_context_data(**kwargs)
         return context
 
 class BlankView(TemplateView):

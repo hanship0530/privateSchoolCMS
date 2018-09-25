@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^$', auth_views.login, {'template_name': 'components/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'components/logout.html'}, name='logout'),
     url(r'^signup/$', views.signup, name='signup'),
+    url(r'^setting/$', views.setting, name='setting'),
     url(r'^index/$', login_required(views.IndexView.as_view()), name="index"),
     url(r'^blank/$', views.BlankView.as_view(), name="blank"),
     url(r'^buttons/$', views.ButtonsView.as_view(), name="buttons"),
