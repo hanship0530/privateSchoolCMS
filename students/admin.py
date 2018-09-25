@@ -5,6 +5,6 @@ from students.models import Student # student 모델에서 Student 클래스는 
 
 class StudentAdmin(admin.ModelAdmin):
 	list_display = ('number','stname','prtname','address','contact','dateOfBirth',
-		'dateOfEnroll','actState','isPayday','exceedCount','school','years','classCount','gender','sheet','filepath',)
+		'dateOfEnroll','actState','isPayday','school','years','gender','sheet','lesson','filepath',)
 
 admin.site.register(Student, StudentAdmin)	

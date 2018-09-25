@@ -103,7 +103,8 @@ class IndexView(TemplateView):
         try:
             human_students = Student.objects.filter(actState='HUMAN')
             payment_students = Student.objects.filter(isPayday='PAY')
-            exceed_students = Student.objects.filter(exceedCount=0)
+            # exceed_students = Student.objects.filter(exceedCount=0)
+            saleList = Payment.objects.filter(paymentDate=timezone.localtime(timezone.now()).date())
             today_sales = Payment.objects.filter(paymentDate=timezone.localtime(timezone.now()).date(), paymentState='결제')
             today_sales_refund = Payment.objects.filter(paymentDate=timezone.localtime(timezone.now()).date(), paymentState='환불')
             total_todayRefund = 0
@@ -120,28 +121,29 @@ class IndexView(TemplateView):
             attendanceList = render_to_string('dashboard/notice_attendance.html',{'attendanceList':attendanceList})
             noticeList = render_to_string('dashboard/notice_notification.html',{'noticeList':noticeList})
             paymentList = render_to_string('dashboard/notice_paymentStudent.html',{'paymentList':payment_students})
-            exceedList = render_to_string('dashboard/notice_paymentStudent2.html',{'exceedList':exceed_students})
-            todaySales = render_to_string('dashboard/notice_payments.html',{'todaySales':today_sales})
+            # exceedList = render_to_string('dashboard/notice_paymentStudent2.html',{'exceedList':exceed_students})
+            todaySales = render_to_string('dashboard/notice_payments.html',{'todaySales':saleList})
             context.update({
                 'is_valid': True,
                 'human_students': human_students.count(),
                 'payment_students': payment_students.count(),
-                'exceed_students': exceed_students.count(),
+                # 'exceed_students': exceed_students.count(),
                 'total_todaySales': total_todaySales,
                 'attendanceList': attendanceList,
                 'noticeList': noticeList,
                 'paymentList': paymentList,
-                'exceedList': exceedList,
+                # 'exceedList': exceedList,
                 'todaySales': todaySales,
                 'loginUser': self.request.user
             })
             return context
         except Exception as e:
             print("Error: "+str(e))
-            context.update({
-                'is_valid': False,
-                'errorMsg': "Error: "+str(e) })
-            return context
+            # context.update({
+            #     'is_valid': False,
+            #     'errorMsg': "Error: "+str(e) })
+            # return context
+            return redirect('dashboard:error')
 
 class ErrorView(TemplateView):
     template_name = "components/error.html"

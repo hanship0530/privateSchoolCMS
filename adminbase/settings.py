@@ -13,7 +13,7 @@ SECRET_KEY = 'cwb51zmori3v#j$m-5wctvq84-e4rm!0mbxk2_g^o1bcgmbai0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 LOGIN_URL = 'dashboard:login'
 LOGOUT_URL = 'dashboard:logout'
@@ -28,14 +28,15 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dashboard',
-    # 'students',
-    # 'attendance',
-    # 'payments',
     'students.apps.StudentsConfig',
     'attendance.apps.AttendanceConfig',
     'payments.apps.PaymentsConfig',
-    # 'dashboard.apps.NoteConfig',
+    'sales.apps.SalesConfig',
+    'lessons.apps.LessonsConfig',
     'widget_tweaks',
+    # 'students',
+    # 'attendance',
+    # 'payments',
 )
 
 MIDDLEWARE_CLASSES = (
