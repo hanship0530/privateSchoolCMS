@@ -123,7 +123,7 @@ class ScheduleView(TemplateView):
             dayTuple = datetime.datetime(int(date[2]),int(date[1]),int(date[0])).isocalendar()
             day = dayTuple[2]
             sheetName = str(dayTuple[0])+'년_'+str(dayTuple[1])+'주차'
-            filepath = "excelchart/timetable_master.xlsx"
+            filepath = request.user.profile.fileName
             scheduleData = ScheduleView.getData(day, sheetName, filepath)
             html['scheduleTable'] = render_to_string('scheduleTable/scheduleTableList.html', {"scheduleTable":scheduleData}, 
                 request=request)
@@ -134,10 +134,11 @@ class ScheduleView(TemplateView):
             try:
                 html = dict()
                 cells = request.POST['cellInfo'].split("/")
+                filepath = request.user.profile.fileName
                 # Open Excel 
                 pythoncom.CoInitialize()
                 excel = win32com.client.DispatchEx('Excel.Application')
-                workbook = excel.Workbooks.Open(os.path.join(os.getcwd(),"excelchart\\timetable_master.xlsx"))
+                workbook = excel.Workbooks.Open(os.path.join(os.getcwd(), filepath))
                 excel.Visible = False
                 excel.DisplayAlerts = False            
                 worksheet = workbook.Worksheets(request.POST['sheet'])
@@ -150,7 +151,6 @@ class ScheduleView(TemplateView):
                 excel.Application.Quit()
                 # Close Excel 
                 
-                filepath = "excelchart/timetable_master.xlsx"
                 scheduleData = ScheduleView.getData(int(request.POST['day']), request.POST['sheet'], filepath)
                 html['is_valid'] = True
                 html['scheduleTable'] = render_to_string('scheduleTable/scheduleTableList.html', {"scheduleTable":scheduleData}, 
@@ -394,5 +394,21 @@ class LessonTableView(TemplateView):
                 print("Error: ", str(e))
                 html['is_valid'] = False
                 html['errorMsg'] = "Error: " + str(e)
-            return JsonResponse(html) 
+            return JsonResponse(html)
+    def payment(request):
+        html = {}
+        if request.method == 'POST':
+            try:
+                number = int(request.POST['number'])
+                student = Student.objects.get(number=number)
+                student.isPayday = 'PAY'
+                student.save()
+                students = Student.objects.filter(stname=student.stname)
+                html['is_valid'] = True
+                html['studentList'] = render_to_string("lessonTable/lessonTableStudentList.html", {'students':students}, request=request)
+            except Exception as e:
+                print("Error: ", str(e))
+                html['is_valid'] = False
+                html['errorMsg'] = "Error: " + str(e)
+            return JsonResponse(html)
 

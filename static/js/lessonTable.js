@@ -252,3 +252,38 @@ $('#lesson-table-div').on('click', '#sheet-select-btn', function() {
         }
     })
 });
+
+$('#student-div').on('click', '#check-payment-btn', function(){
+    var btn = $(this);
+    $.ajax({
+        // Ajax 정보입력
+        url: btn.attr("url"), 
+        type: 'post', 
+        datatype: 'json', 
+        data: { // view에 전송할 데이터
+            'number' : btn.attr("data-id"),
+            'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val() // 크로스오버 공격방지    
+        },  
+        success: function(data) { 
+            if(data.is_valid) {
+                $('#student-table tbody').html(); 
+                $('#lesson-table tbody').html();                 
+                  Lobibox.notify('success', {
+                    sound: false,
+                    delay: 900,
+                    msg: 'Successfully completed'
+                  });    
+            }
+            else {
+                  Lobibox.notify('warning', {
+                    sound: false,
+                    delay: 900,
+                    msg: data.errorMsg
+                  }); 
+            }            
+        },
+        error: function(error) { 
+            alert(error);
+        }
+    })
+});

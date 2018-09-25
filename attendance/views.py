@@ -56,6 +56,9 @@ class AttendanceView(TemplateView):
 		attendance = get_object_or_404(Attendance, pk=pk)
 		if request.method == 'POST':
 			form = AttendanceForm(request.POST, instance=attendance)
+			if form.is_valid:
+				form.save()
+				return redirect('dashboard:attendanceSearch')
 		else:
 			form = AttendanceForm(instance=attendance)
 		return AttendanceView.saveAttendanceForm(request, form, 'attendance/attendancePartialUpdate.html', attendance)
@@ -77,8 +80,3 @@ class AttendanceView(TemplateView):
 		context = {'form':form}
 		html['html_form'] = render_to_string(template_name, context, request=request)
 		return JsonResponse(html)
-		# except Exception as e:
-		# 	print("Error: "+str(e))
-		# 	html['form_is_valid'] = False
-		# 	html['errorMsg'] = "Error: "+str(e)
-		# 	return JsonResponse(html)

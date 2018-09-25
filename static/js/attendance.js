@@ -83,36 +83,36 @@ $('#attendance-div').on('click', '#update-attendance-btn', function() {
     });
 })
 
-$('#modal-attendance').on('submit', '#js-attendance-update-form', function() {
-    var form = $(this);
-    console.log(form.serialize());
-    $.ajax({
-        url: form.attr("action"),
-        data: form.serialize(),
-        type: form.attr("method"),
-        dataType: 'json', 
-        success: function (data) {
-            if (data.form_is_valid) {
-                $("#student-table tbody").html(data.studentList);  
-                $("#attendance-table tbody").html(data.attendLists);  
-                $("#modal-attendance").modal("hide");  
-                Lobibox.notify('success', {
-                    sound: false,
-                    delay: 900,
-                    msg: 'Successfully completed.'
-                });                    
-            }
-            else {
-                $("#modal-attendance .modal-content").html(data.html_form);
-                Lobibox.notify('warning', {
-                    sound: false,
-                    delay: 900,
-                    msg: data.errorMsg
-                });                    
-            }
-        },
-        error: function(error) {
-            alert(error);
-        }
-    });
-})
+// $('#modal-attendance').on('submit', '#js-attendance-update-form', function() {
+//     var form = $(this);
+//     console.log(form.serialize());
+//     $.ajax({
+//         url: form.attr("action"),
+//         data: form.serialize(),
+//         type: form.attr("method"),
+//         dataType: 'json', 
+//         success: function (data) {
+//             if (data.form_is_valid) {
+//                 $("#student-table tbody").html(data.studentList);  
+//                 $("#attendance-table tbody").html(data.attendLists);  
+//                 $("#modal-attendance").modal("hide");  
+//                 Lobibox.notify('success', {
+//                     sound: false,
+//                     delay: 900,
+//                     msg: 'Successfully completed.'
+//                 });                    
+//             }
+//             else {
+//                 $("#modal-attendance .modal-content").html(data.html_form);
+//                 Lobibox.notify('warning', {
+//                     sound: false,
+//                     delay: 900,
+//                     msg: data.errorMsg
+//                 });                    
+//             }
+//         },
+//         error: function(error) {
+//             alert(error);
+//         }
+//     });
+// })

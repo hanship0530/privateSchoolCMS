@@ -8,8 +8,8 @@ from students.models import Student
 from students.forms import StudentSearchForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
-
-
+from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse
 # Create your views here.
 class LessonManageView(TemplateView):
 	def show(request):
@@ -106,10 +106,12 @@ class PaymentManageView(TemplateView):
 		if request.method == 'POST':
 			if form.is_valid():
 				payment = form.save(commit=False)
-				print(form.cleaned_data['item'])
-				goods = Goods.objects.get(item=form.cleaned_data['item'])
+				goods = Goods.objects.get(item=str(form.cleaned_data['item']).split('[')[0])
 				payment.item = goods.item
-				payment.price = goods.price
+				if form.cleaned_data['price'] == 0:
+					payment.price = goods.price
+				else:
+					payment.price = form.cleaned_data['price']
 				payment.student = form.cleaned_data['student']
 				payment.save()
 				student = payment.student
@@ -125,7 +127,7 @@ class PaymentManageView(TemplateView):
 			else:
 				html['form_is_valid'] = False
 		context = {'form':form}
-		html['html_form'] = render_to_string(template_name, context, request=request)
+		html['html_form'] = render_to_string(template_name, context,request=request)
 		return JsonResponse(html)
 
 	def inquire(request, pk):
@@ -159,7 +161,7 @@ class PaymentManageView(TemplateView):
 		if request.method == 'POST':
 			form = PaymentForm(request.POST)
 		return PaymentManageView.savePaymentForm('payments/managePaymentPartialCreate.html', form, request, True)
-	
+
 	def update(request, pk):
 		payment = get_object_or_404(Payment, pk=pk)
 		if request.method == 'POST':

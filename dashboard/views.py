@@ -17,10 +17,13 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            user.refresh_from_db()
+            user.profile.fileName = form.cleaned_data.get('fileName')
+            user.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            user = authenticate(username=user.username, password=raw_password)
             login(request, user)
             return redirect('dashboard:index')
     else:
@@ -83,10 +86,15 @@ class IndexView(TemplateView):
             human_students = Student.objects.filter(actState='HUMAN')
             payment_students = Student.objects.filter(isPayday='PAY')
             exceed_students = Student.objects.filter(exceedCount=0)
-            today_sales = Payment.objects.filter(paymentDate=timezone.localtime(timezone.now()).date())
+            today_sales = Payment.objects.filter(paymentDate=timezone.localtime(timezone.now()).date(), paymentState='결제')
+            today_sales_refund = Payment.objects.filter(paymentDate=timezone.localtime(timezone.now()).date(), paymentState='환불')
+            total_todayRefund = 0
             total_todaySales = 0
             for sale in today_sales:
                 total_todaySales = total_todaySales + sale.price
+            for sale in today_sales_refund:
+                total_todayRefund = total_todayRefund + sale.price
+            total_todaySales = total_todaySales - total_todayRefund
             total_todaySales = format(total_todaySales, ',')
             attendanceList = Attendance.objects.filter(attendanceDate=timezone.localtime(timezone.now()).date())
             noticeList = Notice.objects.all()
@@ -107,7 +115,7 @@ class IndexView(TemplateView):
                 'paymentList': paymentList,
                 'exceedList': exceedList,
                 'todaySales': todaySales,
-                'loginUser': self.request.user 
+                'loginUser': self.request.user
             })
             return context
         except Exception as e:

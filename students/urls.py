@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^lessonTable/completeFillOut/$', login_required(views.LessonTableView.completeFillout), name='lessonTableFillout'),
     url(r'^lessonTable/update/$', login_required(views.LessonTableView.update), name='lessonTableUpdate'),
     url(r'^lessonTable/selectSheet/$', login_required(views.LessonTableView.getSheet), name='LessonSelectSheet'),
+    url(r'^lessonTable/checkPayment/$', login_required(views.LessonTableView.payment), name='lessonTablePayment'),
 ]
