@@ -12,6 +12,10 @@ from django.http import JsonResponse
 class LessonManageView(TemplateView):
 	def show(request):
 		lessons = Lesson.objects.all()
+		for lesson in lessons:
+			number = lesson.student_set.all().count()
+			lesson.people = number
+			lesson.save()
 		return render(request, 'manageGoods/manageLesson.html', {'lessons':lessons,'students':''})
 
 	def saveLessonForm(template_name, form, request):

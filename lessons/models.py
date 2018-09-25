@@ -7,5 +7,6 @@ class Lesson(models.Model):
 	price = models.IntegerField(default=0, verbose_name="가격", help_text="숫자만 입력하세요.")
 	teacher = models.CharField(max_length=10, null=True, default='', verbose_name="강사", help_text="강사명")
 	days = models.CharField(max_length=10, null=True, default='', verbose_name="수업요일", help_text="예시: 월/목")
+	people = models.IntegerField(default=0, blank=True, null=True, verbose_name="수강생 수")
 	def __str__(self):
 		return str(self.item)+'['+str(self.price)+']원'
