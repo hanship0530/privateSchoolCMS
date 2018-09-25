@@ -247,6 +247,9 @@ class LessonTableView(TemplateView):
                 number = request.POST['number']
                 student = Student.objects.get(number=number)
 
+                student.sheet = sheetName
+                student.save()
+                
                 # Open Excel
                 pythoncom.CoInitialize()
                 excel = win32com.client.DispatchEx('Excel.Application')
@@ -273,9 +276,6 @@ class LessonTableView(TemplateView):
                 workbook.Close(True)
                 excel.Application.Quit()
                 # Close Excel
-
-                student.sheet = sheetName
-                student.save()
                 
                 students = Student.objects.filter(stname=student.stname)
 

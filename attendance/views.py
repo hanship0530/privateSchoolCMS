@@ -10,8 +10,8 @@ from .forms import AttendanceForm
 # Create your views here.
 class AttendanceView(TemplateView):
 	def searchStudent(request):
+		html = {}
 		if request.method == 'POST':
-			html = {}
 			try:
 				name = request.POST['name']
 				students = Student.objects.filter(stname=name)
@@ -28,8 +28,8 @@ class AttendanceView(TemplateView):
 			return render(request, 'attendance/attendance.html', {})
 
 	def getAttendList(request):
+		html = {}
 		if request.method == 'POST':
-			html = {}
 			try:
 				number = request.POST['number']
 				student = Student.objects.get(number=number)
