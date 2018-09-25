@@ -59,23 +59,23 @@ class daySalesView(TemplateView):
 
 				for payment in payments:
 					if payment.paymentType == '카드':
-						payment1 = payment1 + str(payment.student.stname)+'['+str(payment.student.stname)+']: '\
-								   +str(payment.item)+'-'+str(payment.price)+'원, '
+						payment1 = payment1 + str(payment.student.stname)+"["+str(payment.student.number)+"]: "+str(payment.item)+"-"+str(payment.price)+"원\n"
 					else:
-						payment2 = payment1 + str(payment.student.stname)+'['+str(payment.student.stname)+']: '\
-								   +str(payment.item)+'-'+str(payment.price)+'원, '
+						payment2 = payment2 + str(payment.student.stname)+'['+str(payment.student.number)+']: '+str(payment.item)+'-'+str(payment.price)+'원\n'
 				for payment in payment_refunds:
 					if payment.paymentType == '카드':
-						payment3 = payment1 + str(payment.student.stname)+'['+str(payment.student.stname)+']: '\
-								   +str(payment.item)+'-'+str(payment.price)+'원, '
+						payment3 = payment3 + str(payment.student.stname)+'['+str(payment.student.number)+']: '+str(payment.item)+'-'+str(payment.price)+'원\n'
 					else:
-						payment4 = payment1 + str(payment.student.stname)+'['+str(payment.student.stname)+']: '\
-								   +str(payment.item)+'-'+str(payment.price)+'원, '
+						payment4 = payment4 + str(payment.student.stname)+'['+str(payment.student.number)+']: '+str(payment.item)+'-'+str(payment.price)+'원\n'
 
 				worksheet2.Range('B9').Value = payment1 # payment card
+				worksheet2.Range('B9').Font.Size = 9
 				worksheet2.Range('G9').Value = payment2 # payment casj
+				worksheet2.Range('G9').Font.Size = 9
 				worksheet2.Range('B28').Value = payment3 # refund card
+				worksheet2.Range('B28').Font.Size = 9
 				worksheet2.Range('G28').Value = payment4 # refund cash
+				worksheet2.Range('G28').Font.Size = 9
 				worksheet2.Range('C39').Value = total_Sales
 
 				workbook.Save()
@@ -87,6 +87,7 @@ class daySalesView(TemplateView):
 				today = timezone.localtime(timezone.now()).date()
 				month = monthSale(date=datetime(today.year, today.month), monthsales=total_Sales,
 								  refundsCounts=payment_refunds.count(), paymentsCounts=payments.count())
+				month.save()
 			return JsonResponse(html)
 		except Exception as e:
 			print("Error: "+str(e))
