@@ -6,7 +6,7 @@ class PaymentForm(forms.ModelForm):
     item = forms.ModelChoiceField(queryset=Goods.objects.all(), empty_label="Please select.", label="수업/상품")
     class Meta:
         model = Payment
-        fields = ('number', 'paymentDate','paymentType', 'paymentState', 'student', 'item', 'note')
+        fields = ('number', 'paymentDate','paymentType', 'paymentState', 'student', 'item', 'price', 'note')
 
 class PaymentUpdateForm(forms.ModelForm):
     class Meta:

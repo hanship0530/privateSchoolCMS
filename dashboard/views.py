@@ -13,19 +13,40 @@ from payments.models import Payment
 from attendance.models import Attendance
 from django.http import JsonResponse
 
+def setting(request):
+    if request.method == 'POST':
+        if form.is_valid():
+            form = SignUpForm(request.POST)
+            user = form.save()
+            user.profile.fileName = form.cleaned_data.get('fileName')
+            return redirect('dashboard:index')
+    else:
+        print(request)
+        user = User.objects.get(username=self.request.uesr)
+        form = SignUpForm(user) 
+    return render(request, 'components/setting.html', {'form': form})
+     
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            # user = form.save()
+            # user.refresh_from_db()
+            new_user = User.objects.create_user(username=form.cleaned_data.get('username')
+                ,password=form.cleaned_data.get('password1'), first_name= form.cleaned_data.get('first_name'),
+                last_name=form.cleaned_data.get('last_name'))
+            new_user.profile.fileName = form.cleaned_data.get('fileName')
+            # user.save()
+            new_user.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
+            new_user = authenticate(username=username, password=raw_password)
+            login(request, new_user)
             return redirect('dashboard:index')
     else:
         form = SignUpForm()
     return render(request, 'components/signup.html', {'form': form})   
+
 
 class NoticeView(TemplateView):
     def create(request):
@@ -83,10 +104,15 @@ class IndexView(TemplateView):
             human_students = Student.objects.filter(actState='HUMAN')
             payment_students = Student.objects.filter(isPayday='PAY')
             exceed_students = Student.objects.filter(exceedCount=0)
-            today_sales = Payment.objects.filter(paymentDate=timezone.localtime(timezone.now()).date())
+            today_sales = Payment.objects.filter(paymentDate=timezone.localtime(timezone.now()).date(), paymentState='결제')
+            today_sales_refund = Payment.objects.filter(paymentDate=timezone.localtime(timezone.now()).date(), paymentState='환불')
+            total_todayRefund = 0
             total_todaySales = 0
             for sale in today_sales:
                 total_todaySales = total_todaySales + sale.price
+            for sale in today_sales_refund:
+                total_todayRefund = total_todayRefund + sale.price
+            total_todaySales = total_todaySales - total_todayRefund
             total_todaySales = format(total_todaySales, ',')
             attendanceList = Attendance.objects.filter(attendanceDate=timezone.localtime(timezone.now()).date())
             noticeList = Notice.objects.all()
@@ -107,7 +133,7 @@ class IndexView(TemplateView):
                 'paymentList': paymentList,
                 'exceedList': exceedList,
                 'todaySales': todaySales,
-                'loginUser': self.request.user 
+                'loginUser': self.request.user
             })
             return context
         except Exception as e:
@@ -121,7 +147,7 @@ class ErrorView(TemplateView):
     template_name = "components/error.html"
 
     def get_context_data(self, **kwargs):
-        context = super(BlankView, self).get_context_data(**kwargs)
+        context = super(ErrorView, self).get_context_data(**kwargs)
         return context
 
 class BlankView(TemplateView):

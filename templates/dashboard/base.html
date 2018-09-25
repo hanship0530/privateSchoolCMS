@@ -26,7 +26,7 @@
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> {{loginUser}}</a>
                     </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    <li><a href="{% url 'dashboard:setting' %}"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
                     <li><a href="{% url 'dashboard:logout' %}"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
@@ -125,8 +125,20 @@
                         <a href="{% url 'dashboard:attendanceSearch' %}"><i class="fa fa-bell fa-fw"></i> 출석관리</a>
                     </li> 
                     <li>
-                        <a href="#"><i class="fa fa-usd fa-fw"></i> 매출현황</a>
-                    </li>                                                                                                                      
+                        <a href="#"><i class="fa fa-anchor fa-fw"></i> 매출관리<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">일 매출대장 작성</a>
+                            </li>
+                            <li>
+                                <a href="#">일 매출대장 조회</a>
+                            </li>                            
+                            <li>
+                                <a href="#">월별 매출현황</a>
+                            </li>                                                       
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>                                                                                                                        
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

@@ -77,7 +77,11 @@ $(function () {
             },
             success: function (data) {
                 $("#modal-payment .modal-content").html(data.html_form);
-            }
+            },
+            error: function(error) { // 오류가 난 경우
+                alert(error);
+                console.log(error);
+            }            
         });
     };
 
@@ -107,11 +111,14 @@ $(function () {
                         msg: 'Errors are captured.'
                     });
                 }
-            }
+            },
+            error: function(error) { // 오류가 난 경우
+                alert(error);
+                console.log(error);
+            }            
         });
         return false;
     };
-
 
   //Search student
   $('#div-student-search').on("click", ".js-student-search", search);
@@ -122,7 +129,7 @@ $(function () {
   // Create payment
   $("#table-student").on('click', ".js-register-payment", loadForm);
   $("#modal-payment").on("submit", ".js-payment-register-form", saveForm);
-
+  
   // Update payment
   $("#table-payment").on("click", ".js-update-payment", loadForm);
   $("#modal-payment").on("submit", ".js-payment-update-form", saveForm);

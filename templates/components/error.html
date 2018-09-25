@@ -1,22 +1,26 @@
-{% extends "layout/base.html" %}
-{% block basecontent %}
-<div class="container">
+{% extends "dashboard/base.html" %}
+{% load staticfiles %}
+{% block extrahead %}
+<link href="{% static 'custom/css/error.css' %}" rel="stylesheet">
+{% endblock extrahead %}
+{% block content %}
+<div class="container bootstrap snippet">
     <div class="row">
         <div class="col-md-12">
-            <div class="error-template">
-                <h1>
-                    Oops!</h1>
-                <h2>
-                    404 Not Found</h2>
-                <div class="error-details">
-                    Sorry, an error has occured, Requested page not found!
-                </div>
-                <div class="error-actions">
-                    <a href="{% url 'dashboard:index' %}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
-                        Take Me Home </a>
+            <div class="pull-right" style="margin-top:10px;">
+                <div class="col-md-10 col-md-offset-1 pull-right">
+                    <img class="img-error" src="https://bootdey.com/img/Content/fdfadfadsfadoh.png">
+                    <h2>404 Not Found</h2>
+                    <p>Sorry, an error has occured, Requested page not found!</p>
+                    <div class="error-actions">
+                        <a href="{% url 'dashboard:index' %}" class="btn btn-primary btn-lg">
+                            <span class="glyphicon glyphicon-arrow-left"></span>
+                            Back Home 
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{% endblock basecontent %}
+{% endblock content %}

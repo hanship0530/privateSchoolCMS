@@ -5,7 +5,7 @@
   <td class="text-center">{{student.contact}}</td>
   <td class="text-center">{{student.school}}</td>
   <td class="text-center">{{student.years}}</td>
-  <td class="text-center">
+  <td>
     <button type="button" class="btn btn-info btn-xs" id="display-table-btn" url="{% url 'dashboard:lessonTableDisplay' %}"  data-id="{{student.number}}">
       <span class="glyphicon glyphicon-pencil"></span> 작성
     </button>
@@ -14,10 +14,7 @@
     </button>   
     <button type="button" class="btn btn-primary btn-xs" id="fillout-table-btn" url="{% url 'dashboard:lessonTableFillout' %}"  data-id="{{student.number}}">
       <span class="glyphicon glyphicon-ok"></span> 완료
-    </button>
-    <button type="button" class="btn btn-danger btn-xs" id="check-payment-btn" url="{% url 'dashboard:lessonTablePayment' %}"  data-id="{{student.number}}">
-      <span class="glyphicon glyphicon-ok"></span> 결제일
-    </button>             
+    </button>         
   </td>
 </tr>
 {% empty %}

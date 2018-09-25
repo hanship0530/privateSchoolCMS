@@ -18,14 +18,14 @@ class Payment(models.Model):
 	paymentType = models.CharField(max_length=6, choices=PAYMENT_CHOICE, default='카드', verbose_name="결제방식")
 	paymentState = models.CharField(max_length=6, choices=PAYMENT_STATE, default='결제', verbose_name="결제상태")
 	item = models.CharField(max_length=30, null=True, verbose_name="수업/상품")
-	price = models.IntegerField(default=0, verbose_name="가격")
+	price = models.IntegerField(default=0, blank=True, verbose_name="가격")
 	note = models.CharField(max_length=100, blank=True, default='', null=True, verbose_name="Memo")
 	def __str__(self):
 		return str(self.paymentDate)+"_"+str(self.student)
 
 class Goods(models.Model):
 	code = models.AutoField(primary_key=True, verbose_name="Merchant Code")
-	item = models.CharField(max_length=10, unique=True, default='', verbose_name="수업/상품")
-	price = models.IntegerField(default=0, verbose_name="가격")
+	item = models.CharField(max_length=10, unique=True, default='', verbose_name="수업/상품", help_text="최대 20자까지 입력가능")
+	price = models.IntegerField(default=0, verbose_name="가격", help_text="숫자만 입력하세요.")
 	def __str__(self):
-		return str(self.item)
+		return str(self.item)+'['+str(self.price)+']원'
