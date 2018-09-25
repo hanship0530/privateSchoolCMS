@@ -3,6 +3,9 @@
   <td class="text-center">{{lesson.code}}</td>
   <td class="text-center">{{lesson.item}}</td>
   <td class="text-center">{{lesson.price}}</td>
+  <td class="text-center">{{lesson.teacher}}</td>
+  <td class="text-center">{{lesson.days}}</td>
+  <td class="text-center">미정</td>
   <td class="text-center">
       <button type="button"
               class="btn btn-warning btn-sm js-update-lesson"
@@ -14,6 +17,11 @@
               data-url="{% url 'dashboard:manageLessonDelete' lesson.code %}">
         <span class="glyphicon glyphicon-trash"></span> 삭제
       </button>
+      <button type="button"
+              class="btn btn-primary btn-sm js-inquire-lesson"
+              data-url="{% url 'dashboard:managePaymentStudentInquire' lesson.code %}">
+        <span class="glyphicon glyphicon-trash"></span> 조회
+      </button>      
   </td>
 </tr>
 {% empty %}

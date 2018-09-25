@@ -13,12 +13,12 @@
 {% block content %}
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">수업/상품 관리</h1>
+        <h1 class="page-header">수업</h1>
     </div>
 </div>
 
 <div class="row" id="create-lesson">
-    <div class="col-lg-7">
+    <div class="col-lg-10">
         <div class="box">
             <div class="box-body table-responsive no-padding">
                 <div class="dataTable_wrapper">
@@ -26,9 +26,12 @@
                         <thead>
                             <tr>
                                 <th class="text-center" width="3%">No.</th>
-                                <th class="text-center" width="15%">수업/상품</th>
+                                <th class="text-center" width="15%">수업</th>
                                 <th class="text-center" width="10%">가격</th>
-                                <th class="text-center" width="8%">/</th>
+                                <th class="text-center" width="10%">강사</th>
+                                <th class="text-center" width="10%">요일</th>
+                                <th class="text-center" width="10%">수강생 수</th>
+                                <th class="text-center" width="18%">/</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,6 +47,42 @@
     <!-- /.col-lg-12 -->
 </div>
 
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">수업 수강생</h1>
+    </div>
+</div>
+<div class="row" id="inquire-student-lesson">
+    <div class="col-lg-12">
+        <div class="box">
+            <div class="box-body table-responsive no-padding">
+                <div class="dataTable_wrapper">
+                    <table class="table table-striped table-bordered table-hover" id="student-lesson-table">
+                        <thead>
+                            <tr>
+                                <th class="text-center" width="3%">회원번호</th>
+                                <th class="text-center" width="5%">이름</th>
+                                <th class="text-center" width="8%">연락처</th>
+                                <th class="text-center" width="6%">학교</th>
+                                <th class="text-center" width="3%">학년</th>
+                                <th class="text-center" width="10%">수업</th>
+                                <th class="text-center" width="5%">강사</th>
+                                <th class="text-center" width="5%">요일</th>
+                                <th class="text-center" width="3%">/</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% include 'manageGoods/manageLessonStudentPartialList.html' %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
 <!-- THE MODAL WE WILL BE USING -->
 <div class="modal fade" id="modal-lesson">
     <div class="modal-dialog">
@@ -69,7 +108,15 @@
             "targets": "_all"
             }]                
         });
-
     });
+    $(document).ready(function() {
+        $('#student-lesson-table').DataTable({
+            responsive: true,
+            "columnDefs": [{
+            "defaultContent": "-",
+            "targets": "_all"
+            }]                
+        });
+    });    
 </script>
 {% endblock extrajs %}
