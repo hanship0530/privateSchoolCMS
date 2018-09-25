@@ -110,13 +110,13 @@
                         <a href="{% url 'dashboard:managePaymentShow' %}"><i class="fa fa-shopping-cart fa-fw"></i> 결제관리</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-anchor fa-fw"></i> 수업/상품 관리<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-anchor fa-fw"></i> 수업 관리<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{% url 'dashboard:manageLessonCreate' %}">수업/상품 등록</a>
+                                <a href="{% url 'dashboard:manageLessonCreate' %}">수업 등록</a>
                             </li>
                             <li>
-                                <a href="{% url 'dashboard:manageLessonShow' %}">수업/상품 조회</a>
+                                <a href="{% url 'dashboard:manageLessonShow' %}">수업 조회</a>
                             </li>                                                       
                         </ul>
                         <!-- /.nav-second-level -->
@@ -128,10 +128,7 @@
                         <a href="#"><i class="fa fa-anchor fa-fw"></i> 매출관리<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">일 매출대장 작성</a>
-                            </li>
-                            <li>
-                                <a href="#">일 매출대장 조회</a>
+                                <a href="{% url 'dashboard:salesDisplay' %}">일 매출대장</a>
                             </li>                            
                             <li>
                                 <a href="#">월별 매출현황</a>

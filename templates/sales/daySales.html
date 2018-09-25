@@ -1,0 +1,75 @@
+{% extends "dashboard/base.html" %}
+{% load staticfiles %}
+
+{% block extrahead %}
+<link href="{% static 'custom/css/loading.min.css' %}" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">일 매출대장</h1>
+    </div>
+</div>
+<div class="row" id="sales-write-div">
+    <div class="col-lg-12">
+        <button type="button" class="btn btn-warning btn-lg btn-block" id="sales-write-btn" url="{% url 'dashboard:salesCreateDay' %}">일 매출대장 엑셀에 작성</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">일 매출대장 조회</h1>
+    </div>
+</div>
+<div class="row" id="sales-inquire-div">
+    <div class="col-lg-3">
+        <select class="form-control" id="sheet-select">
+            {{sheets}}
+        </select>        
+    </div>
+    <div class="col-lg-3">
+        <button type="button" class="btn btn-info" id="sales-inquire-btn">조회</button>
+    </div>    
+</div>
+<br><br>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box-header with-border">
+            <h3 class="box-title">카드 결제</h3>
+        </div>        
+        <div class="box" id="sales-list-div">
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="box-header with-border">
+            <h3 class="box-title">현금 결제</h3>
+        </div>            
+        <div class="box" id="sales-list-div">
+        </div>
+    </div>    
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box-header with-border">
+            <h3 class="box-title">카드 환불</h3>
+        </div>               
+        <div class="box" id="sales-list-div">
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="box-header with-border">
+            <h3 class="box-title">현금 환불</h3>
+        </div>        
+        <div class="box" id="sales-list-div">
+        </div>
+    </div>    
+</div>
+
+{% endblock content %}
+
+{% block extrajs %}
+<script src="{% static 'js/daySales.js' %}"></script>
+<!-- Loading Java Script -->
+<script src="{% static 'custom/js/jquery.loading.min.js' %}"></script>
+{% endblock extrajs %}
