@@ -5,6 +5,8 @@ attendance/migrations/
 dashboard/__pycache__/
 dashboard/migrations/
 note/__pycache__/
+sales/__pycache__/
+sales/migrations/
 note/migrations/
 students/__pycache__/
 students/migrations/
@@ -18,6 +20,7 @@ dashboard/__init__.py
 note/__init__.py
 students/__init__.py
 payments/__init__.py
+sales/__init__.py
 student_excel/
 tutor_excel/
 db.sqlite3
