@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^create/$', login_required(views.NoticeView.create), name='noticeCreate'),
     url(r'^delete/$', login_required(views.NoticeView.deleteButton), name='noticeDelete'),
     url(r'^delete2/$', login_required(views.NoticeView.deleteForm), name='noticeDelete2'),
+    url(r'^createPayment/$', login_required(views.DashPaymentView.createPayment), name='dashboardPayment'),
+    url(r'^createPayment/Form/$', login_required(views.DashPaymentView.createPaymentForm), name='dashboardPaymentCreate'),    
     url(r'^error/$', login_required(views.ErrorView.as_view()), name='error'),
 
     url(r'^students/', include('students.urls')),

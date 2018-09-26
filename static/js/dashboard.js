@@ -17,7 +17,7 @@ $(function () {
         });
     };
 
-    var loadDelteForm = function () {
+    var loadDeleteForm = function () {
         var btn = $(this);
         var tr = btn.parent().parent();
         var td = tr.children();
@@ -38,7 +38,31 @@ $(function () {
             },
             error: function(error) {
                 alert(error);
-                console.log(error);
+            }
+        });
+    };
+
+    var loadPaymentForm = function () {
+        var btn = $(this);
+        var tr = btn.parent().parent();
+        var td = tr.children();
+        var number = td.eq(0).text();
+        $.ajax({
+            url: btn.attr("url"),
+            type: 'post',
+            dataType: 'json',
+            data: {
+                'number': number,
+                'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+            },
+            beforeSend: function () {
+                $("#modal-dashboard-payment").modal("show");
+            },
+            success: function (data) {
+                $("#modal-dashboard-payment .modal-content").html(data.html_form);
+            },
+            error: function(error) {
+                alert(error);
             }
         });
     };
@@ -61,22 +85,44 @@ $(function () {
                     });                    
                 }
                 else {
-                    $("#modal-dashboard .modal-content").html(data.html_form);
-                    Lobibox.notify('warning', {
-                        sound: false,
-                        delay: 900,
-                        msg: 'Errors are captured'
-                    });                    
+                    $("#modal-dashboard .modal-content").html(data.html_form);                
                 }
             }
         });
         return false;
     };
 
+    var savePaymentForm = function () {
+        var form = $(this);
+        $.ajax({
+            url: form.attr("action"),
+            data: form.serialize(),
+            type: form.attr("method"),
+            dataType: 'json',
+            success: function (data) {
+                if (data.form_is_valid) {
+                    $("#payment-table tbody").html(data.paymentList);  
+                    $("#modal-dashboard-payment").modal("hide");  
+                    Lobibox.notify('success', {
+                        sound: false,
+                        delay: 900,
+                        msg: 'Successfully completed'
+                    });                    
+                }
+                else {
+                    $("#modal-dashboard-payment .modal-content").html(data.html_form);                   
+                }
+            }
+        });
+        return false;
+    };
   /* Binding */ 
   // Create notice
   $("#notice-div").on('click', ".js-register-notice", loadForm);
   $("#modal-dashboard").on("submit", ".js-notice-register-form", saveForm);
   // Delete notice
-  $("#notice-div").on("click", ".js-delete-notice", loadDelteForm);
+  $("#notice-div").on("click", ".js-delete-notice", loadDeleteForm);
+  //Resiger payment
+  $("#payment-table").on("click", ".js-register-payment", loadPaymentForm);
+  $("#modal-dashboard-payment").on("submit", ".js-payment-register-form", savePaymentForm);
 });
