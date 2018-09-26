@@ -44,6 +44,8 @@ class PaymentManageView(TemplateView):
 				payment.student = form.cleaned_data['student']
 				payment.save()
 				student = payment.student
+				student.isPayday = 'PAYED'
+				student.save()
 				if isNew:
 					student.payment_set.add(payment)
 				else:

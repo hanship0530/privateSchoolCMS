@@ -9,7 +9,9 @@ from .forms import SignUpForm, NoticeForm
 from .models import Notice
 import datetime
 from django.utils import timezone
+from lessons.models import Lesson
 from payments.models import Payment
+from payments.forms import PaymentForm
 from attendance.models import Attendance
 from django.http import JsonResponse
 
@@ -96,6 +98,59 @@ class NoticeView(TemplateView):
             print("Error: "+str(e))
             return redirect('dashboard:index')
 
+class DashPaymentView(TemplateView):
+    def createPayment(request):
+        try:
+            if request.method == 'POST':
+                number = request.POST['number']
+                student = Student.objects.get(number=number)
+                form = PaymentForm(initial={'student':student})
+            return DashPaymentView.savePaymentForm('dashboard/paymentPartialCreate.html',form,request)
+        except Exception as e:
+            print("Error: "+str(e))
+            return redirect('dashboard:index')
+    
+    def createPaymentForm(request):
+        try:
+            if request.method == 'POST':
+                form = PaymentForm(request.POST)
+            return DashPaymentView.savePaymentForm('dashboard/paymentPartialCreate.html', form, request)
+        except Exception as e:
+            print("Error: "+str(e))
+            return redirect('dashboard:index')
+    def savePaymentForm(template_name, form, request):
+        html = {}
+        try:
+            if request.method == 'POST':
+                if form.is_valid():
+                    payment = form.save(commit=False)
+                    lesson = Lesson.objects.get(item=str(form.cleaned_data['item']).split('[')[0])
+                    payment.item = lesson.item
+                    if form.cleaned_data['price'] == 0:
+                        payment.price = lesson.price
+                    else:
+                        payment.price = form.cleaned_data['price']
+
+                    payment.student = form.cleaned_data['student']
+                    payment.save()
+                    student = payment.student
+                    student.isPayday = 'PAYED'
+                    student.save()
+                    student.payment_set.add(payment)
+                    lesson.student_set.add(student)
+                    lesson.save()
+
+                    html['form_is_valid'] = True
+                    paymentList = Student.objects.filter(stname=student.stname, isPayday='PAY')
+                    html['paymentList'] = render_to_string('payments/managePaymentStudentList.html',{'paymentList':paymentList})
+                else:
+                    html['form_is_valid'] = False
+            context = {'form':form}
+            html['html_form'] = render_to_string(template_name, context,request=request)
+            return JsonResponse(html)
+        except Exception as e:
+            print("Error: "+str(e))
+            return redirect('dashboard:index')
 class IndexView(TemplateView):
     template_name = "components/index.html"
     def get_context_data(self, **kwargs):
