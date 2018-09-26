@@ -2,67 +2,114 @@
 {% load staticfiles %}
 
 {% block extrahead %}
-<link href="{% static 'custom/css/loading.min.css' %}" rel="stylesheet">
+    
+<!-- Morris Charts CSS -->
+<link href="{% static 'bower_components/morrisjs/morris.css' %}" rel="stylesheet">
+<link href="{% static 'bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css' %}" rel="stylesheet">
+<!-- DataTables Responsive CSS -->
+<link href="{% static 'bower_components/datatables-responsive/css/dataTables.responsive.css' %}" rel="stylesheet">
 {% endblock extrahead %}
 
-{% block content %}
 
+{% block content %}
+    
 <div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">월 매출현황</h1>
+    <div class="col-lg-9">
+        <h1 class="page-header">월 매출 현황</h1>
     </div>
+    <!-- /.col-lg-12 -->
 </div>
-<div class="row" id="sales-write-div">
-    <div class="col-lg-6">
-        <button class="btn btn-primary" id="sales-write-btn">일 매출대장 엑셀에 작성</button>
-    </div>
-</div>
+<!-- /.row -->
 <div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">일 매출대장 조회</h1>
+    <!-- /.col-lg-6 -->
+    <div class="col-lg-9">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">최근 7개월간 매출</h3>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="box-body chart-responsive">
+                <div class="chart" id="morris-bar-chart"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
     </div>
-</div>
-<div class="row" id="sales-inquire-div">
-    <div class="col-lg-3">
-        <select class="form-control" id="sheet-select">
-            {% include 'sales/salesSheetSelect.html' %}
-        </select>        
+    <div class="col-lg-9">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">월별 매출 표</h3>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="box-body">
+                <table class="table table-bordered table-striped" id="sales-table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">날짜</th>
+                            <th class="text-center">매출액</th>
+                            <th class="text-center">결제건수</th>
+                            <th class="text-center">환불건수</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{monthsalesHtml}}
+                    </tbody>                    
+                </table>
+            </div>
+            <!-- /.panel-body -->
+        </div>        
     </div>
-    <div class="col-lg-3">
-        <button class="btn btn-primary" id="sales-inquire-btn">조회</button>
-    </div>    
-</div>
-<div class="row">
-  pay
-    <div class="col-lg-6">
-        <div class="box" id="sales-list-div">
-          card
+    <!-- /.col-lg-6 -->    
+<!-- Morris Usage
+    <div class="col-lg-9">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                Morris.js Usage
+            </div>
+            <div class="panel-body">
+                <p>Morris.js is a jQuery based charting plugin created by Olly Smith. In SB Admin, we are using the most recent version of Morris.js which includes the resize function, which makes the charts fully responsive. The documentation for Morris.js is available on their website, <a target="_blank" href="http://morrisjs.github.io/morris.js/">http://morrisjs.github.io/morris.js/</a>.</p>
+                <a target="_blank" class="btn btn-default btn-lg btn-block" href="http://morrisjs.github.io/morris.js/">View Morris.js Documentation</a>
+            </div>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="box" id="sales-list-div">
-          cash
-        </div>
-    </div>    
+-->
 </div>
-<div class="row">
-  refund
-    <div class="col-lg-6">
-        <div class="box" id="sales-list-div">
-          card
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="box" id="sales-list-div">
-          cash
-        </div>
-    </div>    
-</div>
+<!-- /.row -->
 
 {% endblock content %}
 
+
 {% block extrajs %}
-<script src="{% static 'js/monthSales.js' %}"></script>
-<!-- Loading Java Script -->
-<script src="{% static 'custom/js/jquery.loading.min.js' %}"></script>
+
+<!-- Morris Charts JavaScript -->
+<script src="{% static 'bower_components/raphael/raphael-min.js' %}"></script>
+<script src="{% static 'bower_components/morrisjs/morris.min.js' %}"></script>
+<!-- DataTables JavaScript -->
+<script src="{% static 'bower_components/datatables/media/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+    Morris.Bar({
+        element: 'morris-bar-chart',
+        data: [
+            {% for item in topsevens %}
+                { date: '{{ item.date|date:"Y-M" }}', sales: '{{ item.sales }}', refundsCounts: '{{ item.refundsCounts }}', paymentsCounts: '{{ item.paymentsCounts }}' }{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        ],   
+        xkey: 'date',
+        ykeys: ['sales', 'refundsCounts', 'paymentsCounts'],
+        labels: ['매출', '환불 건수', '결제 건수'],
+        hideHover: 'auto',
+        resize: true
+    });
+    $(document).ready(function() {
+        $('#sales-table').DataTable({
+            responsive: true,
+            "columnDefs": [{
+            "defaultContent": "-",
+            "targets": "_all"
+            }]                
+        });
+
+    });    
+</script>
 {% endblock extrajs %}

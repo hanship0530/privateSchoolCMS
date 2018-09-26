@@ -1,0 +1,11 @@
+{% for sales in monthsales %}
+<tr>
+  <td class="text-center">{{sales.date|date:"Y-M"}}</td>
+  <td class="text-center">{{sales.sales}}</td>
+  <td class="text-center">{{sales.paymentsCounts}}</td>
+  <td class="text-center">{{sales.refundsCounts}}</td>
+{% empty %}
+<tr>
+  <td colspan="8" class="text-center bg-warning">No Data</td>
+</tr>
+{% endfor %}
