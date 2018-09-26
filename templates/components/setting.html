@@ -1,16 +1,13 @@
 {% extends "dashboard/base.html" %}
 {% load staticfiles %}
-
-{% block extrahead %}
-{% endblock extrahead %}
+{% load widget_tweaks %}
 
 {% block content %}
-
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <div class="login-panel panel panel-default">
             <div class="panel-heading">
-                <h5 class="panel-title text-center"><b>프로파일 설정</b></h5>
+                <h5 class="panel-title text-center"><b>사용자 정보 변경</b></h5>
             </div>
             <div class="panel-body">
                <form method="post">
@@ -19,9 +16,9 @@
                     {% for field in form %}
                     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                     {% render_field field class="form-control" %}<br>    
-                    {% for error in field.errors %}
-                    <p style="color: red">{{ error }}</p>
-                    {% endfor %}
+                        {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                        {% endfor %}
                     {% endfor %}
                 </fieldset>
                 <button type="submit" class="btn btn-lg btn-success btn-block">수정하기</button><br>
@@ -32,8 +29,4 @@
     </div>
 </div>
 </div>
-
 {% endblock content %}
-
-{% block extrajs %}
-{% endblock extrajs %}
