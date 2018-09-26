@@ -5,30 +5,29 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h5 class="panel-title text-center"><b>Sign up</b></h5>
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h5 class="panel-title text-center"><b>Sign up</b></h5>
+                    </div>
+                    <div class="panel-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            <fieldset>
+                                {% for field in form %}
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {% render_field field class="form-control" placeholder=field.help_text %}<br>    
+                                {% for error in field.errors %}
+                                <p style="color: red">{{ error }}</p>
+                                {% endfor %}
+                                {% endfor %}
+                            </fieldset>
+                            <button type="submit" class="btn btn-lg btn-success btn-block">Sign up</button><br>
+                            <a href="{% url 'dashboard:login' %}"><button type="button" class="btn btn-lg btn-danger btn-block  ">Cancel</button></a>
+                        </form>
+                    </div>
                 </div>
-                <div class="panel-body">
-                 <form method="post">
-                    {% csrf_token %}
-                    <fieldset>
-                        {% for field in form %}
-                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                            {% render_field field class="form-control" placeholder=field.help_text %}<br>    
-                        {% for error in field.errors %}
-                        <p style="color: red">{{ error }}</p>
-                        {% endfor %}
-                        {% endfor %}
-                    </fieldset>
-                    <button type="submit" class="btn btn-lg btn-success btn-block">Sign up</button><br>
-                    <a href="{% url 'dashboard:login' %}"><button type="button" class="btn btn-lg btn-danger btn-block">Cancel</button></a>
-                </form>
-            </div>
-
         </div>
     </div>
-</div>
 </div>
 
 {% endblock basecontent %}

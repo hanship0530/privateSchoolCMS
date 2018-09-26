@@ -5,7 +5,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
-from .forms import SignUpForm, NoticeForm
+from .forms import SignUpForm, NoticeForm, UpdateForm
 from .models import Notice
 import datetime
 from django.utils import timezone
@@ -16,18 +16,23 @@ from attendance.models import Attendance
 from django.http import JsonResponse
 
 def setting(request):
-    if request.method == 'POST':
-        if form.is_valid():
-            form = SignUpForm(request.POST)
-            user = form.save()
-            user.profile.fileName = form.cleaned_data.get('fileName')
-            return redirect('dashboard:index')
-    else:
-        print(request)
-        user = User.objects.get(username=self.request.uesr)
-        form = SignUpForm(user) 
-    return render(request, 'components/setting.html', {'form': form})
-     
+    try:
+        if request.method == 'POST':
+            form = UpdateForm(request.POST)
+            if form.is_valid():
+                user = request.user
+                user.first_name = form.cleaned_data.get('first_name')
+                user.last_name = form.cleaned_data.get('last_name')
+                user.set_password(form.cleaned_data.get('new_password'))
+                user.profile.fileName = form.cleaned_data.get('fileName')
+                user.save()
+                return redirect('dashboard:index')
+        else:
+            form = UpdateForm(instance=request.user)
+        return render(request, 'components/setting.html', {'form': form})
+    except Exception as e:
+        print("Error: "+str(e))
+        return redirect('dashboard:error')
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
