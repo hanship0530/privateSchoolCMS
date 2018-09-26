@@ -22,7 +22,7 @@ class Student(models.Model):
 	number = models.IntegerField(blank=False, null=True, unique=True, verbose_name="회원번호", help_text='0이상의 숫자를 입력해주세요.')
 	stname = models.CharField(max_length=10, blank=False, null=True, verbose_name="회원이름", help_text='최대 10자까지 입력가능')
 	prtname = models.CharField(max_length=10, blank=False, null=True, verbose_name="보호자 성함", help_text='최대 10자까지 입력가능')
-	contact = models.CharField(max_length=11, blank=False, null=True, verbose_name="보호자 연락처", help_text='010-XXXX-XXXX')
+	contact = models.CharField(max_length=11, blank=False, null=True, verbose_name="보호자 연락처", help_text='010XXXXXXXX')
 	address = models.CharField(max_length=100, blank=False, null=True, verbose_name="주소", help_text='00시 000로 건물번호 세부주소')
 	dateOfBirth = models.DateField(blank=False, null=False, verbose_name="생년월일", help_text='YYYY-MM-DD')
 	dateOfEnroll = models.DateField(default=timezone.now, blank=True, null=True, verbose_name="가입일")
