@@ -31,7 +31,7 @@ class PaymentManageView(TemplateView):
 				request=request)			
 		return JsonResponse(html)
 
-	def savePaymentForm(template_name, form, request, isNew):
+	def savePaymentForm(template_name, form, request):
 		html = {}
 		if request.method == 'POST':
 			if form.is_valid():
@@ -47,10 +47,7 @@ class PaymentManageView(TemplateView):
 				student = payment.student
 				student.isPayday = 'PAYED'
 				student.save()
-				if isNew:
-					student.payment_set.add(payment)
-				else:
-					student.payment_set.update()
+				student.payment_set.add(payment)
 				if payment.paymentState == '결제':
 					lesson.student_set.add(student)
 					lesson.save()
@@ -68,10 +65,46 @@ class PaymentManageView(TemplateView):
 		html['html_form'] = render_to_string(template_name, context,request=request)
 		return JsonResponse(html)
 
-	def inquire(request, pk):
-		student = get_object_or_404(Student, pk=pk)
+	def savePaymentForm2(template_name, form, request, payment):
 		html = {}
-		if request.method == 'GET':
+		if request.method == 'POST':
+			if form.is_valid():
+				payment = form.save(commit=False)
+				lesson = Lesson.objects.get(item=str(form.cleaned_data['item']).split('[')[0])
+				payment.item = lesson.item
+				if form.cleaned_data['price'] == 0:
+					payment.price = lesson.price
+				else:
+					payment.price = form.cleaned_data['price']
+				payment.student = form.cleaned_data['student']
+				payment.save()
+				student = payment.student
+				student.isPayday = 'PAYED'
+				student.save()
+
+				student.payment_set.update()
+				if payment.paymentState == '결제':
+					lesson.student_set.add(student)
+					lesson.save()
+				else:
+					student.isPayday = 'UNPAY'
+					student.lesson = None
+					student.save()
+				html['form_is_valid'] = True
+				students = Student.objects.filter(stname=student.stname)
+				payments = student.payment_set.all()
+				html['student_list'] = render_to_string('payments/managePaymentStudentList.html',{'students':students})
+				html['payment_list'] = render_to_string('payments/managePaymentPartialList.html',{'payments':payments})
+			else:
+				html['form_is_valid'] = False
+		context = {'form':form,'payment':payment}
+		html['html_form'] = render_to_string(template_name, context,request=request)
+		return JsonResponse(html)
+	def inquire(request):
+		html = {}
+		if request.method == 'POST':
+			number = request.POST['number']
+			student = Student.objects.get(number=number)
 			payments = student.payment_set.all()
 			students = Student.objects.filter(stname=student.stname)
 			html['form_is_valid'] = True
@@ -79,41 +112,49 @@ class PaymentManageView(TemplateView):
 				request=request)
 			html['payment_list'] = render_to_string('payments/managePaymentPartialList.html', {'payments':payments},
 				request=request)
-		else:
-			html['form_is_valid'] = False
-			students = Student.objects.filter(stname=student.stname)
-			html['student_list'] = render_to_string('payments/managePaymentStudentList.html', {'students':students},
-				request=request)
-			html['payment_list'] = render_to_string('payments/managePaymentPartialList.html', {},
-				request=request)
 		return JsonResponse(html)
 
-	def create(request, pk):
-		student = get_object_or_404(Student, pk=pk)
-		if request.method == 'GET':
+	def create(request):
+		if request.method == 'POST':
+			number = request.POST['number']
+			student = Student.objects.get(number=number)
 			form = PaymentForm(initial={'student': student,'paymentDate':timezone.localtime(timezone.now()).date()})
 		# get url can't move student obj to payments obj so should put sutdent to payments	
-		return PaymentManageView.savePaymentForm('payments/managePaymentPartialCreate.html', form, request, True)		
+		return PaymentManageView.savePaymentForm('payments/managePaymentPartialCreate.html', form, request)		
 	
 	def createForm(request):
 		if request.method == 'POST':
 			form = PaymentForm(request.POST)
-		return PaymentManageView.savePaymentForm('payments/managePaymentPartialCreate.html', form, request, True)
+		return PaymentManageView.savePaymentForm('payments/managePaymentPartialCreate.html', form, request)
 
-	def update(request, pk):
-		payment = get_object_or_404(Payment, pk=pk)
+	def update(request):
 		if request.method == 'POST':
-			form = PaymentUpdateForm(request.POST, instance=payment)
-		else:
+			number = request.POST['number']
+			payment = Payment.objects.get(number=number)
 			form = PaymentUpdateForm(instance=payment)
-		return PaymentManageView.savePaymentForm('payments/managePaymentPartialUpdate.html', form, request, False)
+			return PaymentManageView.savePaymentForm2('payments/managePaymentPartialUpdate.html', form, request, payment)
+	def updateForm(request):
+		if request.method == 'POST':
+			number = request.POST['number']
+			payment = Payment.objects.get(number=number)
+			form = PaymentUpdateForm(request.POST, instance=payment)
+			return PaymentManageView.savePaymentForm2('payments/managePaymentPartialUpdate.html', form, request, payment)
 
-	def delete(request, pk):
-		payment = get_object_or_404(Payment, pk=pk)
+	def delete(request):
 		html = {}
 		if request.method == 'POST':
+			number = request.POST['number']
+			payment = Payment.objects.get(number=number)
+			context = {'payment':payment}
+			html['html_form'] = render_to_string('payments/managePaymentPartialDelete.html', context, request=request)
+			return JsonResponse(html)
+
+	def deleteForm(request):
+		html={}
+		if request.method == 'POST':
+			number = request.POST['number']
+			payment = Payment.objects.get(number=number)
 			student = payment.student
-			student.payment_set.remove(payment)
 			payment.delete()
 			html['form_is_valid'] = True
 			payments = student.payment_set.all()
@@ -122,10 +163,7 @@ class PaymentManageView(TemplateView):
 				request=request)
 			html['payment_list'] = render_to_string('payments/managePaymentPartialList.html', {'payments':payments},
 				request=request)
-		else:
-			context = {'payment':payment}
-			html['html_form'] = render_to_string('payments/managePaymentPartialDelete.html', context, request=request)
-		return JsonResponse(html)
+			return JsonResponse(html)		
 
 
 

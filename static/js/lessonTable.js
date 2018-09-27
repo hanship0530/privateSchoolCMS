@@ -187,7 +187,7 @@ $('#lesson-table-div').on('click', '#update-table-btn', function() {
         type: 'post',
         datatype: 'json',
         data: { // view에 전송할 데이터
-            'number': studentNumber,
+            'number': $('#lesson-table-header').text(),
             'date': date,
             'content': content,
             'completed': completed,

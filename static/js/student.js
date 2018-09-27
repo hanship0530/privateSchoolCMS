@@ -6,9 +6,13 @@ $(function () {
     var loadForm = function () {
         var btn = $(this);
         $.ajax({
-            url: btn.attr("data-url"),
-            type: 'get',
+            url: btn.attr("url"),
+            type: 'post',
             dataType: 'json',
+            data: {
+                'number': btn.attr("data-id"),
+                'csrfmiddlewaretoken': $("input[name=csrfmiddlewaretoken]").val()
+            },
             beforeSend: function () {
                 $("#modal-student").modal("show");
             },

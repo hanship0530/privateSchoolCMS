@@ -11,12 +11,12 @@
   <td class="text-center">
       <button type="button"
               class="btn btn-warning btn-sm js-update-student"
-              data-url="{% url 'dashboard:studentUpdate' student.number %}">
+              url="{% url 'dashboard:studentUpdate' %}" data-id="{{student.number}}">
         <span class="glyphicon glyphicon-pencil"></span> 수정
       </button>
       <button type="button"
               class="btn btn-danger btn-sm js-delete-student"
-              data-url="{% url 'dashboard:studentDelete' student.number %}">
+              url="{% url 'dashboard:studentDelete' %}" data-id="{{student.number}}">
         <span class="glyphicon glyphicon-trash"></span> 삭제
       </button>
   </td>

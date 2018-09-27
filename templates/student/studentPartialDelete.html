@@ -1,6 +1,7 @@
-<form method="post" action="{% url 'dashboard:studentDelete' student.number %}" class="js-student-delete-form">
+<form method="post" action="{% url 'dashboard:studentDeleteForm' %}" class="js-student-delete-form">
   {% csrf_token %}
   <div class="modal-danger modal-header">
+    <input class="hidden" name="number" value="{{student.number}}">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>

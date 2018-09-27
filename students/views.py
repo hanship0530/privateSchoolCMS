@@ -31,7 +31,7 @@ class StudentView(TemplateView):
         # except EmptyPage:
         #     students = paginator.page(paginator.num_pages)
         return render(request, 'student/student.html', {'students' : students})
-    def saveStudentForm(request, form, template_name):
+    def saveStudentForm(request, form, template_name, student):
         html = {}
         if request.method == 'POST':
             if form.is_valid():
@@ -43,30 +43,41 @@ class StudentView(TemplateView):
                 })           
             else:
                 html['form_is_valid'] = False
-        context = {'form':form}
+        context = {'form':form,'student':student}
         html['html_form'] = render_to_string(template_name, context, request=request)           
         return JsonResponse(html)
-    def update(request, pk):
-        student = get_object_or_404(Student, pk=pk)
+    def update(request):
         if request.method == 'POST':
-            form = StudentForm(request.POST, instance=student)
-        else:
+            number = request.POST['number']
+            student = Student.objects.get(number=number)
             form = StudentForm(instance=student)
-        return StudentView.saveStudentForm(request, form, 'student/studentPartialUpdate.html')
-    def delete(request, pk):
-        html = {}
-        student = get_object_or_404(Student, pk=pk)
+            return StudentView.saveStudentForm(request, form, 'student/studentPartialUpdate.html', student)
+    def updateForm(request):
         if request.method == 'POST':
+            number = request.POST['number']
+            student = Student.objects.get(number=number)
+            form = StudentForm(request.POST, instance=student)
+            return StudentView.saveStudentForm(request, form, 'student/studentPartialUpdate.html',student)
+    def deleteForm(request):
+        html = {}
+        if request.method == 'POST':
+            number = request.POST['number']
+            student = Student.objects.get(number=number)
             student.delete()
             html['form_is_valid'] = True
             students = Student.objects.all()
             html['studentList'] = render_to_string('student/studentPartialList.html', 
                 {'students': students })
-        else:
-            context = {'student':student}
-            html['html_form'] = render_to_string('student/studentPartialDelete.html', context,
-                request=request)
-        return JsonResponse(html)
+            return JsonResponse(html)
+    def delete(request):
+        html={}
+        if request.method=='POST':
+            print(request.POST)
+            number = request.POST['number']
+            student = Student.objects.get(number=number)
+            context = {'student':student,'student':student}
+            html['html_form'] = render_to_string('student/studentPartialDelete.html', context,request=request)
+            return JsonResponse(html)
 
 # create student
 class StudentCreateView(TemplateView):      
@@ -359,19 +370,17 @@ class LessonTableView(TemplateView):
             try:
                 tableData = {}
                 cells = request.POST['cells']
-                number = request.POST['number']
+                number = int(str(request.POST['number']).split('(')[1].split(')')[0])
                 sheetName = request.POST['sheetName']
                 cells = cells.split('/')
                 student = Student.objects.get(number=number)
                 students = Student.objects.filter(stname=student.stname)
-
                 tableData['date'] = request.POST['date']
                 tableData['content'] = request.POST['content']
                 tableData['completed'] = request.POST['completed']
                 tableData['memo'] = request.POST['memo']
 
                 update_excelsheet(student.filepath, sheetName, tableData, cells) 
-
                 datafordisplay = display_excelsheet(student.filepath,sheetName)
                 html['is_valid'] = True
                 html['studentList'] = render_to_string("lessonTable/lessonTableStudentList.html", {'students':students},
