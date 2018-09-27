@@ -1,5 +1,10 @@
 # PrivateSchoolCMS
 PrivateSchoolCMS는 엑설과 데이터베이스를 통해 소규모 학원에서 학원관리시스템을 이용할 수 있는 프로그램입니다. 단순히 해당 프로그램을 다운받아 실행시키면 추가적인 서버구매 없이 개인 데스크탑으로 구동이 가능하며 웹으로 손쉽게 동작시킬 수 가 있습니다. 또한 엑셀을 연동하기에 회원차트나 시간표를 형식이 있는 엑셀 문서로 문서화가 가능합니다.
+## Overview
+
+### [Youtube Introduction for coding-night-live v1.0](https://youtu.be/EgOmuShXVNE)
+
+![Overview](https://youtu.be/S06boWP3hNE)
 
 ## 시작하기  
 단순히 개인용 데스크탑에 다운 받아 바로 사용이 가능합니다.
@@ -77,17 +82,17 @@ Windows, Windows Office Excel, python, web
 pywin32가 아닌 openpyxl로 엑셀을 편집가능하다면 연락바랍니다. 
 
 ## 라이브러리들
-* [Django](https://www.djangoproject.com/) - 장고 웹프레임워크
-* [openpyxl](https://openpyxl.readthedocs.io/en/stable/) - 엑셀 읽기 라이브러리
-* [pywin32](https://pypi.org/project/pywin32/) - 엑셀 편집, 생성 라이브러리
-* [sb-admin2](https://github.com/code-geek/sbadmin-django) - 장고 호환 깃헙주소
-* [sb-admin2](https://startbootstrap.com/template-overviews/sb-admin-2/) - 대쉬보드 사이트
-* [bootstrap](http://getbootstrap.com/) - 부트스트랩
-* [Loading jquery](https://www.jqueryscript.net/loading/jQuery-Plugin-To-Handle-CSS3-Powered-Spinners-Loaders-Loading-js.html) - 로딩 화면 Jquery
-* [Lobibox](http://lobianijs.com/site/lobibox) - 부트스트랩 알림창 
+* ['Django'](https://www.djangoproject.com/) - 장고 웹프레임워크
+* ['openpyxl'](https://openpyxl.readthedocs.io/en/stable/) - 엑셀 읽기 라이브러리
+* ['pywin32'](https://pypi.org/project/pywin32/) - 엑셀 편집, 생성 라이브러리
+* ['sb-admin2'](https://github.com/code-geek/sbadmin-django) - 장고 호환 깃헙주소
+* ['sb-admin2'](https://startbootstrap.com/template-overviews/sb-admin-2/) - 대쉬보드 사이트
+* ['bootstrap'](http://getbootstrap.com/) - 부트스트랩
+* ['Loading jquery'](https://www.jqueryscript.net/loading/jQuery-Plugin-To-Handle-CSS3-Powered-Spinners-Loaders-Loading-js.html) - 로딩 화면 Jquery
+* ['Lobibox'](http://lobianijs.com/site/lobibox) - 부트스트랩 알림창 
 
 ## 참고 사이트 
-* [https://simpleisbetterthancomplex.com/](https://simpleisbetterthancomplex.com/)
+* ['https://simpleisbetterthancomplex.com/'](https://simpleisbetterthancomplex.com/)
 
 ## License
 
