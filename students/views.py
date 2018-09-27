@@ -316,7 +316,6 @@ class LessonTableView(TemplateView):
                 student = Student.objects.get(number=number)
                 wb = openpyxl.load_workbook(os.path.join(os.getcwd(),student.filepath))
                 if student.sheet != "main":
-                    student.sheet = wb.sheetnames[-1]
                     tableData = display_excelsheet(student.filepath, student.sheet)
                     html['is_valid'] = True
                     html['is_main'] = False
@@ -326,7 +325,6 @@ class LessonTableView(TemplateView):
                     html['worksheets'] = render_to_string("lessonTable/lessonTableSelect.html", {'worksheets':tableData[-1]})
                     html['message'] = "Successfully completed."
                 else:
-                    student.sheet = wb.sheetnames[-1]
                     tableData = display_excelsheet(student.filepath, student.sheet)
                     html['is_valid'] = True
                     html['is_main'] = True
