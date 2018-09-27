@@ -3,7 +3,7 @@ PrivateSchoolCMS는 엑설과 데이터베이스를 통해 소규모 학원에�
 ## Overview
 ![Overview](main.PNG)
 ### [데모 영상 보러가기](https://www.youtube.com/watch?v=S06boWP3hNE&feature=youtu.be)
-![Overview](https://www.youtube.com/watch?v=S06boWP3hNE&feature=youtu.be)
+![Overview](demo_vedio.mp4)
 
 ## 시작하기  
 단순히 개인용 데스크탑에 다운 받아 바로 사용이 가능합니다.
