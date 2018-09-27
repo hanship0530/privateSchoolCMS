@@ -9,12 +9,12 @@
   <td>
       <button type="button"
               class="btn btn-warning btn-xs js-update-payment"
-              data-url="{% url 'dashboard:managePaymentUpdate' payment.number %}">
+              url="{% url 'dashboard:managePaymentUpdate' %}" data-id="{{payment.number}}">
         <span class="glyphicon glyphicon-pencil"></span> 수정
       </button>
       <button type="button"
               class="btn btn-danger btn-xs js-delete-payment"
-              data-url="{% url 'dashboard:managePaymentDelete' payment.number %}">
+              url="{% url 'dashboard:managePaymentDelete' %}" data-id="{{payment.number}}">
         <span class="glyphicon glyphicon-trash"></span> 삭제
       </button>      
   </td>

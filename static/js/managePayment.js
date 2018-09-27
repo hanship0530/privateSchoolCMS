@@ -43,9 +43,13 @@ $(function () {
         var btn = $(this);
         $.ajax({
             // Ajax 정보입력
-            url: btn.attr("data-url"), 
-            type: 'get', 
-            datatype: 'json', 
+            url: btn.attr("url"), 
+            type: 'post', 
+            datatype: 'json',
+            data: {
+                'number': btn.attr("data-id"),
+                'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+            }, 
             success: function(data) { 
                 if(data.form_is_valid){
                     $('#table-student tbody').html(data.student_list); 
@@ -69,9 +73,13 @@ $(function () {
     var loadForm = function () {
         var btn = $(this);
         $.ajax({
-            url: btn.attr("data-url"),
-            type: 'get',
+            url: btn.attr("url"),
+            type: 'post',
             dataType: 'json',
+            data: {
+                'number': btn.attr("data-id"),
+                'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+            },
             beforeSend: function () {
                 $("#modal-payment").modal("show");
             },
@@ -124,7 +132,7 @@ $(function () {
   $('#div-student-search').on("click", ".js-student-search", search);
 
   //Inquire payment
-  $("#table-student").on('click', ".js-inquire-payment", inquire);
+  $("#div-student").on('click', "#js-inquire-payment", inquire);
   
   // Create payment
   $("#table-student").on('click', ".js-register-payment", loadForm);

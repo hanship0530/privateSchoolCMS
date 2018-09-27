@@ -7,16 +7,16 @@
   <td class="text-center">{{student.years}}</td>
   <td class="text-center">
     <button type="button" class="btn btn-info btn-xs" id="display-table-btn" url="{% url 'dashboard:lessonTableDisplay' %}"  data-id="{{student.number}}">
-      <span class="glyphicon glyphicon-pencil"></span> 작성
+      <span class="glyphicon glyphicon-pencil"></span> 조회
     </button>
     <button type="button" class="btn btn-success btn-xs" id="create-table-btn" url="{% url 'dashboard:lessonTableCreate' %}"  data-id="{{student.number}}">
-      <span class="glyphicon glyphicon-plus"></span> 생성
+      <span class="glyphicon glyphicon-plus"></span> 차트 생성
     </button>   
     <button type="button" class="btn btn-primary btn-xs" id="fillout-table-btn" url="{% url 'dashboard:lessonTableFillout' %}"  data-id="{{student.number}}">
-      <span class="glyphicon glyphicon-ok"></span> 완료
+      <span class="glyphicon glyphicon-ok"></span> 작성완료
     </button>
     <button type="button" class="btn btn-danger btn-xs" id="check-payment-btn" url="{% url 'dashboard:lessonTablePayment' %}"  data-id="{{student.number}}">
-      <span class="glyphicon glyphicon-ok"></span> 결제일
+      <span class="glyphicon glyphicon-ok"></span> 결제일 표시
     </button>             
   </td>
 </tr>

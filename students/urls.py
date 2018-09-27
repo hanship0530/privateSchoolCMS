@@ -7,10 +7,12 @@ from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     # manage student urls
-    url(r'^student/$', login_required(views.StudentView.display), name="studentDisplay"),
-    url(r'^student/create/$', login_required(views.StudentCreateView.create), name='studentCreate'),
-    url(r'^student/(?P<pk>\d+)/update/$', login_required(views.StudentView.update), name='studentUpdate'),
-    url(r'^student/(?P<pk>\d+)/delete/$', login_required(views.StudentView.delete), name='studentDelete'),
+    url(r'^$', login_required(views.StudentView.display), name="studentDisplay"),
+    url(r'^create/$', login_required(views.StudentCreateView.create), name='studentCreate'),
+    url(r'^update/$', login_required(views.StudentView.update), name='studentUpdate'),
+    url(r'^updateForm/$', login_required(views.StudentView.updateForm), name='studentUpdateForm'),
+    url(r'^delete/$', login_required(views.StudentView.delete), name='studentDelete'),
+    url(r'^deleteForm/$', login_required(views.StudentView.deleteForm), name='studentDeleteForm'),
     
     # manage schedule table urls
     url(r'^studentSchedule/$', login_required(views.ScheduleView.display), name='scheduleDisplay'),
