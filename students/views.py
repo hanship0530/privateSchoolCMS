@@ -246,7 +246,7 @@ class LessonTableView(TemplateView):
             if request.method == 'POST':
                 number = request.POST['number']
                 student = Student.objects.get(number=number)
-
+                sheetName = str(datetime.datetime.now().date())
                 student.sheet = sheetName
                 student.save()
                 
@@ -260,17 +260,23 @@ class LessonTableView(TemplateView):
 
                 worksheet1 = workbook.Worksheets("main")
                 worksheet2 = workbook.Worksheets.Add()
-                sheetName = str(datetime.datetime.now().date())
                 worksheet2.Name = sheetName
                 worksheet2 = workbook.Worksheets(sheetName)
                 worksheet1.Range("A1:AF100").Copy(worksheet2.Range("A1:AH41"))
                 worksheet2.Range("E5").Value = str(student.stname)
+                worksheet2.Range("E5").Font.Size = 12
                 worksheet2.Range("C9").Value = str(student.number)
+                worksheet2.Range("C9").Font.Size = 12
                 worksheet2.Range("C10").Value = str(student.dateOfBirth)
+                worksheet2.Range("C10").Font.Size = 12
                 worksheet2.Range("C11").Value = str(student.dateOfEnroll)
-                worksheet2.Range("E10").Value = "Default"
-                worksheet2.Range("E11").Value = "Default"
-                worksheet2.Range("G10").Value = "Default"
+                worksheet2.Range("C11").Font.Size = 12
+                worksheet2.Range("E10").Value = str(student.years)+'/'+str(student.gender)
+                worksheet2.Range("E10").Font.Size = 12
+                worksheet2.Range("E11").Value = str(student.school)
+                worksheet2.Range("E11").Font.Size = 8
+                worksheet2.Range("G10").Value = str(student.contact)
+                worksheet2.Range("G10").Font.Size = 12
 
                 workbook.Save()
                 workbook.Close(True)
@@ -287,6 +293,7 @@ class LessonTableView(TemplateView):
             print("Error: "+str(e))
             html['is_valid'] = False
             html['errorMsg'] = "Error: "+str(e)
+            student.sheet = "main"
             return JsonResponse(html) 
     
     def display(request):
@@ -306,12 +313,13 @@ class LessonTableView(TemplateView):
                     html['worksheets'] = render_to_string("lessonTable/lessonTableSelect.html", {'worksheets':tableData[-1]})
                     html['message'] = "Successfully completed."
                 else:
+                    tableData = display_excelsheet(student.filepath, student.sheet)
                     html['is_valid'] = True
                     html['is_main'] = True
                     html['lessonTable'] = render_to_string("lessonTable/lessonTableList.html", {},
                         request=request)
                     html['student'] = {'name':student.stname, 'number':student.number}
-                    html['worksheets'] = None
+                    html['worksheets'] = render_to_string("lessonTable/lessonTableSelect.html", {'worksheets':tableData[-1]})
                     html['message'] = "차트불러오기 실패 생성버튼을 눌러 엑셀 시트를 생성해주세요."
                 return JsonResponse(html)
             except Exception as e:
