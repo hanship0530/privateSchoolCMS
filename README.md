@@ -1,9 +1,8 @@
 # PrivateSchoolCMS
 PrivateSchoolCMS는 엑설과 데이터베이스를 통해 소규모 학원에서 학원관리시스템을 이용할 수 있는 프로그램입니다. 단순히 해당 프로그램을 다운받아 실행시키면 추가적인 서버구매 없이 개인 데스크탑으로 구동이 가능하며 웹으로 손쉽게 동작시킬 수 가 있습니다. 또한 엑셀을 연동하기에 회원차트나 시간표를 형식이 있는 엑셀 문서로 문서화가 가능합니다.
 ## Overview
-
+![Overviewt]main.PNG)
 ### [데모 영상 보러가기](https://www.youtube.com/watch?v=S06boWP3hNE&feature=youtu.be)
-![screenshot]main.PNG)
 ![Overview](https://www.youtube.com/watch?v=S06boWP3hNE&feature=youtu.be)
 
 ## 시작하기  
