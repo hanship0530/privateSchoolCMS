@@ -109,7 +109,7 @@ class DashPaymentView(TemplateView):
             if request.method == 'POST':
                 number = request.POST['number']
                 student = Student.objects.get(number=number)
-                form = PaymentForm(initial={'student':student})
+                form = PaymentForm(initial={'student':student,'paymentDate':timezone.localtime(timezone.now()).date()})
             return DashPaymentView.savePaymentForm('dashboard/paymentPartialCreate.html',form,request)
         except Exception as e:
             print("Error: "+str(e))

@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from .forms import AttendanceForm
+from django.utils import timezone
 
 # Create your views here.
 class AttendanceView(TemplateView):

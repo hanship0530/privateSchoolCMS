@@ -15,8 +15,8 @@ from attendance.models import Attendance
 from .forms import StudentForm
 from .schedule_func import sunday, monday, tuseday, wendsday, thursday, friday, saturday
 from .lessonTable_func import update_excelsheet, display_excelsheet
-import win32com.client, datetime, pythoncom, os, re
-
+import win32com.client, datetime, pythoncom, os, re, openpyxl
+from django.utils import timezone
 # manage student 
 class StudentView(TemplateView): 
     def display(request):
@@ -166,7 +166,7 @@ class ScheduleView(TemplateView):
             html = {}
             try:
                 student = Student.objects.get(number=request.POST['number'])
-                date = datetime.datetime.now().date()
+                date = timezone.localtime(timezone.now()).date()
                 today = Attendance(attendanceDate=date, student=student)
                 # attend_list = student.attendance_set.all()
                 isAttend = student.attendance_set.filter(attendanceDate=date, student=student)
@@ -201,7 +201,7 @@ class ScheduleView(TemplateView):
 # manage student's lesson table
 class LessonTableView(TemplateView):
     def displayAttendList(request):
-        today = datetime.datetime.now().date()
+        today = timezone.localtime(timezone.now()).date()
         # 오늘 출석한 회원 리스트 얻기
         if Attendance.objects.filter(attendanceDate=today).exists():
             student_list = Attendance.objects.filter(attendanceDate=today, fillOut='미작성')
@@ -246,7 +246,7 @@ class LessonTableView(TemplateView):
             if request.method == 'POST':
                 number = request.POST['number']
                 student = Student.objects.get(number=number)
-                sheetName = str(datetime.datetime.now().date())
+                sheetName = str(timezone.localtime(timezone.now()).date())
                 student.sheet = sheetName
                 student.save()
                 
@@ -298,12 +298,14 @@ class LessonTableView(TemplateView):
     
     def display(request):
         html = {}
-        today = datetime.datetime.now().date()
+        today = timezone.localtime(timezone.now()).date()
         if request.method == 'POST':
             try:
                 number = request.POST['number']
                 student = Student.objects.get(number=number)
-                if student.sheet != "main": 
+                wb = openpyxl.load_workbook(os.path.join(os.getcwd(),student.filepath))
+                if student.sheet != "main":
+                    student.sheet = wb.sheetnames[-1]
                     tableData = display_excelsheet(student.filepath, student.sheet)
                     html['is_valid'] = True
                     html['is_main'] = False
@@ -313,6 +315,7 @@ class LessonTableView(TemplateView):
                     html['worksheets'] = render_to_string("lessonTable/lessonTableSelect.html", {'worksheets':tableData[-1]})
                     html['message'] = "Successfully completed."
                 else:
+                    student.sheet = wb.sheetnames[-1]
                     tableData = display_excelsheet(student.filepath, student.sheet)
                     html['is_valid'] = True
                     html['is_main'] = True
@@ -320,7 +323,7 @@ class LessonTableView(TemplateView):
                         request=request)
                     html['student'] = {'name':student.stname, 'number':student.number}
                     html['worksheets'] = render_to_string("lessonTable/lessonTableSelect.html", {'worksheets':tableData[-1]})
-                    html['message'] = "차트불러오기 실패 생성버튼을 눌러 엑셀 시트를 생성해주세요."
+                    html['message'] = "차트가 생성이 안되었습니다. 생성버튼을 눌러 엑셀 시트를 생성해주세요."
                 return JsonResponse(html)
             except Exception as e:
                 print("Error: "+str(e))
@@ -330,7 +333,7 @@ class LessonTableView(TemplateView):
 
     def completeFillout(request):
         html = {}
-        today = datetime.datetime.now().date()
+        today = timezone.localtime(timezone.now()).date()
 
         if request.method == 'POST':
             try:

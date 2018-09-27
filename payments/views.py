@@ -9,6 +9,7 @@ from students.models import Student
 from students.forms import StudentSearchForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse		 	
+from django.utils import timezone
 
 class PaymentManageView(TemplateView):
 	def show(request):
@@ -90,7 +91,7 @@ class PaymentManageView(TemplateView):
 	def create(request, pk):
 		student = get_object_or_404(Student, pk=pk)
 		if request.method == 'GET':
-			form = PaymentForm(initial={'student': student})
+			form = PaymentForm(initial={'student': student,'paymentDate':timezone.localtime(timezone.now()).date()})
 		# get url can't move student obj to payments obj so should put sutdent to payments	
 		return PaymentManageView.savePaymentForm('payments/managePaymentPartialCreate.html', form, request, True)		
 	
