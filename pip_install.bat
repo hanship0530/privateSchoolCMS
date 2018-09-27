@@ -1,2 +1,2 @@
 @echo off
-cmd /k "cd /d C:\Users\%USERNAME%\Desktop\privateSchoolCMS-master & pip install -r requirement.txt & exit"
+cmd /k "cd /d %cd% & pip install -r requirement.txt & exit"
