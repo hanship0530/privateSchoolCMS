@@ -1,55 +1,82 @@
-# PrivateSchoolCMS(감자스무디 공개SW대회)
-PrivateSchoolCMS는 엑설과 데이터베이스를 통해 소규모 학원에서 학원관리시스템을 이용할 수 있는 프로그램입니다.   
-해당 프로그램을 다운받아 실행시키면 추가적인 서버구매 없이 개인 데스크탑으로 구동이 가능하며 웹으로 손쉽게 동작시킬 수 있습니다.   
-또한 회원차트나 시간표를 형식이 있는 엑셀 문서로 문서화가 가능합니다.  
+# PrivateSchoolCMS
+PrivateSchoolCMS는 엑설과 데이터베이스를 통해 소규모 학원에서 학원관리시스템을 이용할 수 있는 프로그램입니다. 단순히 해당 프로그램을 다운받아 실행시키면 추가적인 서버구매 없이 개인 데스크탑으로 구동이 가능하며 웹으로 손쉽게 동작시킬 수 가 있습니다. 또한 엑셀을 연동하기에 회원차트나 시간표를 형식이 있는 엑셀 문서로 문서화가 가능합니다.
 
 ## Getting Started    
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.      
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+User Guide: 
 ###   Environment
-Windows, Django 1.9
+```
+Windows, Windows Office Excel, python, web   
+```
 ### Before Installing 
-please download over python 3.0     
-[python](https://www.python.org/downloads/)     
+[python](https://www.python.org/downloads/)   
+```
+please download over python 3.0   
+```
 ### Installing
 
 What things you need to install the software and how to install them
 
-- python package
+1. python package
 ```
-open windowns cmd
-pip install requirment.txt
-```       
-### Caution
-This program only works on Windows, Django 1.9
-Please check your django version with "pip list"
-## Running
-
+  git clone 
+  open windowns cmd
+  cd cloned location
+  pip install -r requirment.txt
+  or
+  just use pip_install.bat
+  finally
+  check yout djang version with pip list
+  django must be 1,9 if not pip uninstall and then pip install django==.19 
+  ```      
+2. running server
 ```
-python manage.py runserver 0.0.0.0:8000 
-```       
-## Detail
-### django.models
-After modify django models
-
+  python manage.py runserver:8000
+  or
+  excute runserver.bat file
+  ``` 
+3. Get to server site
 ```
-python manage.py makemigrations
-python manage.py migrate
+  open your browser
+  put "localhost:8000"
+  and then create user select timetable of yours
+  ```
+4. Admin Site
 ```
+  localhost:8000/admin
+  you can control whole database
+  ```     
 
-### templates
-web html files
-### students, attendance, payments, dashboard
-django apps
-### static
-javascript files
-### student_excel, tutor_excel
-timetable, student lesson table excel files
-## Deployment
+## Caution
+```
+  When you create or edit excel sheets you can get some errors
+  Thoes are from pywin32.com libraries
+  5 handling guide in below
+  ``` 
+  ### 1. Check your task manager
+```
+  Check you
+  ``` 
+## Excel files
+### student_excel folder
+```
+it's created when you make student data in web
+```
+### tutor_excel/timetable_master.xlsx
+```
+it's built in
+when making a user just select yout timetable
+copy and paste
+```
+### tutor_excel/sales.xlsx
+```
+daily sales report not timetable 
+please don't choose this file user's timetable
+```
+## Questions
+Please make a issues
 
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
+## Libraries
 * [Django](https://www.djangoproject.com/) - The web framework used
 * [openpyxl](https://openpyxl.readthedocs.io/en/stable/) - Excel Editor Library
 * [pywin32](https://pypi.org/project/pywin32/) - Excel Editor Library
@@ -61,10 +88,6 @@ Add additional notes about how to deploy this on a live system
 
 ## References
 * [https://simpleisbetterthancomplex.com/](https://simpleisbetterthancomplex.com/)
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## License
 
