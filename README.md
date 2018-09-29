@@ -31,9 +31,9 @@ Windows, Windows Office Excel, python, web
   ```      
 2. 서버 구동
 ```
-  python manage.py runserver:8000
-  or
-  excute runserver.bat file
+  $ python manage.py runserver:8000
+  또는
+  runserver.bat 파일을 실행 시킵니다.
   ``` 
 3. 사이트 접속하기
 ```
