@@ -1,29 +1,24 @@
 # PrivateSchoolCMS
 PrivateSchoolCMS는 엑설과 데이터베이스를 통해 소규모 학원에서 학원관리시스템을 이용할 수 있는 프로그램입니다. 단순히 해당 프로그램을 다운받아 실행시키면 추가적인 서버구매 없이 개인 데스크탑으로 구동이 가능하며 웹으로 손쉽게 동작시킬 수 가 있습니다. 또한 엑셀을 연동하기에 회원차트나 시간표를 형식이 있는 엑셀 문서로 문서화가 가능합니다.
 ## Overview
-[![Watch the video](main.PNG)](https://www.youtube.com/watch?v=S06boWP3hNE&feature=youtu.be)
 ### [데모 영상 보러가기](https://www.youtube.com/watch?v=S06boWP3hNE&feature=youtu.be)
+[![Watch the video](main.PNG)](https://www.youtube.com/watch?v=S06boWP3hNE&feature=youtu.be)
 
-## [유저가이드로 이동하기](https://github.com/dxdiag20/privateSchoolCMS/wiki)
-
+## 유저가이드
+[유저가이드로 이동하기](https://github.com/dxdiag20/privateSchoolCMS/wiki)
 ## 시작하기  
 단순히 개인용 데스크탑에 다운 받아 바로 사용이 가능합니다.
 ### 작동 환경
 ```
 Windows, Windows Office Excel, python, web   
 ```
-### 설치전에
-[python](https://www.python.org/downloads/)   
-```
-3.0이상 버전의 파이썬 설치가 필요합니다.
-```
 ### 설치 하기
 
-프로그램 시작전에 몇가지 설치가 필요합니다.
+프로그램 구동전 [python 3.0](https://www.python.org/downloads/) 이상의 버전이 필요합니다.
 
 1. 파이썬 패키지
 ```
-  git clone을 하여 프로젝트를 다운 받습니다. 
+ $ git clone을 하여 프로젝트를 다운 받습니다. 
   cmd창을 엽니다.
   cd 명령어를 통해 클론한 폴더의 위치로 이동합니다.
   "pip install -r requirment.txt" 명령어를 실행합니다.
@@ -82,15 +77,16 @@ Windows, Windows Office Excel, python, web
 이슈를 요청해주세요. 오류 해결에 대한 요청은 언제든지 환영합니다. 또한
 pywin32가 아닌 openpyxl로 엑셀을 편집가능하다면 연락바랍니다. 
 
-## 라이브러리들
-* [Django](https://www.djangoproject.com/) - 장고 웹프레임워크
-* [openpyxl](https://openpyxl.readthedocs.io/en/stable/) - 엑셀 읽기 라이브러리
-* [pywin32](https://pypi.org/project/pywin32/) - 엑셀 편집, 생성 라이브러리
-* [sb-admin2](https://github.com/code-geek/sbadmin-django) - 장고 호환 깃헙주소
-* [sb-admin2](https://startbootstrap.com/template-overviews/sb-admin-2/) - 대쉬보드 사이트
-* [bootstrap](http://getbootstrap.com/) - 부트스트랩
-* [Loading jquery](https://www.jqueryscript.net/loading/jQuery-Plugin-To-Handle-CSS3-Powered-Spinners-Loaders-Loading-js.html) - 로딩 화면 Jquery
-* [Lobibox](http://lobianijs.com/site/lobibox) - 부트스트랩 알림창 
+## Tech
+코드 관련해서는 아래의 링크들을 참조하시면 됩니다.
+- [Django](https://www.djangoproject.com/) - 장고 웹프레임워크
+- [openpyxl](https://openpyxl.readthedocs.io/en/stable/) - 엑셀 읽기 라이브러리
+- [pywin32](https://pypi.org/project/pywin32/) - 엑셀 편집, 생성 라이브러리
+- [sb-admin2](https://github.com/code-geek/sbadmin-django) - 장고 호환 깃헙주소
+- [sb-admin2](https://startbootstrap.com/template-overviews/sb-admin-2/) - 대쉬보드 사이트
+- [bootstrap](http://getbootstrap.com/) - 부트스트랩
+- [Loading jquery](https://www.jqueryscript.net/loading/jQuery-Plugin-To-Handle-CSS3-Powered-Spinners-Loaders-Loading-js.html) - 로딩 화면 Jquery
+- [Lobibox](http://lobianijs.com/site/lobibox) - 부트스트랩 알림창 
 
 ## 참고 사이트 
 * [https://simpleisbetterthancomplex.com/](https://simpleisbetterthancomplex.com/)
