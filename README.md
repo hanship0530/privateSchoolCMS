@@ -64,17 +64,17 @@ Windows, Windows Office Excel, python, web
   Check you
   ``` 
 ## Excel files
-### student_excel folder
+1. student_excel folder
 ```
 학생정보를 생성하면 생기는 파일 입니다. 학생의 수업차트를 기록하는 엑셀 파일입니다.
 ```
-### tutor_excel/timetable_master.xlsx
+2. tutor_excel/timetable_master.xlsx
 ```
 처음부터 내제되어 있는 엑셀 파일입니다.
 각 선생님이름으로 파일을 만들며 해당 시간표파일에 시간표를 작성하여 사용자계정 생성시 등록하여야 합니다.
 해당 파일을 토대로 시간표를 조회합니다.
 ```
-### tutor_excel/sales.xlsx
+3. tutor_excel/sales.xlsx
 ```
 일 매출대장표입니다.
 ```
