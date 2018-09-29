@@ -13,9 +13,7 @@ PrivateSchoolCMS는 엑설과 데이터베이스를 통해 소규모 학원에�
 Windows, Windows Office Excel, python, web   
 ```
 ### 설치 하기
-
 프로그램 구동전 [python 3.0](https://www.python.org/downloads/) 이상의 버전이 필요합니다.
-
 1. 파이썬 패키지
 ```
  - 프로젝트 다운
@@ -50,16 +48,11 @@ Windows, Windows Office Excel, python, web
   localhost:8000/admin
   아이디: admin 비밀번호: privatecms
   ```     
-
 ## 주의사항
  [오류 가이드로 이동하기](https://github.com/dxdiag20/privateSchoolCMS/wiki)
 ```
   프로그램 에러는 대부분 pywin32의 라이브러리 동작에서 일어납니다.
   오류를 해결하는 5가지 방법이 있습니다. 오류시 참고 바랍니다.
-  ``` 
-  ### 1. 작업관리자 확인
-```
-  Check you
   ``` 
 ## Excel files
 1. student_excel folder
