@@ -18,15 +18,18 @@ Windows, Windows Office Excel, python, web
 
 1. 파이썬 패키지
 ```
- $ git clone을 하여 프로젝트를 다운 받습니다. 
-  cmd창을 엽니다.
-  cd 명령어를 통해 클론한 폴더의 위치로 이동합니다.
-  "pip install -r requirment.txt" 명령어를 실행합니다.
-  또는
-  다운 받은 폴더에서 pip_install.bat 파일을 클릭하여 실행할 수 있습니다.
-  마지막으로 
-  설치된 장고의 버전을 확인해봅니다. pip list
-  장고의 버전은 1.9이여 합니다. 그렇지 않다면 pip uninstall 그리고 pip install django==.19 통해 설치합니다.
+ - 프로젝트 다운
+ $ git clone
+ - cmd 창을 엽니다.
+ - 클론 한 폴더의 위치로 이동
+ $ cd 클론한 폴더 위치
+ - 라이브러리 설치
+ $ pip install -r requirment.txt
+ - 위 방법이 아닌 한번에 하는 방법
+   다운 받은 폴더로 이동 하여 "pip_install.bat"을 클릭하여 실행
+ - 마지막으로 설치 된 장고의 버전 확인 
+ $ pip list
+ - 장고의 버전은 1.9이여 합니다. 그렇지 않다면 pip uninstall 그리고 pip install django==.19 통해 설치합니다.
   ```      
 2. 서버 구동
 ```
@@ -49,7 +52,7 @@ Windows, Windows Office Excel, python, web
   ```     
 
 ## 주의사항
- come to this link to 
+ [오류 가이드로 이동하기](https://github.com/dxdiag20/privateSchoolCMS/wiki)
 ```
   프로그램 에러는 대부분 pywin32의 라이브러리 동작에서 일어납니다.
   오류를 해결하는 5가지 방법이 있습니다. 오류시 참고 바랍니다.
@@ -74,8 +77,9 @@ Windows, Windows Office Excel, python, web
 일 매출대장표입니다.
 ```
 ## 오류 해결 
-이슈를 요청해주세요. 오류 해결에 대한 요청은 언제든지 환영합니다. 또한
-pywin32가 아닌 openpyxl로 엑셀을 편집가능하다면 연락바랍니다. 
+이슈를 요청해주세요.
+요청된 이슈에 대해서는 검토 후 답변 드리겠습니다.
+코드향상에 대한 질의는 언제든지 환영입니다.
 
 ## Tech
 코드 관련해서는 아래의 링크들을 참조하시면 됩니다.
