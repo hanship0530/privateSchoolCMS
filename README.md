@@ -4,6 +4,8 @@ PrivateSchoolCMS는 엑설과 데이터베이스를 통해 소규모 학원에�
 [![Watch the video](main.PNG)](https://www.youtube.com/watch?v=S06boWP3hNE&feature=youtu.be)
 ### [데모 영상 보러가기](https://www.youtube.com/watch?v=S06boWP3hNE&feature=youtu.be)
 
+## User Guide direct
+
 ## 시작하기  
 단순히 개인용 데스크탑에 다운 받아 바로 사용이 가능합니다.
 ###   작동 환경
@@ -52,6 +54,7 @@ Windows, Windows Office Excel, python, web
   ```     
 
 ## 주의사항
+ come to this link to 
 ```
   프로그램 에러는 대부분 pywin32의 라이브러리 동작에서 일어납니다.
   오류를 해결하는 5가지 방법이 있습니다. 오류시 참고 바랍니다.
