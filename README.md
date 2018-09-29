@@ -49,7 +49,7 @@ Windows, Windows Office Excel, python, web
   아이디: admin 비밀번호: privatecms
   ```     
 ## 주의사항
- [오류 가이드로 이동하기](https://github.com/dxdiag20/privateSchoolCMS/wiki)
+ [오류 가이드로 이동하기](https://github.com/dxdiag20/privateSchoolCMS/wiki/4.-%EC%98%A4%EB%A5%98-%ED%95%B4%EA%B2%B0%EA%B0%80%EC%9D%B4%EB%93%9C)
 ```
   프로그램 에러는 대부분 pywin32의 라이브러리 동작에서 일어납니다.
   오류를 해결하는 5가지 방법이 있습니다. 오류시 참고 바랍니다.
