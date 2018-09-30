@@ -308,7 +308,7 @@ class LessonTableView(TemplateView):
             # student = Student.objects.get(number=number)
             wb = openpyxl.load_workbook(student.filepath)
             sheets = wb.sheetnames
-            student.sheet = str(sheets[-1])
+            student.sheet = str(sheets[0])
             student.save()
             return JsonResponse(html) 
     
