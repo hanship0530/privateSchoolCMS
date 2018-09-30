@@ -79,14 +79,10 @@ Windows, Windows Office Excel, python, web
 - [Django](https://www.djangoproject.com/) - 장고 웹프레임워크
 - [openpyxl](https://openpyxl.readthedocs.io/en/stable/) - 엑셀 읽기 라이브러리
 - [pywin32](https://pypi.org/project/pywin32/) - 엑셀 편집, 생성 라이브러리
-- [sb-admin2](https://github.com/code-geek/sbadmin-django) - 장고 호환 깃헙주소
 - [sb-admin2](https://startbootstrap.com/template-overviews/sb-admin-2/) - 대쉬보드 사이트
 - [bootstrap](http://getbootstrap.com/) - 부트스트랩
 - [Loading jquery](https://www.jqueryscript.net/loading/jQuery-Plugin-To-Handle-CSS3-Powered-Spinners-Loaders-Loading-js.html) - 로딩 화면 Jquery
-- [Lobibox](http://lobianijs.com/site/lobibox) - 부트스트랩 알림창 
-
-## 참고 사이트 
-* [https://simpleisbetterthancomplex.com/](https://simpleisbetterthancomplex.com/)
+- [Lobibox](http://lobianijs.com/site/lobibox) - 부트스트랩 알림창     
 
 ## License
 
