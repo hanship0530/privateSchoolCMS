@@ -348,7 +348,7 @@ class LessonTableView(TemplateView):
             try:
                 student = Student.objects.get(number=request.POST['number'])
                 attend = Attendance.objects.get(attendanceDate=today, student=student, fillOut='미작성')
-                attend.fillOut = '미작성'
+                attend.fillOut = '작성'
                 attend.save()
                 html['is_valid'] = True
                 students = Student.objects.filter(stname=student.stname)
