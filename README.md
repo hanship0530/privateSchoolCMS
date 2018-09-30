@@ -51,8 +51,8 @@ Windows, Windows Office Excel, python, web
 ## 주의사항
  [오류 가이드로 이동하기](https://github.com/dxdiag20/privateSchoolCMS/wiki/4.-%EC%98%A4%EB%A5%98-%ED%95%B4%EA%B2%B0%EA%B0%80%EC%9D%B4%EB%93%9C)
 ```
-  프로그램 에러는 대부분 pywin32의 라이브러리 동작에서 일어납니다.
-  오류를 해결하는 5가지 방법이 있습니다. 오류시 참고 바랍니다.
+  프로그램 사용시 에러가 날 수 있습니다.   
+  그에 관련하여 대처방법을 기술 해놓았습니다.   
   ``` 
 ## Excel files
 1. student_excel folder
