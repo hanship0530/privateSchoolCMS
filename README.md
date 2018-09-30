@@ -7,7 +7,7 @@ PrivateSchoolCMS는 엑설과 데이터베이스를 통해 소규모 학원에�
 ## 유저가이드
 [유저가이드로 이동하기](https://github.com/dxdiag20/privateSchoolCMS/wiki)
 ## 시작하기  
-단순히 개인용 데스크탑에 다운 받아 바로 사용이 가능합니다.
+개인용 데스크탑에 다운 받아 바로 사용이 가능합니다.
 ### 작동 환경
 ```
 Windows, Windows Office Excel, python, web   
