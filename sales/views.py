@@ -92,7 +92,7 @@ class daySalesView(TemplateView):
 					worksheets = wb.sheetnames
 					html['sheets'] = render_to_string('sales/salesSheetSelect.html',{'worksheets':worksheets})
 
-					today = timezone.localtime(timezone.now()).date()
+					today = date
 					# print(today.strftime("%y-%m"))
 					if Monthsale.objects.filter(date=datetime.datetime(today.year, today.month, 1)).exists():
 						month = Monthsale.objects.get(date=datetime.datetime(today.year, today.month, 1))
