@@ -160,6 +160,7 @@ class ScheduleView(TemplateView):
                 workbook.Save()
                 workbook.Close(True)
                 excel.Application.Quit()
+                pythoncom.CoUninitialize()
                 # Close Excel 
                 
                 scheduleData = ScheduleView.getData(int(request.POST['day']), request.POST['sheet'], filepath)
@@ -193,6 +194,7 @@ class ScheduleView(TemplateView):
                     return JsonResponse(html)
             except Exception as e:
                 print("Error: "+str(e))
+                pythoncom.CoUninitialize()
                 html['is_valid'] = False
                 html['errorMsg'] = "Error: "+str(e)
                 return JsonResponse(html)  
@@ -304,8 +306,7 @@ class LessonTableView(TemplateView):
             print("Error: "+str(e))
             html['is_valid'] = False
             html['errorMsg'] = "Error: "+str(e)
-            # number = request.POST['number']
-            # student = Student.objects.get(number=number)
+            pythoncom.CoUninitialize()
             wb = openpyxl.load_workbook(student.filepath)
             sheets = wb.sheetnames
             student.sheet = str(sheets[0])
@@ -394,6 +395,7 @@ class LessonTableView(TemplateView):
                 return JsonResponse(html)
             except Exception as e:
                 print("Error: "+str(e))
+                pythoncom.CoUninitialize()
                 html['is_valid'] = False
                 html['errorMsg'] = "Error: "+str(e)
                 return JsonResponse(html) 

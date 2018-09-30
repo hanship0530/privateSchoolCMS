@@ -111,6 +111,7 @@ class daySalesView(TemplateView):
 			return JsonResponse(html)
 		except Exception as e:
 			print("Error: "+str(e))
+			pythoncom.CoUninitialize()
 			return redirect('dashboard:error')
 
 	def inquire(request):
