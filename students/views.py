@@ -304,7 +304,12 @@ class LessonTableView(TemplateView):
             print("Error: "+str(e))
             html['is_valid'] = False
             html['errorMsg'] = "Error: "+str(e)
-            student.sheet = "main"
+            # number = request.POST['number']
+            # student = Student.objects.get(number=number)
+            wb = openpyxl.load_workbook(student.filepath)
+            sheets = wb.sheetnames
+            student.sheet = str(sheets[-1])
+            student.save()
             return JsonResponse(html) 
     
     def display(request):

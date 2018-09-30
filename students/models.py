@@ -67,8 +67,10 @@ class Student(models.Model):
 			self.years = "고2"
 		elif year == 19:
 			self.years = "고3"	
+		elif year < 8:
+			self.years = "유년"
 		else:
-			self.years = "유년/성년"
+			self.years = "성년"
 		if(not os.path.isfile(os.path.join(os.getcwd(),"student_excel\\"+str(self.number)+"_"+str(self.stname)+"_차트.xlsx"))):
 			copyfile(os.path.join(os.getcwd(),"student_excel\\studentchart.xlsx"), 
 				os.path.join(os.getcwd(),"student_excel\\"+str(self.number)+"_"+str(self.stname)+"_차트.xlsx"))
