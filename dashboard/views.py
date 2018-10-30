@@ -194,7 +194,8 @@ class IndexView(TemplateView):
                 'paymentList': paymentList,
                 # 'exceedList': exceedList,
                 'todaySales': todaySales,
-                'loginUser': self.request.user
+                'loginUser': self.request.user,
+                'userChartFileName' : self.request.user.profile.fileName
             })
             return context
         except Exception as e:
