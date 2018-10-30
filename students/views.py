@@ -12,7 +12,7 @@ from django.template.loader import render_to_string
 #from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Student
 from attendance.models import Attendance
-from .forms import StudentForm
+from .forms import StudentForm, StudentCreateForm
 from .schedule_func import sunday, monday, tuseday, wendsday, thursday, friday, saturday
 from .lessonTable_func import update_excelsheet, display_excelsheet
 import win32com.client, datetime, pythoncom, os, re, openpyxl
@@ -83,11 +83,11 @@ class StudentView(TemplateView):
 class StudentCreateView(TemplateView):      
     def create(request):
         if request.method == 'POST':
-            form = StudentForm(request.POST)
+            form = StudentCreateForm(request.POST)
             return StudentCreateView.saveStudentForm(request, form, 'student/studentPartialCreate.html')  
         else:
             number = Student.objects.all().count() + 1
-            form = StudentForm(initial={'number':number}) 
+            form = StudentCreateForm(initial={'number':number}) 
             return render(request, 'student/studentCreate.html', {'form':form})
     def saveStudentForm(request, form, template_name):
         html = {}
