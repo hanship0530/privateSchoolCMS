@@ -1,5 +1,8 @@
 # PrivateSchoolCMS
-PrivateSchoolCMS는 엑설과 데이터베이스를 통해 소규모 학원에서 학원관리시스템을 이용할 수 있는 프로그램입니다. 단순히 해당 프로그램을 다운받아 실행시키면 추가적인 서버구매 없이 개인 데스크탑으로 구동이 가능하며 웹으로 손쉽게 동작시킬 수 가 있습니다. 또한 엑셀을 연동하기에 회원차트나 시간표를 형식이 있는 엑셀 문서로 문서화가 가능합니다.
+"PrivateSchoolCMS" can be used at small private school as management system. Usage is simple.         
+Just download this site and then run it on your Windows Desktop right away!         
+It run on web browser, so anybody can execute  and use this program. And plus this is synchronized with ms office excel.    
+You can use style sheet as timetable or learning table.         
 ## Overview
 ### [Watch Demo Video](https://youtu.be/yk7QZ5b2Udo)
 [![Watch the video](main.PNG)](https://youtu.be/yk7QZ5b2Udo)
@@ -7,7 +10,7 @@ PrivateSchoolCMS는 엑설과 데이터베이스를 통해 소규모 학원에�
 ## User's Guide
 [To User's Guide](https://github.com/dxdiag20/privateSchoolCMS/wiki)
 ## Bootcamp  
-개인용 데스크탑에 다운 받아 바로 사용이 가능합니다.
+You can download and use this program on your windows desktop 
 ### Operating Environment
 ```
 Windows over 10,    
@@ -55,8 +58,8 @@ Please install [python 3.5](https://www.python.org/downloads/)
 ## Caution!
  [To Caution Guide](https://github.com/dxdiag20/privateSchoolCMS/wiki/4.-%EC%98%A4%EB%A5%98-%ED%95%B4%EA%B2%B0%EA%B0%80%EC%9D%B4%EB%93%9C)
 ```
-  프로그램 사용시 에러가 날 수 있습니다.   
-  그에 관련하여 대처방법을 기술 해놓았습니다.   
+  When error is occured     
+  You can deal with error above site        
   ``` 
 ## Excel files
 1. student_excel folder
@@ -78,13 +81,13 @@ If you have further solution, please pull-request
 
 ## Tech
 reference following sources
-- [Django](https://www.djangoproject.com/) - 장고 웹프레임워크
-- [openpyxl](https://openpyxl.readthedocs.io/en/stable/) - 엑셀 읽기 라이브러리
-- [pywin32](https://pypi.org/project/pywin32/) - 엑셀 편집, 생성 라이브러리
-- [sb-admin2](https://startbootstrap.com/template-overviews/sb-admin-2/) - 대쉬보드 사이트
-- [bootstrap](http://getbootstrap.com/) - 부트스트랩
-- [Loading jquery](https://www.jqueryscript.net/loading/jQuery-Plugin-To-Handle-CSS3-Powered-Spinners-Loaders-Loading-js.html) - 로딩 화면 Jquery
-- [Lobibox](http://lobianijs.com/site/lobibox) - 부트스트랩 알림창     
+- [Django](https://www.djangoproject.com/) - Django Web framework
+- [openpyxl](https://openpyxl.readthedocs.io/en/stable/) - Excel editing library
+- [pywin32](https://pypi.org/project/pywin32/) - Excel editing library
+- [sb-admin2](https://startbootstrap.com/template-overviews/sb-admin-2/) - Bootstrap dashboard
+- [bootstrap](http://getbootstrap.com/) - Bootstrap
+- [Loading jquery](https://www.jqueryscript.net/loading/jQuery-Plugin-To-Handle-CSS3-Powered-Spinners-Loaders-Loading-js.html) - Loading jquery plugin
+- [Lobibox](http://lobianijs.com/site/lobibox) - Boostrap alert jquery plugin  
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
