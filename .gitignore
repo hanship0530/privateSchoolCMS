@@ -27,3 +27,5 @@ lessons/__init__.py
 student_excel/
 tutor_excel/
 db.sqlite3
+.idea/
+.vscode/
