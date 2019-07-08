@@ -1,8 +1,9 @@
 # PrivateSchoolCMS
-"PrivateSchoolCMS" can be used at small private school as management system. Usage is simple.         
-Just download this site and then run it on your Windows Desktop right away!         
-It run on web browser, so anybody can execute  and use this program. And plus this is synchronized with ms office excel.    
-You can use style sheet as timetable or learning table.         
+"PrivateSchoolCMS" is an administrative management programme for small private schools. It is simple.      
+Just download this site(programme?) and run it on your Windows Desktop with no configuration as it runs on web browsers.    
+Anybody can intuitively use this program. It’s that easy. Plus, the data is saved as a MS office Excel file.     
+You can use style sheet as a timetable or learning table.        
+
 ## Overview
 ### [Watch Demo Video](https://youtu.be/yk7QZ5b2Udo)
 [![Watch the video](main.PNG)](https://youtu.be/yk7QZ5b2Udo)
@@ -28,16 +29,15 @@ Please install [python 3.5](https://www.python.org/downloads/)
  - move to download location.     
  $ cd download location    
  - install libraries    
- $ pip install -r requirment.txt
- - 위 방법이 아닌 한번에 하는 방법
-   다운 받은 폴더로 이동 하여 "pip_install.bat"을 클릭하여 실행
- - 마지막으로 설치 된 장고의 버전 확인 
+ $ pip install -r requirment.txt       
+ - if you are not familar with CMD Please 'Run "pip_install.bat' file"      
+ - you can install all libraries in one time        
  $ pip list
  - Django must be 1.9 version. So if it is NOT please re install django.      
-   Use this option when you install "pip install django==1.9      
+   Use this option when you install "pip install django==1.9       
   ```      
 2. Run 
-```
+```    
   $ python manage.py runserver:8000
   Or
   Click runserver.bat    
