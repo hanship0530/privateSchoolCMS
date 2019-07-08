@@ -1,4 +1,4 @@
 pywin32
-django-widget-tweaks
 openpyxl
-django=1.11.19
+django-widget-tweaks
+django==1.11.21
