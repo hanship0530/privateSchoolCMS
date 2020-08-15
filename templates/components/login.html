@@ -1,9 +1,12 @@
 {% extends "layout/base.html" %}
-
-
+{% load staticfiles %}
+{% block extrastyle %}
+<link href="{% static 'custom/css/loginBackground.css' %}" rel="stylesheet">
+{% endblock extrastyle %}
 {% block basecontent %}
 <div class="container">
-    <div class="row">
+    <div class="row" id="login-header">
+        <img src="{% static 'image/background.png' %}" class="img-fluid logo" alt="logo">
         <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">

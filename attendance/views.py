@@ -7,6 +7,8 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from .forms import AttendanceForm
 from django.utils import timezone
+from .arduinoAttendanceFunction import getRfidCardNumber, stopReadRfidCard
+import serial
 
 # Create your views here.
 class AttendanceView(TemplateView):
@@ -53,6 +55,52 @@ class AttendanceView(TemplateView):
 				html['is_valid'] = False
 				html['errorMsg'] = "Error: "+str(e)
 				return JsonResponse(html)
+	#new
+	def registerCardNumber(request):
+		html={}
+		if request.method == 'POST':
+			try:
+				number = int(request.POST['number'])
+				student = Student.objects.get(number=number)
+				cardNumber = getRfidCardNumber()
+				student.attendanceCardNumber = cardNumber
+				student.save()
+				html['isSuccess']=True
+				html['successMessageAjax']=student.stname + "'s card is registered!"
+				return JsonResponse(html)
+			except Exception as e:
+				print("Error: " + str(e))
+				html['isSuccess']=False
+				html['errorMessage']='Port is not exist'
+				return redirect('dashboard:error')
+	def stopTagStudentAttendance(request):
+		if request.method == 'POST':
+			print("stop")
+			stopReadRfidCard()
+			return redirect('dashboard:index')
+	def tagStudentAttendance(request):
+		if request.method == 'POST':
+			html = {}
+			try:
+				cardNumber = getRfidCardNumber()
+				student = Student.objects.get(attendanceCardNumber=cardNumber)
+				today = timezone.localtime(timezone.now()).date()
+				attendance = Attendance(attendanceDate=today, student=student)
+				isAttend = student.attendance_set.filter(attendanceDate=today, student=student)
+				if not isAttend:
+					attendance.save()
+					student.attendance_set.add(attendance)
+				html['attendanceInformation'] = student.stname+' attend now!'
+				return JsonResponse(html)
+			except Exception as e:
+				print("Error: " + str(e))
+				html['attendanceInformation']='Already Attend Or Your card IS NOT registered'
+				return JsonResponse(html)
+		if request.method == 'GET':
+			return render(request,'attendance/tagAttendanceCard.html',{
+				'notice':"Click 'Attend Now' to attend Private School",
+				'instruction': "Put your card on card reader after click 'Attend Now' Button"
+				})
 	def update(request, pk):
 		attendance = get_object_or_404(Attendance, pk=pk)
 		if request.method == 'POST':

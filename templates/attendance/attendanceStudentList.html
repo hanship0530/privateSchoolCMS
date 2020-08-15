@@ -8,7 +8,10 @@
   <td class="text-center">
     <button type="button" class="btn btn-primary btn-sm" id="display-table-btn" url="{% url 'dashboard:getAttendList' %}"  data-id="{{student.number}}">
       <span class="glyphicon glyphicon-align-left"></span> 조회
-    </button>        
+    </button>
+    <button type="button" class="btn btn-info btn-sm" id="register-attendCard-btn" url="{% url 'dashboard:registerAttendanceCard' %}"  data-id="{{student.number}}">
+      <span class="glyphicon glyphicon-user"></span> Card
+    </button>              
   </td>
 </tr>
 {% empty %}

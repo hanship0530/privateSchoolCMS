@@ -7,7 +7,7 @@
 <link href="{% static 'bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css' %}" rel="stylesheet">
 <!-- DataTables Responsive CSS -->
 <link href="{% static 'bower_components/datatables-responsive/css/dataTables.responsive.css' %}" rel="stylesheet">
-
+<link href="{% static 'custom/css/jquery.loadingModal.css' %}" rel="stylesheet">
 {% endblock extrahead %}
 
 {% block content %}
@@ -36,7 +36,7 @@
                             <th class="text-center" width="7%">연락처</th>
                             <th class="text-center" width="15%">학교</th>
                             <th class="text-center" width="3%">학년</th>
-                            <th class="text-center" width="2%">/</th>
+                            <th class="text-center" width="13%">/</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,6 +94,7 @@
 <!-- DataTables JavaScript -->
 <script src="{% static 'bower_components/datatables/media/js/jquery.dataTables.min.js' %}"></script>
 <script src="{% static 'bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'custom/js/jquery.loadingModal.js' %}"></script>
 <script>
     $(document).ready(function() {
         $('#attendance-table').DataTable({

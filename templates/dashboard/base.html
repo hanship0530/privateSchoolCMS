@@ -120,10 +120,18 @@
                             </li>                                                       
                         </ul>
                         <!-- /.nav-second-level -->
-                    </li>                      
+                    </li>  
                     <li>
-                        <a href="{% url 'dashboard:attendanceSearch' %}"><i class="fa fa-bell fa-fw"></i> 출석관리</a>
-                    </li> 
+                        <a href="#"><i class="fa fa-bell fa-fw"></i> 출석 관리<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{% url 'dashboard:attendanceSearch' %}">출석 기록</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'dashboard:tagAttendanceCard' %}">출석 태그</a>
+                            </li>                                                       
+                        </ul>
+                    </li>                                         
                     <li>
                         <a href="#"><i class="fa fa-anchor fa-fw"></i> 매출관리<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">

@@ -65,6 +65,39 @@ $('#student-div').on('click', '#display-table-btn', function(){
     })
 });
 
+//register student attendance card
+$('#student-div').on('click', '#register-attendCard-btn', function(){
+    var btn = $(this);
+    $.ajax({
+        url: btn.attr("url"), 
+        type: 'post', 
+        datatype: 'json', 
+        data: { 
+            'number' : btn.attr("data-id"),
+            'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()   
+        },
+        beforeSend: function () {
+            $('body').loadingModal({
+                text: 'Please tag Card! Detecting Card',
+                color: '#fff',
+                backgroundColor: 'rgb(0,0,0)',
+                animation: 'doubleBounce'
+            });
+        },          
+        success: function(data) { 
+            $('body').loadingModal('hide');
+            Lobibox.notify('success', {
+                sound: false,
+                delay: 900,
+                msg: data.successMessageAjax
+            });            
+        },
+        error: function(error) { 
+            alert(error);
+        }
+    })
+});
+
 $('#attendance-div').on('click', '#update-attendance-btn', function() {
     var btn = $(this);
     $.ajax({

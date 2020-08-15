@@ -1,0 +1,32 @@
+{% extends "dashboard/base.html" %}
+{% load staticfiles %}
+
+{% block extrahead %}
+<link href="{% static 'custom/css/tagCard.css' %}" rel="stylesheet">
+<link href="{% static 'custom/css/jquery.loadingModal.css' %}" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block content %}
+<input type='hidden' url="{% url 'dashboard:tagAttendanceCard' %}" id="tagCard-url-input">
+<section class="logo-header">
+   <div class="container h-100" id='tagCard-div'>
+      <div class="row h-100 align-items-center">
+         <div class="col-12 col-md-12 text-center header-content">
+            <img src="{% static 'image/background.png' %}" class="img-fluid logo" alt="logo">
+            <h1 id='notice'>{{notice}}</h1>
+            <p>{{instruction}}</p>
+            <p>
+            	<form action="{% url 'dashboard:stopTagStudentAttendance' %}" method="post">{% csrf_token %}
+               		<button  type='submit' class="btn btn-primary rounded btn-lg" id="attend-stop-btn">Stop Now</button>
+           		</form>
+            </p>
+         </div>
+      </div>
+   </div>
+</section>
+{% endblock content %}
+
+{% block extrajs %}
+<script src="{% static 'js/tagAttendance.js' %}"></script>
+<script src="{% static 'custom/js/jquery.loadingModal.js' %}"></script>
+{% endblock extrajs %}

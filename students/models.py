@@ -36,6 +36,7 @@ class Student(models.Model):
 	sheet = models.CharField(max_length=10, blank=True, null=True, default="main", verbose_name="현재시트명")
 	filepath = models.CharField(max_length=50, blank=True, null=True, verbose_name="차트파일 위치")
 	lesson = models.ForeignKey(Lesson, null=True, blank=True, verbose_name="수업", on_delete=models.CASCADE)
+	attendanceCardNumber = models.CharField(max_length=10, blank=True, null=True, verbose_name="출석카드 번호")
 	def __str__(self):
 		return str(self.stname)+'['+str(self.number)+']'
 
